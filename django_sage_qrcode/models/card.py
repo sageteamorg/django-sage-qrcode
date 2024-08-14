@@ -18,7 +18,7 @@ class VCardQRCode(QRCode):
     full_name = models.CharField(
         max_length=255,
         help_text=_("Full name of the individual."),
-        db_comment=_("The name of the individual represented in the VCard QR code."),
+        db_comment=("The name of the individual represented in the VCard QR code."),
         verbose_name=_("Full Name"),
     )
     display_name = models.CharField(
@@ -26,14 +26,14 @@ class VCardQRCode(QRCode):
         null=True,
         blank=True,
         help_text=_("Display name of the individual."),
-        db_comment=_("An optional display name for the individual."),
+        db_comment=("An optional display name for the individual."),
         verbose_name=_("Display Name"),
     )
     email = models.EmailField(
         null=True,
         blank=True,
         help_text=_("Email address of the individual."),
-        db_comment=_("The email address of the individual."),
+        db_comment=("The email address of the individual."),
         verbose_name=_("Email"),
     )
     phone = models.CharField(
@@ -42,14 +42,14 @@ class VCardQRCode(QRCode):
         blank=True,
         validators=[validate_phone_number],
         help_text=_("Phone number of the individual."),
-        db_comment=_("The phone number of the individual."),
+        db_comment=("The phone number of the individual."),
         verbose_name=_("Phone Number"),
     )
     url = models.URLField(
         null=True,
         blank=True,
         help_text=_("URL of the individual's website or profile."),
-        db_comment=_("The URL to the individual's website or profile."),
+        db_comment=("The URL to the individual's website or profile."),
         verbose_name=_("Website URL"),
     )
     org = models.CharField(
@@ -57,14 +57,14 @@ class VCardQRCode(QRCode):
         null=True,
         blank=True,
         help_text=_("Name of the organization."),
-        db_comment=_("The organization name associated with the individual."),
+        db_comment=("The organization name associated with the individual."),
         verbose_name=_("Organization"),
     )
     address = models.TextField(
         null=True,
         blank=True,
         help_text=_("Physical address of the individual."),
-        db_comment=_("The physical address of the individual."),
+        db_comment=("The physical address of the individual."),
         verbose_name=_("Address"),
     )
     phone_number = models.CharField(
@@ -80,7 +80,7 @@ class VCardQRCode(QRCode):
             ),
         },
         help_text=_("Phone number in E164 format."),
-        db_comment=_("The phone number of the individual in E164 format."),
+        db_comment=("The phone number of the individual in E164 format."),
     )
 
     def __str__(self):

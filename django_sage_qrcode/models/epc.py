@@ -19,14 +19,14 @@ class EPCQRCode(QRCode):
     name = models.CharField(
         max_length=255,
         help_text=_("Name of the EPC beneficiary."),
-        db_comment=_("The name of the beneficiary for the EPC QR code."),
+        db_comment=("The name of the beneficiary for the EPC QR code."),
         verbose_name=_("Beneficiary Name"),
     )
     iban = models.CharField(
         max_length=34,
         validators=[validate_iban],
         help_text=_("IBAN of the EPC beneficiary."),
-        db_comment=_("The IBAN of the beneficiary for the EPC QR code."),
+        db_comment=("The IBAN of the beneficiary for the EPC QR code."),
         verbose_name=_("IBAN"),
     )
     amount = models.DecimalField(
@@ -34,13 +34,13 @@ class EPCQRCode(QRCode):
         decimal_places=2,
         validators=[MinValueValidator(0.01)],
         help_text=_("Payment amount."),
-        db_comment=_("The amount to be paid using the EPC QR code."),
+        db_comment=("The amount to be paid using the EPC QR code."),
         verbose_name=_("Payment Amount"),
     )
     text = models.TextField(
         blank=True,
         help_text=_("Additional text for the EPC QR code."),
-        db_comment=_("Optional additional text for the EPC QR code."),
+        db_comment=("Optional additional text for the EPC QR code."),
         verbose_name=_("Additional Text"),
     )
 

@@ -17,7 +17,7 @@ class Barcode(PolymorphicModel, TimestampMixin):
         null=True,
         validators=[validate_image_file],
         help_text=_("The generated bar code image."),
-        db_comment=_("The image file of the generated bar code."),
+        db_comment=("The image file of the generated bar code."),
     )
 
     title = models.CharField(
@@ -25,7 +25,7 @@ class Barcode(PolymorphicModel, TimestampMixin):
         null=True,
         blank=True,
         help_text=_("Title of the BAR code."),
-        db_comment=_("A descriptive title for the BAR code."),
+        db_comment=("A descriptive title for the BAR code."),
     )
 
     color = ColorField(
@@ -33,14 +33,14 @@ class Barcode(PolymorphicModel, TimestampMixin):
         help_text=_("Color of the BAR code."),
         null=True,
         blank=True,
-        db_comment=_("The color of the BAR code in hexadecimal format."),
+        db_comment=("The color of the BAR code in hexadecimal format."),
     )
     second_color = ColorField(
         format="hex",
         help_text=_("Second color of the QR code."),
         null=True,
         blank=True,
-        db_comment=_("The second color of the BAR code in hexadecimal format."),
+        db_comment=("The second color of the BAR code in hexadecimal format."),
     )
 
     class Meta:

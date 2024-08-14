@@ -28,13 +28,13 @@ class WhatsAppQRCode(QRCode):
         max_length=20,
         validators=[validate_phone_number],
         help_text=_("WhatsApp phone number. Example: +1234567890"),
-        db_comment=_("The WhatsApp phone number."),
+        db_comment=("The WhatsApp phone number."),
         verbose_name=_("WhatsApp Phone Number"),
     )
     message = models.TextField(
         blank=True,
         help_text=_("Message to be sent. Example: 'Hello, this is a test message.'"),
-        db_comment=_("The message to be sent via WhatsApp."),
+        db_comment=("The message to be sent via WhatsApp."),
         verbose_name=_("Message"),
     )
 
@@ -59,7 +59,7 @@ class SkypeQRCode(QRCode):
             "URL of the Skype profile. Example: 'https://www.skype.com/username'"
         ),
         validators=[validate_skype],
-        db_comment=_("The URL of the Skype profile."),
+        db_comment=("The URL of the Skype profile."),
         verbose_name=_("Skype URL"),
     )
 
@@ -89,7 +89,7 @@ class TikTokQRCode(QRCode):
             "URL of the TikTok profile. Example: 'https://www.tiktok.com/@username'"
         ),
         validators=[validate_tiktok],
-        db_comment=_("The URL of the TikTok profile."),
+        db_comment=("The URL of the TikTok profile."),
         verbose_name=_("TikTok URL"),
     )
 
@@ -123,7 +123,7 @@ class SnapchatQRCode(QRCode):
             "URL of the Snapchat profile. Example: 'https://www.snapchat.com/add/username'"
         ),
         validators=[validate_snapchat],
-        db_comment=_("The URL of the Snapchat profile."),
+        db_comment=("The URL of the Snapchat profile."),
         verbose_name=_("Snapchat URL"),
     )
 
@@ -157,7 +157,7 @@ class InstagramQRCode(QRCode):
             "URL of the Instagram profile. Example: 'https://www.instagram.com/username'"
         ),
         validators=[validate_instagram],
-        db_comment=_("The URL of the Instagram profile."),
+        db_comment=("The URL of the Instagram profile."),
         verbose_name=_("Instagram URL"),
     )
 
@@ -191,7 +191,7 @@ class FacebookQRCode(QRCode):
             "URL of the Facebook profile. Example: 'https://www.facebook.com/username'"
         ),
         validators=[validate_facebook],
-        db_comment=_("The URL of the Facebook profile."),
+        db_comment=("The URL of the Facebook profile."),
         verbose_name=_("Facebook URL"),
     )
 
@@ -223,7 +223,7 @@ class TelegramQRCode(QRCode):
     url = models.URLField(
         help_text=_("URL of the Telegram profile. Example: 'https://t.me/username'"),
         validators=[validate_telegram],
-        db_comment=_("The URL of the Telegram profile."),
+        db_comment=("The URL of the Telegram profile."),
         verbose_name=_("Telegram URL"),
     )
 
@@ -257,7 +257,7 @@ class LinkedInQRCode(QRCode):
             "URL of the LinkedIn profile. Example: 'https://www.linkedin.com/in/username'"
         ),
         validators=[validate_linkedin],
-        db_comment=_("The URL of the LinkedIn profile."),
+        db_comment=("The URL of the LinkedIn profile."),
         verbose_name=_("LinkedIn URL"),
     )
 
@@ -289,7 +289,7 @@ class XQRCode(QRCode):
     url = models.URLField(
         help_text=_("URL of the X profile. Example: 'https://www.x.com/username'"),
         validators=[validate_x],
-        db_comment=_("The URL of the Twitter profile."),
+        db_comment=("The URL of the Twitter profile."),
         verbose_name=_("Twitter URL"),
     )
 
@@ -320,7 +320,7 @@ class MediaUrl(QRCode):
 
     url = models.URLField(
         help_text=_("URL of the media content."),
-        db_comment=_("The URL of the media content."),
+        db_comment=("The URL of the media content."),
         verbose_name=_("Media URL"),
     )
 
