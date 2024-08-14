@@ -17,7 +17,7 @@ class QRCode(PolymorphicModel, TimestampMixin):
         null=True,
         validators=[validate_image_file],
         help_text=_("The generated QR code image."),
-        db_comment=("The image file of the generated QR code."),
+        db_comment="The image file of the generated QR code.",
     )
     custom_gif = models.ImageField(
         upload_to="custom_gifs/",
@@ -25,35 +25,35 @@ class QRCode(PolymorphicModel, TimestampMixin):
         null=True,
         validators=[validate_image_file],
         help_text=_("Custom GIF to be embedded in the QR code."),
-        db_comment=("An optional custom GIF that can be embedded in the QR code."),
+        db_comment="An optional custom GIF that can be embedded in the QR code.",
     )
     title = models.CharField(
         max_length=255,
         null=True,
         blank=True,
         help_text=_("Title of the QR code."),
-        db_comment=("A descriptive title for the QR code."),
+        db_comment="A descriptive title for the QR code.",
     )
     size = models.PositiveSmallIntegerField(
         validators=[validate_size],
         help_text=_("Size of the QR code image."),
         null=True,
         blank=True,
-        db_comment=("The size (dimensions) of the QR code image."),
+        db_comment="The size (dimensions) of the QR code image.",
     )
     color = ColorField(
         format="hex",
         help_text=_("Color of the QR code."),
         null=True,
         blank=True,
-        db_comment=("The color of the QR code in hexadecimal format."),
+        db_comment="The color of the QR code in hexadecimal format.",
     )
     second_color = ColorField(
         format="hex",
         help_text=_("Second color of the QR code."),
         null=True,
         blank=True,
-        db_comment=("The second color of the QR code in hexadecimal format."),
+        db_comment="The second color of the QR code in hexadecimal format.",
     )
 
     third_color = ColorField(
@@ -61,7 +61,7 @@ class QRCode(PolymorphicModel, TimestampMixin):
         help_text=_("Third color of the QR code."),
         null=True,
         blank=True,
-        db_comment=("The third color of the BAR code in hexadecimal format."),
+        db_comment="The third color of the BAR code in hexadecimal format.",
     )
 
     class Meta:

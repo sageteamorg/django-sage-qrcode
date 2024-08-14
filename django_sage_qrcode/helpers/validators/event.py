@@ -8,12 +8,8 @@ class EventTimeRangeValidator:
     """Validator to ensure that the end time is after the start time for
     events.
 
-    This validator checks that the end time of an event is after the start time,
-    ensuring that events have a valid time range.
-
-    Attributes:
-        message (str): Error message returned when the validation fails.
-        code (str): Error code returned when the validation fails.
+    This validator checks that the end time of an event is after the
+    start time, ensuring that events have a valid time range.
 
     """
 

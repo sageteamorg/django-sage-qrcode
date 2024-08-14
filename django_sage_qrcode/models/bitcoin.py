@@ -19,7 +19,7 @@ class BitcoinQRCode(QRCode):
         max_length=34,
         validators=[validate_bitcoin_address],
         help_text=_("Bitcoin address. Example: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'"),
-        db_comment=_("The Bitcoin address for the payment."),
+        db_comment="The Bitcoin address for the payment.",
         verbose_name=_("Bitcoin Address"),
     )
     amount = models.DecimalField(
@@ -29,20 +29,20 @@ class BitcoinQRCode(QRCode):
         blank=True,
         validators=[MinValueValidator(0.00000001)],
         help_text=_("Amount of Bitcoin to send. Example: '0.01'"),
-        db_comment=("The amount of Bitcoin to send."),
+        db_comment="The amount of Bitcoin to send.",
         verbose_name=_("Amount"),
     )
     label = models.CharField(
         max_length=255,
         blank=True,
         help_text=_("Label for the transaction."),
-        db_comment=("An optional label for the transaction."),
+        db_comment="An optional label for the transaction.",
         verbose_name=_("Label"),
     )
     message = models.TextField(
         blank=True,
         help_text=_("Message for the transaction."),
-        db_comment=("An optional message for the transaction."),
+        db_comment="An optional message for the transaction.",
         verbose_name=_("Message"),
     )
 
