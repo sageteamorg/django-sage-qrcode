@@ -2,16 +2,23 @@ import os
 import uuid
 from PIL import Image
 import segno
-from ..utils import add_text_to_image, add_icon_to_image, add_frame_to_image
+
 
 class QRCodeBase:
     def __init__(self):
         self.qr_image = None
 
-    def generate_qr_code(self, data, scale=10, error='h', custom=None, color="#000000",color2="#FFFFFF",color3="#000000"):
-
-        """
-        Generates a QR code image based on the provided data and parameters.
+    def generate_qr_code(
+        self,
+        data,
+        scale=10,
+        error="h",
+        custom=None,
+        color="#000000",
+        color2="#FFFFFF",
+        color3="#000000",
+    ):
+        """Generates a QR code image based on the provided data and parameters.
 
         Args:
         - data (str): The data to encode in the QR code.
@@ -22,6 +29,7 @@ class QRCodeBase:
 
         Returns:
         - bool: True if a custom QR code is generated, False otherwise.
+
         """
         qr = segno.make(data, error=error)
 
@@ -30,25 +38,27 @@ class QRCodeBase:
             return True
 
         try:
-            self.qr_image = qr.to_pil(scale=scale, dark=color,light=color2,finder_dark=color3)
+            self.qr_image = qr.to_pil(
+                scale=scale, dark=color, light=color2, finder_dark=color3
+            )
         except ValueError as e:
             print(f"Error applying color: {e}")
             self.qr_image = qr.to_pil(scale=scale)
 
-        if self.qr_image.mode != 'RGBA':
-            self.qr_image = self.qr_image.convert('RGBA')
+        if self.qr_image.mode != "RGBA":
+            self.qr_image = self.qr_image.convert("RGBA")
 
         return False
 
     def show_qr_code(self, save=False):
-        """
-        Displays the generated QR code image.
+        """Displays the generated QR code image.
 
         Args:
         - save (bool, optional): Whether to save the QR code image to a file. Default is False.
 
         Returns:
         - Image: The generated QR code image.
+
         """
         if self.qr_image is None:
             raise ValueError("QR code image is not generated.")
@@ -60,9 +70,7 @@ class QRCodeBase:
         return self.qr_image
 
     def save_qr_code(self):
-        """
-        Saves the generated QR code image to a file.
-        """
+        """Saves the generated QR code image to a file."""
         if self.qr_image is None:
             raise ValueError("QR code image is not generated.")
 
@@ -70,8 +78,8 @@ class QRCodeBase:
         self.qr_image.save(unique_filename)
 
     def customize_qr_code(self, obj, path, scale=10):
-        """
-        Applies custom styling to the QR code by overlaying it with another image.
+        """Applies custom styling to the QR code by overlaying it with another
+        image.
 
         Args:
         - obj (segno.QRCode): The QR code object to customize.
@@ -80,6 +88,7 @@ class QRCodeBase:
 
         Returns:
         - Image: The customized QR code image.
+
         """
         target_extension = os.path.splitext(path)[1]
         unique_filename = str(uuid.uuid4()) + target_extension

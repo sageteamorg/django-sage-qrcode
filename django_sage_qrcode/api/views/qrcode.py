@@ -1,7 +1,5 @@
 from rest_framework import viewsets
-from rest_framework.response import Response
 from rest_framework.decorators import action
-from django.http import HttpResponse
 from django_sage_qrcode.models import (
     VCardQRCode,
     WifiQRCode,
@@ -45,6 +43,7 @@ from django_sage_qrcode.admin.utils import (
     download_barcode,
 )
 
+
 class VCardQRCodeViewSet(viewsets.ModelViewSet):
     queryset = VCardQRCode.objects.all()
     serializer_class = VCardQRCodeSerializer
@@ -55,10 +54,11 @@ class VCardQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class WifiQRCodeViewSet(viewsets.ModelViewSet):
     queryset = WifiQRCode.objects.all()
@@ -70,10 +70,11 @@ class WifiQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class TikTokQRCodeViewSet(viewsets.ModelViewSet):
     queryset = TikTokQRCode.objects.all()
@@ -85,10 +86,11 @@ class TikTokQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class TelegramQRCodeViewSet(viewsets.ModelViewSet):
     queryset = TelegramQRCode.objects.all()
@@ -100,10 +102,11 @@ class TelegramQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class InstagramQRCodeViewSet(viewsets.ModelViewSet):
     queryset = InstagramQRCode.objects.all()
@@ -115,10 +118,11 @@ class InstagramQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class SnapchatQRCodeViewSet(viewsets.ModelViewSet):
     queryset = SnapchatQRCode.objects.all()
@@ -130,10 +134,11 @@ class SnapchatQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class SkypeQRCodeViewSet(viewsets.ModelViewSet):
     queryset = SkypeQRCode.objects.all()
@@ -145,10 +150,11 @@ class SkypeQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class WhatsAppQRCodeViewSet(viewsets.ModelViewSet):
     queryset = WhatsAppQRCode.objects.all()
@@ -160,10 +166,11 @@ class WhatsAppQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class FacebookQRCodeViewSet(viewsets.ModelViewSet):
     queryset = FacebookQRCode.objects.all()
@@ -175,10 +182,11 @@ class FacebookQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class EPCQRCodeViewSet(viewsets.ModelViewSet):
     queryset = EPCQRCode.objects.all()
@@ -190,10 +198,11 @@ class EPCQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class MediaUrlViewSet(viewsets.ModelViewSet):
     queryset = MediaUrl.objects.all()
@@ -205,10 +214,11 @@ class MediaUrlViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class LinkedInQRCodeViewSet(viewsets.ModelViewSet):
     queryset = LinkedInQRCode.objects.all()
@@ -220,10 +230,11 @@ class LinkedInQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class BitcoinQRCodeViewSet(viewsets.ModelViewSet):
     queryset = BitcoinQRCode.objects.all()
@@ -235,10 +246,11 @@ class BitcoinQRCodeViewSet(viewsets.ModelViewSet):
         save_qr_code_image(obj, qr_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
+
 
 class BarcodeTextViewSet(viewsets.ModelViewSet):
     queryset = BarcodeText.objects.all()
@@ -250,10 +262,11 @@ class BarcodeTextViewSet(viewsets.ModelViewSet):
         save_barcode_image(obj, barcode_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_barcode(request, [obj])
+
 
 class BarcodeUrlViewSet(viewsets.ModelViewSet):
     queryset = BarcodeUrl.objects.all()
@@ -265,7 +278,7 @@ class BarcodeUrlViewSet(viewsets.ModelViewSet):
         save_barcode_image(obj, barcode_image)
         obj.save()
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=["get"])
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_barcode(request, [obj])

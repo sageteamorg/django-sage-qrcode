@@ -1,6 +1,5 @@
 from django.contrib.admin import SimpleListFilter
 from django_sage_qrcode.models import (
-    QRCode,
     VCardQRCode,
     WifiQRCode,
     MediaUrl,
@@ -27,7 +26,7 @@ class QRCodeTypeFilter(SimpleListFilter):
             return queryset.instance_of(VCardQRCode)
         if self.value() == "wifi":
             return queryset.instance_of(WifiQRCode)
-    
+
         if self.value() == "mediaurl":
             return queryset.instance_of(MediaUrl)
         if self.value() == "epc":

@@ -5,9 +5,8 @@ from django.utils.translation import gettext_lazy as _
 
 @deconstructible
 class EventTimeRangeValidator:
-    """
-    Validator to ensure that the end time is after the start time for events.
-    """
+    """Validator to ensure that the end time is after the start time for
+    events."""
 
     message = _("End time must be after start time.")
     code = "invalid_time_range"

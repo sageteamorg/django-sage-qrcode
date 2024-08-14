@@ -6,7 +6,7 @@ from django_sage_qrcode.service import (
     SocialMediaQRCode,
     PaymentQRCode,
     QRCodeBase,
-    BarcodeProxy
+    BarcodeProxy,
 )
 
 from django_sage_qrcode.models import (
@@ -47,7 +47,7 @@ def generate_qr_code(obj):
         FacebookQRCode,
         LinkedInQRCode,
     )
-    
+
     if isinstance(obj, VCardQRCode):
         contact_proxy = ContactQRCode()
         contact_proxy.generate_vcard_qr_code(
@@ -62,7 +62,7 @@ def generate_qr_code(obj):
             color=obj.color,
             size=obj.size,
             color2=obj.second_color,
-            color3=obj.third_color
+            color3=obj.third_color,
         )
         proxy.qr_image = contact_proxy.qr_image
     elif isinstance(obj, WifiQRCode):
@@ -80,14 +80,22 @@ def generate_qr_code(obj):
         proxy.qr_image = contact_proxy.qr_image
     elif isinstance(obj, media_classes):
         social_proxy = SocialMediaQRCode()
-        social_proxy.create_social_media_url(url=obj.url, color=obj.color, size=obj.size,color2=obj.second_color,
-            color3=obj.third_color
+        social_proxy.create_social_media_url(
+            url=obj.url,
+            color=obj.color,
+            size=obj.size,
+            color2=obj.second_color,
+            color3=obj.third_color,
         )
         proxy.qr_image = social_proxy.qr_image
     elif isinstance(obj, MediaUrl):
         social_proxy = SocialMediaQRCode()
         social_proxy.create_url(
-            playlist_url=obj.url, custom=custom_gif_path, color=obj.color, size=obj.size,color2=obj.second_color,
+            playlist_url=obj.url,
+            custom=custom_gif_path,
+            color=obj.color,
+            size=obj.size,
+            color2=obj.second_color,
             color3=obj.third_color,
         )
         proxy.qr_image = social_proxy.qr_image
@@ -141,13 +149,11 @@ def download_qr_code(request, queryset):
 def generate_barcode_image(obj):
     proxy = BarcodeProxy()
     if not obj.color:
-        obj.color = 'black'
+        obj.color = "black"
     if not obj.second_color:
-        obj.second_color = 'white'
+        obj.second_color = "white"
     if isinstance(obj, BarcodeUrl):
-        proxy.create_url(
-            url=obj.url, bar_color=obj.color, bg_color=obj.second_color
-        )
+        proxy.create_url(url=obj.url, bar_color=obj.color, bg_color=obj.second_color)
     elif isinstance(obj, BarcodeText):
         proxy.create_text_barcode(
             text=obj.body, bar_color=obj.color, bg_color=obj.second_color

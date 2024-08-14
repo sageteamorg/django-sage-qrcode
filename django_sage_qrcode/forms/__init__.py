@@ -6,3 +6,12 @@ from .forms import (
     EPCQRCodeForm,
     BitForm,
 )
+
+__all__ = [
+    "WiFiQRCodeForm",
+    "VCardQRCodeForm",
+    "TikTokForm",
+    "MediaUrlForm",
+    "EPCQRCodeForm",
+    "BitForm",
+]

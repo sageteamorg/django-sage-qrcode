@@ -6,9 +6,11 @@ from django.core.files.images import get_image_dimensions
 
 @deconstructible
 class ImageFileValidator:
-    """
-    Validator for image files.
-    Ensures that the uploaded file is an image and optionally checks the size.
+    """Validator for image files.
+
+    Ensures that the uploaded file is an image and optionally checks the
+    size.
+
     """
 
     message = _("Upload a valid image file.")
@@ -49,9 +51,10 @@ class ImageFileValidator:
 
 @deconstructible
 class SizeValidator:
-    """
-    Validator for the size field.
+    """Validator for the size field.
+
     Ensures that the size is within a reasonable range.
+
     """
 
     message = _("Size must be between 1 and 1000.")

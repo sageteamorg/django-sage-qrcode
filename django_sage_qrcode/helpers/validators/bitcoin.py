@@ -6,10 +6,10 @@ from django.utils.translation import gettext_lazy as _
 
 @deconstructible
 class BitcoinAddressValidator:
-    """
-    Validator for Bitcoin addresses.
+    """Validator for Bitcoin addresses.
 
     Validates that the address is a valid Bitcoin address.
+
     """
 
     message = _("Enter a valid Bitcoin address.")

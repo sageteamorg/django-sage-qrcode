@@ -4,11 +4,11 @@ from django_sage_qrcode.models.qrcode import QRCode
 
 
 class WifiQRCode(QRCode):
-    """
-    Model representing a WiFi QR code.
+    """Model representing a WiFi QR code.
 
-    A WiFi QR code stores the credentials for a WiFi network.
-    When scanned, it allows the user to quickly connect to the WiFi network.
+    A WiFi QR code stores the credentials for a WiFi network. When
+    scanned, it allows the user to quickly connect to the WiFi network.
+
     """
 
     ssid = models.CharField(

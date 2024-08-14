@@ -17,11 +17,11 @@ from django_sage_qrcode.helpers.validators import (
 
 
 class WhatsAppQRCode(QRCode):
-    """
-    Model representing a WhatsApp QR code.
+    """Model representing a WhatsApp QR code.
 
     A WhatsApp QR code stores a phone number with an optional message.
     When scanned, it opens WhatsApp with the encoded information.
+
     """
 
     phone_number = models.CharField(
@@ -77,11 +77,11 @@ class SkypeQRCode(QRCode):
 
 
 class TikTokQRCode(QRCode):
-    """
-    Model representing a TikTok QR code.
+    """Model representing a TikTok QR code.
 
-    A TikTok QR code stores the URL of a TikTok profile.
-    When scanned, it directs the user to the TikTok profile page.
+    A TikTok QR code stores the URL of a TikTok profile. When scanned,
+    it directs the user to the TikTok profile page.
+
     """
 
     url = models.URLField(
@@ -111,11 +111,11 @@ class TikTokQRCode(QRCode):
 
 
 class SnapchatQRCode(QRCode):
-    """
-    Model representing a Snapchat QR code.
+    """Model representing a Snapchat QR code.
 
-    A Snapchat QR code stores the URL of a Snapchat profile.
-    When scanned, it directs the user to the Snapchat profile page.
+    A Snapchat QR code stores the URL of a Snapchat profile. When
+    scanned, it directs the user to the Snapchat profile page.
+
     """
 
     url = models.URLField(
@@ -145,11 +145,11 @@ class SnapchatQRCode(QRCode):
 
 
 class InstagramQRCode(QRCode):
-    """
-    Model representing an Instagram QR code.
+    """Model representing an Instagram QR code.
 
-    An Instagram QR code stores the URL of an Instagram profile.
-    When scanned, it directs the user to the Instagram profile page.
+    An Instagram QR code stores the URL of an Instagram profile. When
+    scanned, it directs the user to the Instagram profile page.
+
     """
 
     url = models.URLField(
@@ -179,11 +179,11 @@ class InstagramQRCode(QRCode):
 
 
 class FacebookQRCode(QRCode):
-    """
-    Model representing a Facebook QR code.
+    """Model representing a Facebook QR code.
 
-    A Facebook QR code stores the URL of a Facebook profile.
-    When scanned, it directs the user to the Facebook profile page.
+    A Facebook QR code stores the URL of a Facebook profile. When
+    scanned, it directs the user to the Facebook profile page.
+
     """
 
     url = models.URLField(
@@ -213,11 +213,11 @@ class FacebookQRCode(QRCode):
 
 
 class TelegramQRCode(QRCode):
-    """
-    Model representing a Telegram QR code.
+    """Model representing a Telegram QR code.
 
-    A Telegram QR code stores the URL of a Telegram profile.
-    When scanned, it directs the user to the Telegram profile page.
+    A Telegram QR code stores the URL of a Telegram profile. When
+    scanned, it directs the user to the Telegram profile page.
+
     """
 
     url = models.URLField(
@@ -245,11 +245,11 @@ class TelegramQRCode(QRCode):
 
 
 class LinkedInQRCode(QRCode):
-    """
-    Model representing a LinkedIn QR code.
+    """Model representing a LinkedIn QR code.
 
-    A LinkedIn QR code stores the URL of a LinkedIn profile.
-    When scanned, it directs the user to the LinkedIn profile page.
+    A LinkedIn QR code stores the URL of a LinkedIn profile. When
+    scanned, it directs the user to the LinkedIn profile page.
+
     """
 
     url = models.URLField(
@@ -279,11 +279,11 @@ class LinkedInQRCode(QRCode):
 
 
 class XQRCode(QRCode):
-    """
-    Model representing a Twitter QR code.
+    """Model representing a Twitter QR code.
 
-    A X (old Twitter) QR code stores the URL of a Twitter profile.
-    When scanned, it directs the user to the Twitter profile page.
+    A X (old Twitter) QR code stores the URL of a Twitter profile. When
+    scanned, it directs the user to the Twitter profile page.
+
     """
 
     url = models.URLField(
@@ -311,11 +311,11 @@ class XQRCode(QRCode):
 
 
 class MediaUrl(QRCode):
-    """
-    Model representing a media URL QR code.
+    """Model representing a media URL QR code.
 
-    A media URL QR code stores the URL of media content such as videos or audio.
-    When scanned, it directs the user to the media content.
+    A media URL QR code stores the URL of media content such as videos
+    or audio. When scanned, it directs the user to the media content.
+
     """
 
     url = models.URLField(

@@ -5,16 +5,11 @@ from colorfield.fields import ColorField
 from polymorphic.models import PolymorphicModel
 
 from django_sage_qrcode.mixins import TimestampMixin
-from django_sage_qrcode.helpers.validators import (
-    validate_image_file,
-    validate_size
-)
+from django_sage_qrcode.helpers.validators import validate_image_file
 
 
 class Barcode(PolymorphicModel, TimestampMixin):
-    """
-    Abstract base class for all QR code types.
-    """
+    """Abstract base class for all QR code types."""
 
     bar_code_image = models.ImageField(
         upload_to="bar_codes/",
@@ -60,11 +55,12 @@ class Barcode(PolymorphicModel, TimestampMixin):
 
 
 class BarcodeUrl(Barcode):
-    """
-    Model representing a Barcode URL QR code.
+    """Model representing a Barcode URL QR code.
 
-    A Barcode URL QR code stores the URL of media content such as videos or audio.
-    When scanned, it directs the user to the Barcode url content.
+    A Barcode URL QR code stores the URL of media content such as videos
+    or audio. When scanned, it directs the user to the Barcode url
+    content.
+
     """
 
     url = models.URLField(
@@ -85,12 +81,13 @@ class BarcodeUrl(Barcode):
         verbose_name = _(" URL Barcode")
         verbose_name_plural = _("URL Barcode")
 
+
 class BarcodeText(Barcode):
-    """
-    Model representing a Text  bar code.
+    """Model representing a Text  bar code.
 
     A Text bar stores the URL of media content such as videos or audio.
     When scanned, it directs the user to the media content.
+
     """
 
     body = models.TextField(

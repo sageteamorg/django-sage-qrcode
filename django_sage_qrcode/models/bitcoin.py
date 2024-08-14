@@ -7,10 +7,12 @@ from django_sage_qrcode.helpers.validators import validate_bitcoin_address
 
 
 class BitcoinQRCode(QRCode):
-    """
-    Model representing a Bitcoin Payment QR code.
+    """Model representing a Bitcoin Payment QR code.
 
-    A Bitcoin Payment QR code stores Bitcoin payment information. When scanned, it opens the Bitcoin wallet app with the encoded payment information.
+    A Bitcoin Payment QR code stores Bitcoin payment information. When
+    scanned, it opens the Bitcoin wallet app with the encoded payment
+    information.
+
     """
 
     bitcoin_address = models.CharField(

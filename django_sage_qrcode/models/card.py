@@ -7,11 +7,12 @@ from django_sage_qrcode.helpers.validators import validate_phone_number
 
 
 class VCardQRCode(QRCode):
-    """
-    Model representing a VCard QR code.
+    """Model representing a VCard QR code.
 
-    A VCard QR code stores information about an individual, such as their name, email, phone number, and more.
-    When scanned, it allows the user to easily add the contact details to their address book.
+    A VCard QR code stores information about an individual, such as
+    their name, email, phone number, and more. When scanned, it allows
+    the user to easily add the contact details to their address book.
+
     """
 
     full_name = models.CharField(

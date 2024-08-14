@@ -1,30 +1,17 @@
 from django.contrib import admin
 from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
-from django.http import HttpResponse
-from django.core.exceptions import ValidationError
 from ..models import Barcode, BarcodeUrl, BarcodeText
-from .utils import generate_barcode_image, save_barcode_image,download_barcode
+from .utils import generate_barcode_image, save_barcode_image
 from django_sage_qrcode.admin.actions import download_barcode_action
+
 
 @admin.register(Barcode)
 class BarcodeParentAdmin(PolymorphicParentModelAdmin):
     base_model = Barcode
     child_models = (BarcodeUrl, BarcodeText)
-    list_display = (
-        'id', 
-        'title', 
-        'color', 
-        'second_color', 
-        'created', 
-        'modified'
-    )
-    list_filter = (
-        'created', 
-        'modified', 
-        'color', 
-        'second_color'
-    )
-    search_fields = ('title',)
+    list_display = ("id", "title", "color", "second_color", "created", "modified")
+    list_filter = ("created", "modified", "color", "second_color")
+    search_fields = ("title",)
     actions = [download_barcode_action]
 
     def save_model(self, request, obj, form, change):
@@ -34,51 +21,32 @@ class BarcodeParentAdmin(PolymorphicParentModelAdmin):
 
 
 @admin.register(BarcodeUrl)
-class BarcodeUrlAdmin(PolymorphicChildModelAdmin,BarcodeParentAdmin):
+class BarcodeUrlAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
     base_model = BarcodeUrl
     show_in_index = True
-    list_display = (
-        'title', 
-    )
-    list_filter = (
-        'created', 
-        'modified', 
-        'url', 
-        'color', 
-        'second_color'
-    )
-    search_fields = ('title', 'url')
-    
+    list_display = ("title",)
+    list_filter = ("created", "modified", "url", "color", "second_color")
+    search_fields = ("title", "url")
+
     def get_fields(self, request, obj=None):
-        return [
-            'url',
-            'color',
-            'secend_color'
-        ]
+        return ["url", "color", "secend_color"]
+
 
 @admin.register(BarcodeText)
-class BarcodeTextAdmin(PolymorphicChildModelAdmin,BarcodeParentAdmin):
+class BarcodeTextAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
     base_model = BarcodeText
     show_in_index = True
     list_display = (
-        'id', 
-        'title', 
-        'body', 
-        'color', 
-        'second_color', 
-        'created', 
-        'modified'
+        "id",
+        "title",
+        "body",
+        "color",
+        "second_color",
+        "created",
+        "modified",
     )
-    list_filter = (
-        'created', 
-        'modified', 
-        'color', 
-        'second_color'
-    )
-    search_fields = ('title', 'body')
+    list_filter = ("created", "modified", "color", "second_color")
+    search_fields = ("title", "body")
+
     def get_fields(self, request, obj=None):
-        return [
-            'body',
-            'color',
-            'second_color'
-        ]
+        return ["body", "color", "second_color"]

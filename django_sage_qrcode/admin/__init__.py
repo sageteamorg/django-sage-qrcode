@@ -1,2 +1,36 @@
-from .qrcode import *
-from .barcode import BarcodeTextAdmin,BarcodeUrlAdmin
+from .barcode import BarcodeTextAdmin, BarcodeUrlAdmin
+from .qrcode import (
+    QRCodeParentAdmin,
+    VCardQRCodeAdmin,
+    WiFiQRCodeAdmin,
+    MediaUrlAdmin,
+    EPCQRCodeAdmin,
+    BitcoinQRCodeAdmin,
+    SkypeQRCodeAdmin,
+    TikTokQRCodeAdmin,
+    SnapchatQRCodeAdmin,
+    XQRCodeAdmin,
+    LinkedInQRCodeAdmin,
+    FacebookQRCodeAdmin,
+    TelegramQRCodeAdmin,
+    InstagramQRCodeAdmin,
+)
+
+__all__ = [
+    "QRCodeParentAdmin",
+    "VCardQRCodeAdmin",
+    "WiFiQRCodeAdmin",
+    "MediaUrlAdmin",
+    "EPCQRCodeAdmin",
+    "BitcoinQRCodeAdmin",
+    "SkypeQRCodeAdmin",
+    "TikTokQRCodeAdmin",
+    "SnapchatQRCodeAdmin",
+    "XQRCodeAdmin",
+    "LinkedInQRCodeAdmin",
+    "FacebookQRCodeAdmin",
+    "TelegramQRCodeAdmin",
+    "InstagramQRCodeAdmin",
+    "BarcodeTextAdmin",
+    "BarcodeUrlAdmin",
+]

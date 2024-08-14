@@ -5,16 +5,11 @@ from colorfield.fields import ColorField
 from polymorphic.models import PolymorphicModel
 
 from django_sage_qrcode.mixins import TimestampMixin
-from django_sage_qrcode.helpers.validators import (
-    validate_image_file,
-    validate_size
-)
+from django_sage_qrcode.helpers.validators import validate_image_file, validate_size
 
 
 class QRCode(PolymorphicModel, TimestampMixin):
-    """
-    Abstract base class for all QR code types.
-    """
+    """Abstract base class for all QR code types."""
 
     qr_code_image = models.ImageField(
         upload_to="qr_codes/",
@@ -68,6 +63,7 @@ class QRCode(PolymorphicModel, TimestampMixin):
         blank=True,
         db_comment=_("The third color of the BAR code in hexadecimal format."),
     )
+
     class Meta:
         verbose_name = _("QR Code")
         verbose_name_plural = _("QR Codes")

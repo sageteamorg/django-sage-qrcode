@@ -6,10 +6,11 @@ from django.utils.translation import gettext_lazy as _
 
 @deconstructible
 class ValidatorE164:
-    """
-    E.164 phone number format validator.
+    """E.164 phone number format validator.
 
-    Validates that the phone number is in E.164 format: up to fifteen digits in length starting with a '+'.
+    Validates that the phone number is in E.164 format: up to fifteen
+    digits in length starting with a '+'.
+
     """
 
     message = _("Invalid phone number format. Must be in E.164 format.")

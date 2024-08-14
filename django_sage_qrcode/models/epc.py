@@ -8,11 +8,12 @@ from django_sage_qrcode.helpers.validators import validate_iban
 
 
 class EPCQRCode(QRCode):
-    """
-    Model representing an EPC QR code.
+    """Model representing an EPC QR code.
 
-    An EPC QR code stores payment details such as the beneficiary's name, IBAN, and the amount.
-    It allows for easy scanning and processing of payments.
+    An EPC QR code stores payment details such as the beneficiary's
+    name, IBAN, and the amount. It allows for easy scanning and
+    processing of payments.
+
     """
 
     name = models.CharField(
