@@ -1,0 +1,2 @@
+from .barcode import TestBarcodeProxy
+from .qrcode import TestQRCodeBase,TestContactQRCode,TestSocialMediaQRCode,TestPaymentQRCode

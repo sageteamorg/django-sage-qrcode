@@ -1,0 +1,1 @@
+from .qrcodeadmin import QRCodeTypeFilter
