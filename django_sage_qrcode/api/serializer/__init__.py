@@ -1,37 +1,33 @@
-from .qrcode import (
-    QRCodeSerializer,
-    VCardQRCodeSerializer,
-    WifiQRCodeSerializer,
+from .base import QRCodeSerializer
+from .contact import VCardQRCodeSerializer, WifiQRCodeSerializer
+from .social_media import (
+    MediaUrlSerializer,
     TikTokQRCodeSerializer,
-    TelegramQRCodeSerializer,
     InstagramQRCodeSerializer,
     SnapchatQRCodeSerializer,
     SkypeQRCodeSerializer,
     WhatsAppQRCodeSerializer,
     FacebookQRCodeSerializer,
-    EPCQRCodeSerializer,
-    MediaUrlSerializer,
     LinkedInQRCodeSerializer,
-    BitcoinQRCodeSerializer,
-    BarcodeSerializer,
-    BarcodeTextSerializer,
-    BarcodeUrlSerializer,
+    TelegramQRCodeSerializer,
 )
+from .payment import EPCQRCodeSerializer, BitcoinQRCodeSerializer
+from .barcode import BarcodeSerializer, BarcodeTextSerializer, BarcodeUrlSerializer
 
 __all__ = [
     "QRCodeSerializer",
-    "VCardQRCodeSerializer",
     "WifiQRCodeSerializer",
+    "VCardQRCodeSerializer",
+    "MediaUrlSerializer",
     "TikTokQRCodeSerializer",
-    "TelegramQRCodeSerializer",
     "InstagramQRCodeSerializer",
     "SnapchatQRCodeSerializer",
     "SkypeQRCodeSerializer",
     "WhatsAppQRCodeSerializer",
     "FacebookQRCodeSerializer",
-    "EPCQRCodeSerializer",
-    "MediaUrlSerializer",
     "LinkedInQRCodeSerializer",
+    "TelegramQRCodeSerializer",
+    "EPCQRCodeSerializer",
     "BitcoinQRCodeSerializer",
     "BarcodeSerializer",
     "BarcodeTextSerializer",

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 
-from ..utils import download_qr_code, download_barcode
+from django_sage_qrcode.utils.admin import download_qr_code, download_barcode
 
 
 @admin.action(description=_("Download selected qrcode for user"))

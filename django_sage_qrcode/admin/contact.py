@@ -1,0 +1,60 @@
+from polymorphic.admin import PolymorphicChildModelAdmin
+from django.contrib import admin
+
+from django_sage_qrcode.models import VCardQRCode, WifiQRCode
+from django_sage_qrcode.forms import VCardQRCodeForm, WiFiQRCodeForm
+from django_sage_qrcode.admin.base import QRCodeParentAdmin
+
+
+@admin.register(VCardQRCode)
+class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+    base_model = VCardQRCode
+    form = VCardQRCodeForm
+    show_in_index = True
+    list_display = ("full_name", "display_name", "email", "phone", "url", "custom_gif")
+    list_filter = ("full_name", "display_name", "email")
+    search_fields = ("full_name", "display_name", "email")
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "display_name",
+                    "full_name",
+                    "email",
+                    "phone",
+                    "url",
+                    "custom_gif",
+                )
+            },
+        ),
+        (
+            "Advanced options",
+            {
+                "classes": ("collapse",),
+                "fields": ("org", "size", "color", "second_color", "third_color"),
+            },
+        ),
+    )
+
+
+@admin.register(WifiQRCode)
+class WiFiQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+    base_model = WifiQRCode
+    form = WiFiQRCodeForm
+    show_in_index = True
+    list_display = ("ssid", "password", "security", "custom_gif")
+    list_filter = ("ssid", "security")
+    search_fields = ("ssid", "security")
+
+    fieldsets = (
+        (None, {"fields": ("ssid", "password", "security", "custom_gif")}),
+        (
+            "Advanced options",
+            {
+                "classes": ("collapse",),
+                "fields": ("size", "color", "second_color", "third_color"),
+            },
+        ),
+    )

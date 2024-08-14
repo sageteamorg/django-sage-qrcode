@@ -1,68 +1,37 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from django_sage_qrcode.models import (
-    VCardQRCode,
-    WifiQRCode,
+    MediaUrl,
     TikTokQRCode,
-    TelegramQRCode,
     InstagramQRCode,
     SnapchatQRCode,
     SkypeQRCode,
     WhatsAppQRCode,
     FacebookQRCode,
-    EPCQRCode,
-    MediaUrl,
     LinkedInQRCode,
-    BitcoinQRCode,
-    BarcodeText,
-    BarcodeUrl,
+    TelegramQRCode,
 )
 from ..serializer import (
-    VCardQRCodeSerializer,
-    WifiQRCodeSerializer,
+    MediaUrlSerializer,
     TikTokQRCodeSerializer,
-    TelegramQRCodeSerializer,
     InstagramQRCodeSerializer,
     SnapchatQRCodeSerializer,
     SkypeQRCodeSerializer,
     WhatsAppQRCodeSerializer,
     FacebookQRCodeSerializer,
-    EPCQRCodeSerializer,
-    MediaUrlSerializer,
     LinkedInQRCodeSerializer,
-    BitcoinQRCodeSerializer,
-    BarcodeTextSerializer,
-    BarcodeUrlSerializer,
+    TelegramQRCodeSerializer,
 )
 from django_sage_qrcode.utils.admin import (
     generate_qr_code,
     save_qr_code_image,
     download_qr_code,
-    generate_barcode_image,
-    save_barcode_image,
-    download_barcode,
 )
 
 
-class VCardQRCodeViewSet(viewsets.ModelViewSet):
-    queryset = VCardQRCode.objects.all()
-    serializer_class = VCardQRCodeSerializer
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        qr_image = generate_qr_code(obj)
-        save_qr_code_image(obj, qr_image)
-        obj.save()
-
-    @action(detail=True, methods=["get"])
-    def download(self, request, pk=None):
-        obj = self.get_object()
-        return download_qr_code(request, [obj])
-
-
-class WifiQRCodeViewSet(viewsets.ModelViewSet):
-    queryset = WifiQRCode.objects.all()
-    serializer_class = WifiQRCodeSerializer
+class MediaUrlViewSet(viewsets.ModelViewSet):
+    queryset = MediaUrl.objects.all()
+    serializer_class = MediaUrlSerializer
 
     def perform_create(self, serializer):
         obj = serializer.save()
@@ -79,22 +48,6 @@ class WifiQRCodeViewSet(viewsets.ModelViewSet):
 class TikTokQRCodeViewSet(viewsets.ModelViewSet):
     queryset = TikTokQRCode.objects.all()
     serializer_class = TikTokQRCodeSerializer
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        qr_image = generate_qr_code(obj)
-        save_qr_code_image(obj, qr_image)
-        obj.save()
-
-    @action(detail=True, methods=["get"])
-    def download(self, request, pk=None):
-        obj = self.get_object()
-        return download_qr_code(request, [obj])
-
-
-class TelegramQRCodeViewSet(viewsets.ModelViewSet):
-    queryset = TelegramQRCode.objects.all()
-    serializer_class = TelegramQRCodeSerializer
 
     def perform_create(self, serializer):
         obj = serializer.save()
@@ -188,38 +141,6 @@ class FacebookQRCodeViewSet(viewsets.ModelViewSet):
         return download_qr_code(request, [obj])
 
 
-class EPCQRCodeViewSet(viewsets.ModelViewSet):
-    queryset = EPCQRCode.objects.all()
-    serializer_class = EPCQRCodeSerializer
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        qr_image = generate_qr_code(obj)
-        save_qr_code_image(obj, qr_image)
-        obj.save()
-
-    @action(detail=True, methods=["get"])
-    def download(self, request, pk=None):
-        obj = self.get_object()
-        return download_qr_code(request, [obj])
-
-
-class MediaUrlViewSet(viewsets.ModelViewSet):
-    queryset = MediaUrl.objects.all()
-    serializer_class = MediaUrlSerializer
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        qr_image = generate_qr_code(obj)
-        save_qr_code_image(obj, qr_image)
-        obj.save()
-
-    @action(detail=True, methods=["get"])
-    def download(self, request, pk=None):
-        obj = self.get_object()
-        return download_qr_code(request, [obj])
-
-
 class LinkedInQRCodeViewSet(viewsets.ModelViewSet):
     queryset = LinkedInQRCode.objects.all()
     serializer_class = LinkedInQRCodeSerializer
@@ -236,9 +157,9 @@ class LinkedInQRCodeViewSet(viewsets.ModelViewSet):
         return download_qr_code(request, [obj])
 
 
-class BitcoinQRCodeViewSet(viewsets.ModelViewSet):
-    queryset = BitcoinQRCode.objects.all()
-    serializer_class = BitcoinQRCodeSerializer
+class TelegramQRCodeViewSet(viewsets.ModelViewSet):
+    queryset = TelegramQRCode.objects.all()
+    serializer_class = TelegramQRCodeSerializer
 
     def perform_create(self, serializer):
         obj = serializer.save()
@@ -250,35 +171,3 @@ class BitcoinQRCodeViewSet(viewsets.ModelViewSet):
     def download(self, request, pk=None):
         obj = self.get_object()
         return download_qr_code(request, [obj])
-
-
-class BarcodeTextViewSet(viewsets.ModelViewSet):
-    queryset = BarcodeText.objects.all()
-    serializer_class = BarcodeTextSerializer
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        barcode_image = generate_barcode_image(obj)
-        save_barcode_image(obj, barcode_image)
-        obj.save()
-
-    @action(detail=True, methods=["get"])
-    def download(self, request, pk=None):
-        obj = self.get_object()
-        return download_barcode(request, [obj])
-
-
-class BarcodeUrlViewSet(viewsets.ModelViewSet):
-    queryset = BarcodeUrl.objects.all()
-    serializer_class = BarcodeUrlSerializer
-
-    def perform_create(self, serializer):
-        obj = serializer.save()
-        barcode_image = generate_barcode_image(obj)
-        save_barcode_image(obj, barcode_image)
-        obj.save()
-
-    @action(detail=True, methods=["get"])
-    def download(self, request, pk=None):
-        obj = self.get_object()
-        return download_barcode(request, [obj])

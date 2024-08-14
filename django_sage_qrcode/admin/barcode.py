@@ -1,7 +1,7 @@
 from django.contrib import admin
 from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
 from ..models import Barcode, BarcodeUrl, BarcodeText
-from .utils import generate_barcode_image, save_barcode_image
+from django_sage_qrcode.utils.admin import generate_barcode_image, save_barcode_image
 from django_sage_qrcode.admin.actions import download_barcode_action
 
 

@@ -1,35 +1,32 @@
-from .qrcode import (
-    VCardQRCodeViewSet,
-    WifiQRCodeViewSet,
+from .barcode import BarcodeTextViewSet, BarcodeUrlViewSet
+from .contact import VCardQRCodeViewSet, WifiQRCodeViewSet
+from .social_media import (
+    MediaUrlViewSet,
     TikTokQRCodeViewSet,
-    TelegramQRCodeViewSet,
     InstagramQRCodeViewSet,
     SnapchatQRCodeViewSet,
     SkypeQRCodeViewSet,
     WhatsAppQRCodeViewSet,
     FacebookQRCodeViewSet,
-    EPCQRCodeViewSet,
-    MediaUrlViewSet,
     LinkedInQRCodeViewSet,
-    BitcoinQRCodeViewSet,
-    BarcodeTextViewSet,
-    BarcodeUrlViewSet,
+    TelegramQRCodeViewSet,
 )
+from .payment import EPCQRCodeViewSet, BitcoinQRCodeViewSet
 
 __all__ = [
-    "VCardQRCodeViewSet",
     "WifiQRCodeViewSet",
+    "BarcodeTextViewSet",
+    "BarcodeUrlViewSet",
+    "VCardQRCodeViewSet",
+    "MediaUrlViewSet",
     "TikTokQRCodeViewSet",
-    "TelegramQRCodeViewSet",
     "InstagramQRCodeViewSet",
     "SnapchatQRCodeViewSet",
     "SkypeQRCodeViewSet",
     "WhatsAppQRCodeViewSet",
     "FacebookQRCodeViewSet",
-    "EPCQRCodeViewSet",
-    "MediaUrlViewSet",
     "LinkedInQRCodeViewSet",
+    "TelegramQRCodeViewSet",
+    "EPCQRCodeViewSet",
     "BitcoinQRCodeViewSet",
-    "BarcodeTextViewSet",
-    "BarcodeUrlViewSet",
 ]

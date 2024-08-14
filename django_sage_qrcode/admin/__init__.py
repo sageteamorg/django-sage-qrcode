@@ -1,11 +1,8 @@
 from .barcode import BarcodeTextAdmin, BarcodeUrlAdmin
-from .qrcode import (
-    QRCodeParentAdmin,
-    VCardQRCodeAdmin,
-    WiFiQRCodeAdmin,
+from .base import QRCodeParentAdmin
+from .contact import VCardQRCodeAdmin, WiFiQRCodeAdmin
+from .social_media import (
     MediaUrlAdmin,
-    EPCQRCodeAdmin,
-    BitcoinQRCodeAdmin,
     SkypeQRCodeAdmin,
     TikTokQRCodeAdmin,
     SnapchatQRCodeAdmin,
@@ -15,6 +12,7 @@ from .qrcode import (
     TelegramQRCodeAdmin,
     InstagramQRCodeAdmin,
 )
+from .payment import EPCQRCodeAdmin, BitcoinQRCodeAdmin
 
 __all__ = [
     "QRCodeParentAdmin",
