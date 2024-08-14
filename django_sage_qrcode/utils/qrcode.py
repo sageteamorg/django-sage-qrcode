@@ -3,16 +3,14 @@ import logging
 try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError:
-    raise ImportError(
-        "Install `pillow` package. Run `pip install pillow`."
-    )
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
 
 
 logger = logging.getLogger(__name__)
 
+
 def add_text_to_image(image, text):
-    """
-    Adds centered text to the provided image.
+    """Adds centered text to the provided image.
 
     Args:
         image (Image): The image to which the text will be added.
@@ -20,6 +18,7 @@ def add_text_to_image(image, text):
 
     Returns:
         Image: The image with the added text.
+
     """
     logging.debug(f"Adding text to image: {text}")
     draw = ImageDraw.Draw(image)
@@ -41,8 +40,7 @@ def add_text_to_image(image, text):
 
 
 def add_icon_to_image(image, icon_path):
-    """
-    Adds an icon to the center of the provided image.
+    """Adds an icon to the center of the provided image.
 
     Args:
         image (Image): The image to which the icon will be added.
@@ -50,6 +48,7 @@ def add_icon_to_image(image, icon_path):
 
     Returns:
         Image: The image with the added icon.
+
     """
     logging.debug(f"Adding icon to image from path: {icon_path}")
     icon = Image.open(icon_path).convert("RGBA")
@@ -66,8 +65,7 @@ def add_icon_to_image(image, icon_path):
 
 
 def add_frame_to_image(image, frame_type="simple"):
-    """
-    Adds a frame to the provided image. Supports simple and rounded frames.
+    """Adds a frame to the provided image. Supports simple and rounded frames.
 
     Args:
         image (Image): The image to which the frame will be added.
@@ -75,6 +73,7 @@ def add_frame_to_image(image, frame_type="simple"):
 
     Returns:
         Image: The image with the added frame.
+
     """
     logging.debug(f"Adding {frame_type} frame to image.")
     if image.mode != "RGBA":

@@ -5,14 +5,14 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class SocialMediaQRCode(QRCodeBase):
-    """
-    A class for generating QR codes that include social media icons and related functionality.
-    """
+    """A class for generating QR codes that include social media icons and
+    related functionality."""
 
     def add_social_media_icon(self, url):
-        """
-        Adds an appropriate social media icon to the QR code based on the provided URL.
+        """Adds an appropriate social media icon to the QR code based on the
+        provided URL.
 
         Args:
             url (str): The social media URL.
@@ -22,6 +22,7 @@ class SocialMediaQRCode(QRCodeBase):
 
         Raises:
             ValueError: If the URL does not match any known social media platforms.
+
         """
         logging.debug(f"Attempting to add a social media icon for URL: {url}")
         script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -60,8 +61,8 @@ class SocialMediaQRCode(QRCodeBase):
         color3="#000000",
         size=10,
     ):
-        """
-        Generates a QR code for a social media URL and adds an appropriate icon.
+        """Generates a QR code for a social media URL and adds an appropriate
+        icon.
 
         Args:
             url (str): The social media URL.
@@ -71,6 +72,7 @@ class SocialMediaQRCode(QRCodeBase):
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
+
         """
         logging.debug(f"Creating QR code for social media URL: {url}")
         result = self.generate_qr_code(
@@ -98,8 +100,8 @@ class SocialMediaQRCode(QRCodeBase):
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code for a URL and adds optional customizations like frame and text.
+        """Generates a QR code for a URL and adds optional customizations like
+        frame and text.
 
         Args:
             playlist_url (str): The URL to encode in the QR code.
@@ -110,6 +112,7 @@ class SocialMediaQRCode(QRCodeBase):
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
+
         """
         logging.debug(f"Creating QR code for URL: {playlist_url}")
         self.generate_qr_code(

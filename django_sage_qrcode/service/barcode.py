@@ -10,29 +10,27 @@ logger = logging.getLogger(__name__)
 
 
 class BarcodeProxy:
-    """
-    A proxy class for generating and handling barcodes.
+    """A proxy class for generating and handling barcodes.
 
     Attributes:
         barcode_image (Image): Stores the generated barcode image.
+
     """
 
     def __init__(self):
-        """
-        Initializes a new instance of BarcodeProxy with no barcode image.
-        """
+        """Initializes a new instance of BarcodeProxy with no barcode image."""
         logging.info("Initializing BarcodeProxy instance.")
         self.barcode_image = None
 
     def shorten_url(self, url):
-        """
-        Shortens the provided URL using the TinyURL service.
+        """Shortens the provided URL using the TinyURL service.
 
         Args:
             url (str): The URL to shorten.
 
         Returns:
             str: The shortened URL.
+
         """
         logging.debug(f"Shortening URL: {url}")
         s = pyshorteners.Shortener()
@@ -43,8 +41,7 @@ class BarcodeProxy:
     def generate_barcode(
         self, data, barcode_type="code128", scale=1, bar_color="black", bg_color="white"
     ):
-        """
-        Generates a barcode image with the specified parameters.
+        """Generates a barcode image with the specified parameters.
 
         Args:
             data (str): The data to encode in the barcode.
@@ -55,11 +52,14 @@ class BarcodeProxy:
 
         Returns:
             Image: The generated barcode image.
+
         """
         logging.debug(f"Generating barcode with data: {data}")
-        
+
         # Shorten URLs if necessary
-        if (data.startswith("http://") or data.startswith("https://")) and len(data) > 80:
+        if (data.startswith("http://") or data.startswith("https://")) and len(
+            data
+        ) > 80:
             logging.info("Data is a long URL, shortening it...")
             data = self.shorten_url(data)
 
@@ -84,14 +84,14 @@ class BarcodeProxy:
         return self.barcode_image
 
     def show_barcode(self, save):
-        """
-        Displays the generated barcode image.
+        """Displays the generated barcode image.
 
         Args:
             save (bool): Whether to save the barcode image to a file.
 
         Returns:
             Image: The displayed barcode image.
+
         """
         logging.debug("Attempting to display barcode.")
         if self.barcode_image is None:
@@ -105,9 +105,8 @@ class BarcodeProxy:
         return self.barcode_image
 
     def save_barcode(self):
-        """
-        Saves the generated barcode image to a file with a unique filename.
-        """
+        """Saves the generated barcode image to a file with a unique
+        filename."""
         logging.debug("Attempting to save barcode image.")
         if self.barcode_image is None:
             logging.error("No barcode image to save.")
@@ -117,28 +116,30 @@ class BarcodeProxy:
         logging.info(f"Barcode image saved as {unique_filename}")
 
     def create_url(self, url, save=False, bar_color="black", bg_color="white"):
-        """
-        Generates and displays a barcode for a given URL.
+        """Generates and displays a barcode for a given URL.
 
         Args:
             url (str): The URL to encode in the barcode.
             save (bool, optional): Whether to save the barcode image to a file. Default is False.
             bar_color (str, optional): The color of the bars in the barcode. Default is "black".
             bg_color (str, optional): The background color of the barcode. Default is "white".
+
         """
         logging.info(f"Creating barcode for URL: {url}")
         self.generate_barcode(data=url, bar_color=bar_color, bg_color=bg_color)
         self.show_barcode(save)
 
-    def create_text_barcode(self, text, save=False, bar_color="black", bg_color="white"):
-        """
-        Generates and displays a barcode for a given text.
+    def create_text_barcode(
+        self, text, save=False, bar_color="black", bg_color="white"
+    ):
+        """Generates and displays a barcode for a given text.
 
         Args:
             text (str): The text to encode in the barcode.
             save (bool, optional): Whether to save the barcode image to a file. Default is False.
             bar_color (str, optional): The color of the bars in the barcode. Default is "black".
             bg_color (str, optional): The background color of the barcode. Default is "white".
+
         """
         logging.info(f"Creating barcode for text: {text}")
         self.generate_barcode(data=text, bar_color=bar_color, bg_color=bg_color)

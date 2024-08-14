@@ -6,18 +6,17 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class QRCodeBase:
-    """
-    A base class for generating and handling QR codes.
+    """A base class for generating and handling QR codes.
 
     Attributes:
         qr_image (Image): Stores the generated QR code image.
+
     """
 
     def __init__(self):
-        """
-        Initializes a new instance of QRCodeBase with no QR code image.
-        """
+        """Initializes a new instance of QRCodeBase with no QR code image."""
         logging.info("Initializing QRCodeBase instance.")
         self.qr_image = None
 
@@ -31,8 +30,7 @@ class QRCodeBase:
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code image based on the provided data and parameters.
+        """Generates a QR code image based on the provided data and parameters.
 
         Args:
             data (str): The data to encode in the QR code.
@@ -43,6 +41,7 @@ class QRCodeBase:
 
         Returns:
             bool: True if a custom QR code is generated, False otherwise.
+
         """
         logging.debug(f"Generating QR code with data: {data}")
         qr = segno.make(data, error=error)
@@ -67,14 +66,14 @@ class QRCodeBase:
         return False
 
     def show_qr_code(self, save=False):
-        """
-        Displays the generated QR code image.
+        """Displays the generated QR code image.
 
         Args:
             save (bool, optional): Whether to save the QR code image to a file. Default is False.
 
         Returns:
             Image: The generated QR code image.
+
         """
         logging.debug("Attempting to display QR code.")
         if self.qr_image is None:
@@ -90,9 +89,7 @@ class QRCodeBase:
         return self.qr_image
 
     def save_qr_code(self):
-        """
-        Saves the generated QR code image to a file.
-        """
+        """Saves the generated QR code image to a file."""
         logging.debug("Attempting to save QR code image.")
         if self.qr_image is None:
             logging.error("No QR code image to save.")
@@ -103,8 +100,8 @@ class QRCodeBase:
         logging.info(f"QR code image saved as {unique_filename}")
 
     def customize_qr_code(self, obj, path, scale=10):
-        """
-        Applies custom styling to the QR code by overlaying it with another image.
+        """Applies custom styling to the QR code by overlaying it with another
+        image.
 
         Args:
             obj (segno.QRCode): The QR code object to customize.
@@ -113,6 +110,7 @@ class QRCodeBase:
 
         Returns:
             Image: The customized QR code image.
+
         """
         logging.debug(f"Customizing QR code with image from path: {path}")
         target_extension = os.path.splitext(path)[1]

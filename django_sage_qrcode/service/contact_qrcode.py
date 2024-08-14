@@ -1,4 +1,3 @@
-
 from segno import helpers
 from .base import QRCodeBase
 from ..utils import add_text_to_image, add_frame_to_image
@@ -6,10 +5,10 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class ContactQRCode(QRCodeBase):
-    """
-    A class for generating specific types of QR codes like WiFi, MeCard, and VCard.
-    """
+    """A class for generating specific types of QR codes like WiFi, MeCard, and
+    VCard."""
 
     def generate_wifi_qr_code(
         self,
@@ -24,8 +23,7 @@ class ContactQRCode(QRCodeBase):
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code for connecting to a WiFi network.
+        """Generates a QR code for connecting to a WiFi network.
 
         Args:
             ssid (str): The SSID of the WiFi network.
@@ -38,6 +36,7 @@ class ContactQRCode(QRCodeBase):
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
+
         """
         logging.debug(f"Generating WiFi QR code for SSID: {ssid}")
         wifi_data = helpers.make_wifi_data(
@@ -68,8 +67,7 @@ class ContactQRCode(QRCodeBase):
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code for a MeCard contact.
+        """Generates a QR code for a MeCard contact.
 
         Args:
             name (str): The name of the contact.
@@ -83,6 +81,7 @@ class ContactQRCode(QRCodeBase):
             color (str, optional): Color of the QR code. Default is '#000000'.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
+
         """
         logging.debug(f"Generating MeCard QR code for name: {name}")
         mecard_data = f"MECARD:N:{name};EMAIL:{email};TEL:{phone};URL:{url};;"
@@ -114,8 +113,7 @@ class ContactQRCode(QRCodeBase):
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code for a VCard contact.
+        """Generates a QR code for a VCard contact.
 
         Args:
             name (str): The name of the contact.
@@ -132,6 +130,7 @@ class ContactQRCode(QRCodeBase):
             frame (str, optional): Path to a frame image to add around the QR code. Default is None.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
+
         """
         logging.debug(f"Generating VCard QR code for name: {name}")
         vcard_data = (

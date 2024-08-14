@@ -3,10 +3,10 @@ from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
 
+
 @deconstructible
 class BitcoinAddressValidator:
-    """
-    Validator for Bitcoin addresses.
+    """Validator for Bitcoin addresses.
 
     This validator checks whether a given value is a valid Bitcoin address.
     It uses a regular expression to match the typical structure of Bitcoin addresses,
@@ -16,6 +16,7 @@ class BitcoinAddressValidator:
         message (str): Error message returned when the validation fails.
         code (str): Error code returned when the validation fails.
         regex (Pattern): Compiled regular expression for validating Bitcoin addresses.
+
     """
 
     message = _("Enter a valid Bitcoin address.")
@@ -29,14 +30,14 @@ class BitcoinAddressValidator:
             self.code = code
 
     def __call__(self, value):
-        """
-        Validates the given Bitcoin address.
+        """Validates the given Bitcoin address.
 
         Args:
             value (str): The Bitcoin address to validate.
 
         Raises:
             ValidationError: If the Bitcoin address is not valid.
+
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -47,5 +48,6 @@ class BitcoinAddressValidator:
             and self.message == other.message
             and self.code == other.code
         )
+
 
 validate_bitcoin_address = BitcoinAddressValidator()

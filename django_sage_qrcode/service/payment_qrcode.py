@@ -7,9 +7,8 @@ logger = logging.getLogger(__name__)
 
 
 class PaymentQRCode(QRCodeBase):
-    """
-    A class for generating payment-related QR codes, such as EPC and Bitcoin payment QR codes.
-    """
+    """A class for generating payment-related QR codes, such as EPC and Bitcoin
+    payment QR codes."""
 
     def generate_epc_qr_code(
         self,
@@ -25,8 +24,7 @@ class PaymentQRCode(QRCodeBase):
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code for EPC (European Payments Council) payments.
+        """Generates a QR code for EPC (European Payments Council) payments.
 
         Args:
             name (str): The name of the recipient.
@@ -40,8 +38,11 @@ class PaymentQRCode(QRCodeBase):
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
+
         """
-        logging.debug(f"Generating EPC QR code for recipient: {name}, IBAN: {iban}, Amount: {amount}")
+        logging.debug(
+            f"Generating EPC QR code for recipient: {name}, IBAN: {iban}, Amount: {amount}"
+        )
         epc_data = f"BCD\n001\n1\nSCT\n{name}\n{iban}\nEUR{amount}\n{int(amount * 100)}\n{text}\n"
         result = self.generate_qr_code(
             data=epc_data,
@@ -72,8 +73,7 @@ class PaymentQRCode(QRCodeBase):
         color2="#FFFFFF",
         color3="#000000",
     ):
-        """
-        Generates a QR code for Bitcoin payments.
+        """Generates a QR code for Bitcoin payments.
 
         Args:
             address (str): The Bitcoin address.
@@ -86,8 +86,11 @@ class PaymentQRCode(QRCodeBase):
             frame (str, optional): Path to a frame image to add around the QR code. Default is None.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
+
         """
-        logging.debug(f"Generating Bitcoin QR code for address: {address}, Amount: {amount}, Label: {label}")
+        logging.debug(
+            f"Generating Bitcoin QR code for address: {address}, Amount: {amount}, Label: {label}"
+        )
         params = {"amount": amount, "label": label, "message": message}
         filtered_params = {k: v for k, v in params.items() if v is not None}
         query_string = urlencode(filtered_params)

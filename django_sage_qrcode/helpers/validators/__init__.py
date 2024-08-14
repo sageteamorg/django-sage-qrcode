@@ -26,7 +26,8 @@ from .image import ImageFileValidator, SizeValidator, validate_image_file, valid
 from .iban import IBANValidator, validate_iban
 from .event import EventTimeRangeValidator, validate_event_time_range
 from .bitcoin import BitcoinAddressValidator, validate_bitcoin_address
-from .phone_number import ValidatorE164,validate_phone_number
+from .phone_number import validate_phone_number
+
 __all__ = [
     "ValidatorE164",
     "validate_facebook",
@@ -37,6 +38,7 @@ __all__ = [
     "validate_telegram",
     "validate_tiktok",
     "validate_x",
+    "validate_phone_number",
     "SkypeValidator",
     "TikTokValidator",
     "FacebookValidator",
