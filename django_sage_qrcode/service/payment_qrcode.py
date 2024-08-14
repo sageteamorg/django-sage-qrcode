@@ -2,6 +2,7 @@ from urllib.parse import urlencode
 from .base import QRCodeBase
 from django_sage_qrcode.utils import add_text_to_image, add_frame_to_image
 import logging
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -12,18 +13,18 @@ class PaymentQRCode(QRCodeBase):
 
     def generate_epc_qr_code(
         self,
-        name,
-        iban,
-        amount,
-        text="",
-        save=False,
-        custom=None,
-        frame=None,
-        color="#000000",
-        size=10,
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        name: str,
+        iban: str,
+        amount: float,
+        text: str = "",
+        save: bool = False,
+        custom: Optional[str] = None,
+        frame: Optional[str] = None,
+        color: str = "#000000",
+        size: int = 10,
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> None:
         """Generates a QR code for EPC (European Payments Council) payments.
 
         Args:
@@ -32,8 +33,8 @@ class PaymentQRCode(QRCodeBase):
             amount (float): The payment amount in EUR.
             text (str, optional): Additional text information. Default is "".
             save (bool, optional): Whether to save the QR code image. Default is False.
-            custom (str, optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
@@ -62,28 +63,28 @@ class PaymentQRCode(QRCodeBase):
 
     def generate_bitcoin_qr_code(
         self,
-        address,
-        amount=None,
-        label=None,
-        save=False,
-        message=None,
-        scale=10,
-        color="#000000",
-        frame=None,
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        address: str,
+        amount: Optional[float] = None,
+        label: Optional[str] = None,
+        save: bool = False,
+        message: Optional[str] = None,
+        scale: int = 10,
+        color: str = "#000000",
+        frame: Optional[str] = None,
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> None:
         """Generates a QR code for Bitcoin payments.
 
         Args:
             address (str): The Bitcoin address.
-            amount (float, optional): The amount in BTC. Default is None.
-            label (str, optional): A label for the payment. Default is None.
+            amount (Optional[float], optional): The amount in BTC. Default is None.
+            label (Optional[str], optional): A label for the payment. Default is None.
             save (bool, optional): Whether to save the QR code image. Default is False.
-            message (str, optional): A message for the payment. Default is None.
+            message (Optional[str], optional): A message for the payment. Default is None.
             scale (int, optional): Scale factor for the QR code size. Default is 10.
             color (str, optional): Color of the QR code. Default is '#000000'.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
 

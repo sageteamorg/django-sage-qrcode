@@ -3,6 +3,7 @@ import uuid
 from PIL import Image
 import segno
 import logging
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -11,33 +12,35 @@ class QRCodeBase:
     """A base class for generating and handling QR codes.
 
     Attributes:
-        qr_image (Image): Stores the generated QR code image.
+        qr_image (Optional[Image.Image]): Stores the generated QR code image.
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initializes a new instance of QRCodeBase with no QR code image."""
         logging.info("Initializing QRCodeBase instance.")
-        self.qr_image = None
+        self.qr_image: Optional[Image.Image] = None
 
     def generate_qr_code(
         self,
-        data,
-        scale=10,
-        error="h",
-        custom=None,
-        color="#000000",
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        data: str,
+        scale: int = 10,
+        error: str = "h",
+        custom: Optional[str] = None,
+        color: str = "#000000",
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> bool:
         """Generates a QR code image based on the provided data and parameters.
 
         Args:
             data (str): The data to encode in the QR code.
             scale (int, optional): Scale factor for the QR code size. Default is 10.
             error (str, optional): Error correction level ('h', 'q', 'm', 'l'). Default is 'h'.
-            custom (str, optional): Path to a custom image to overlay on the QR code. Default is None.
+            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
+            color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
+            color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
 
         Returns:
             bool: True if a custom QR code is generated, False otherwise.
@@ -65,14 +68,14 @@ class QRCodeBase:
         logging.info("QR code generated successfully.")
         return False
 
-    def show_qr_code(self, save=False):
+    def show_qr_code(self, save: bool = False) -> Image.Image:
         """Displays the generated QR code image.
 
         Args:
             save (bool, optional): Whether to save the QR code image to a file. Default is False.
 
         Returns:
-            Image: The generated QR code image.
+            Image.Image: The generated QR code image.
 
         """
         logging.debug("Attempting to display QR code.")
@@ -88,7 +91,7 @@ class QRCodeBase:
         logging.info("QR code displayed successfully.")
         return self.qr_image
 
-    def save_qr_code(self):
+    def save_qr_code(self) -> None:
         """Saves the generated QR code image to a file."""
         logging.debug("Attempting to save QR code image.")
         if self.qr_image is None:
@@ -99,7 +102,9 @@ class QRCodeBase:
         self.qr_image.save(unique_filename)
         logging.info(f"QR code image saved as {unique_filename}")
 
-    def customize_qr_code(self, obj, path, scale=10):
+    def customize_qr_code(
+        self, obj: segno.QRCode, path: str, scale: int = 10
+    ) -> Image.Image:
         """Applies custom styling to the QR code by overlaying it with another
         image.
 
@@ -109,7 +114,7 @@ class QRCodeBase:
             scale (int, optional): Scale factor for the custom image. Default is 10.
 
         Returns:
-            Image: The customized QR code image.
+            Image.Image: The customized QR code image.
 
         """
         logging.debug(f"Customizing QR code with image from path: {path}")

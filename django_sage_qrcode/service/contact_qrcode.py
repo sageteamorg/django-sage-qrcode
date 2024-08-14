@@ -2,6 +2,7 @@ from segno import helpers
 from .base import QRCodeBase
 from ..utils import add_text_to_image, add_frame_to_image
 import logging
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -12,17 +13,17 @@ class ContactQRCode(QRCodeBase):
 
     def generate_wifi_qr_code(
         self,
-        ssid,
-        password,
-        security="WPA",
-        save=False,
-        custom=None,
-        frame=None,
-        color="#000000",
-        size=10,
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        ssid: str,
+        password: str,
+        security: str = "WPA",
+        save: bool = False,
+        custom: Optional[str] = None,
+        frame: Optional[str] = None,
+        color: str = "#000000",
+        size: int = 10,
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> None:
         """Generates a QR code for connecting to a WiFi network.
 
         Args:
@@ -30,8 +31,8 @@ class ContactQRCode(QRCodeBase):
             password (str): The password of the WiFi network.
             security (str, optional): The security type (WPA, WEP). Default is "WPA".
             save (bool, optional): Whether to save the QR code image. Default is False.
-            custom (str, optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
@@ -55,28 +56,28 @@ class ContactQRCode(QRCodeBase):
 
     def generate_mecard_qr_code(
         self,
-        name,
-        email=None,
-        phone=None,
-        url=None,
-        save=False,
-        custom=None,
-        frame=None,
-        size=10,
-        color="#000000",
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        name: str,
+        email: Optional[str] = None,
+        phone: Optional[str] = None,
+        url: Optional[str] = None,
+        save: bool = False,
+        custom: Optional[str] = None,
+        frame: Optional[str] = None,
+        size: int = 10,
+        color: str = "#000000",
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> None:
         """Generates a QR code for a MeCard contact.
 
         Args:
             name (str): The name of the contact.
-            email (str, optional): The email of the contact. Default is None.
-            phone (str, optional): The phone number of the contact. Default is None.
-            url (str, optional): The URL associated with the contact. Default is None.
+            email (Optional[str], optional): The email of the contact. Default is None.
+            phone (Optional[str], optional): The phone number of the contact. Default is None.
+            url (Optional[str], optional): The URL associated with the contact. Default is None.
             save (bool, optional): Whether to save the QR code image. Default is False.
-            custom (str, optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color (str, optional): Color of the QR code. Default is '#000000'.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
@@ -98,36 +99,36 @@ class ContactQRCode(QRCodeBase):
 
     def generate_vcard_qr_code(
         self,
-        name,
-        displayname=None,
-        email=None,
-        phone=None,
-        color="#000000",
-        org=None,
-        url=None,
-        address=None,
-        save=False,
-        size=10,
-        custom=None,
-        frame=None,
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        name: str,
+        displayname: Optional[str] = None,
+        email: Optional[str] = None,
+        phone: Optional[str] = None,
+        color: str = "#000000",
+        org: Optional[str] = None,
+        url: Optional[str] = None,
+        address: Optional[str] = None,
+        save: bool = False,
+        size: int = 10,
+        custom: Optional[str] = None,
+        frame: Optional[str] = None,
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> None:
         """Generates a QR code for a VCard contact.
 
         Args:
             name (str): The name of the contact.
-            displayname (str, optional): The display name of the contact. Default is None.
-            email (str, optional): The email of the contact. Default is None.
-            phone (str, optional): The phone number of the contact. Default is None.
+            displayname (Optional[str], optional): The display name of the contact. Default is None.
+            email (Optional[str], optional): The email of the contact. Default is None.
+            phone (Optional[str], optional): The phone number of the contact. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
-            org (str, optional): The organization of the contact. Default is None.
-            url (str, optional): The URL associated with the contact. Default is None.
-            address (str, optional): The address of the contact. Default is None.
+            org (Optional[str], optional): The organization of the contact. Default is None.
+            url (Optional[str], optional): The URL associated with the contact. Default is None.
+            address (Optional[str], optional): The address of the contact. Default is None.
             save (bool, optional): Whether to save the QR code image. Default is False.
             size (int, optional): Scale factor for the QR code size. Default is 10.
-            custom (str, optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
 

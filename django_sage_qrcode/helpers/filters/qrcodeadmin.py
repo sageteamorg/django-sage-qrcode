@@ -12,12 +12,8 @@ from django_sage_qrcode.models import (
 class QRCodeTypeFilter(SimpleListFilter):
     """A custom filter for Django admin to filter QR codes by type.
 
-    This filter allows the admin interface to display QR codes based on their type,
-    such as VCard, WiFi, Social Media, Media URL, or EPC.
-
-    Attributes:
-        title (str): The title of the filter displayed in the admin interface.
-        parameter_name (str): The parameter name used in the query string for filtering.
+    This filter allows the admin interface to display QR codes based on
+    their type, such as VCard, WiFi, Social Media, Media URL, or EPC.
 
     """
 

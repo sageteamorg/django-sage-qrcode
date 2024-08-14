@@ -44,8 +44,8 @@ class Barcode(PolymorphicModel, TimestampMixin):
     )
 
     class Meta:
-        verbose_name = _("BAR Code")
-        verbose_name_plural = _("BAR Codes")
+        verbose_name = _("Bar Code")
+        verbose_name_plural = _("Bar Codes")
 
     def __str__(self):
         return f"{self.__class__.__name__} {self.pk} - {self.title or 'No Title'}"
@@ -106,5 +106,5 @@ class BarcodeText(Barcode):
     class Meta:
         indexes = [models.Index(fields=["body"], name="body_idx")]
         ordering = ["body"]
-        verbose_name = _(" Text Barcode")
-        verbose_name_plural = _("Text Barcode")
+        verbose_name = _("Barcode Text")
+        verbose_name_plural = _("Barcode Texts")

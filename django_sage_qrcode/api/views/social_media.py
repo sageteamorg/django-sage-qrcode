@@ -11,7 +11,7 @@ from django_sage_qrcode.models import (
     LinkedInQRCode,
     TelegramQRCode,
 )
-from ..serializer import (
+from django_sage_qrcode.api.serializer import (
     MediaUrlSerializer,
     TikTokQRCodeSerializer,
     InstagramQRCodeSerializer,

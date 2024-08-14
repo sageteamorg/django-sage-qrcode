@@ -5,6 +5,7 @@ import uuid
 from io import BytesIO
 import pyshorteners
 import logging
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -13,16 +14,16 @@ class BarcodeProxy:
     """A proxy class for generating and handling barcodes.
 
     Attributes:
-        barcode_image (Image): Stores the generated barcode image.
+        barcode_image (Optional[Image.Image]): Stores the generated barcode image.
 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initializes a new instance of BarcodeProxy with no barcode image."""
         logging.info("Initializing BarcodeProxy instance.")
-        self.barcode_image = None
+        self.barcode_image: Optional[Image.Image] = None
 
-    def shorten_url(self, url):
+    def shorten_url(self, url: str) -> str:
         """Shortens the provided URL using the TinyURL service.
 
         Args:
@@ -39,8 +40,13 @@ class BarcodeProxy:
         return shortened_url
 
     def generate_barcode(
-        self, data, barcode_type="code128", scale=1, bar_color="black", bg_color="white"
-    ):
+        self,
+        data: str,
+        barcode_type: str = "code128",
+        scale: int = 1,
+        bar_color: str = "black",
+        bg_color: str = "white",
+    ) -> Image.Image:
         """Generates a barcode image with the specified parameters.
 
         Args:
@@ -51,7 +57,7 @@ class BarcodeProxy:
             bg_color (str, optional): The background color of the barcode. Default is "white".
 
         Returns:
-            Image: The generated barcode image.
+            Image.Image: The generated barcode image.
 
         """
         logging.debug(f"Generating barcode with data: {data}")
@@ -83,14 +89,14 @@ class BarcodeProxy:
         logging.info("Barcode generated successfully.")
         return self.barcode_image
 
-    def show_barcode(self, save):
+    def show_barcode(self, save: bool) -> Image.Image:
         """Displays the generated barcode image.
 
         Args:
             save (bool): Whether to save the barcode image to a file.
 
         Returns:
-            Image: The displayed barcode image.
+            Image.Image: The displayed barcode image.
 
         """
         logging.debug("Attempting to display barcode.")
@@ -104,7 +110,7 @@ class BarcodeProxy:
         logging.info("Barcode displayed successfully.")
         return self.barcode_image
 
-    def save_barcode(self):
+    def save_barcode(self) -> None:
         """Saves the generated barcode image to a file with a unique
         filename."""
         logging.debug("Attempting to save barcode image.")
@@ -115,7 +121,13 @@ class BarcodeProxy:
         self.barcode_image.save(unique_filename)
         logging.info(f"Barcode image saved as {unique_filename}")
 
-    def create_url(self, url, save=False, bar_color="black", bg_color="white"):
+    def create_url(
+        self,
+        url: str,
+        save: bool = False,
+        bar_color: str = "black",
+        bg_color: str = "white",
+    ) -> None:
         """Generates and displays a barcode for a given URL.
 
         Args:
@@ -130,8 +142,12 @@ class BarcodeProxy:
         self.show_barcode(save)
 
     def create_text_barcode(
-        self, text, save=False, bar_color="black", bg_color="white"
-    ):
+        self,
+        text: str,
+        save: bool = False,
+        bar_color: str = "black",
+        bg_color: str = "white",
+    ) -> None:
         """Generates and displays a barcode for a given text.
 
         Args:

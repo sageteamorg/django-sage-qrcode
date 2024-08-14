@@ -2,6 +2,8 @@ from .base import QRCodeBase
 from ..utils import add_text_to_image, add_icon_to_image, add_frame_to_image
 import os
 import logging
+from typing import Optional
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +12,7 @@ class SocialMediaQRCode(QRCodeBase):
     """A class for generating QR codes that include social media icons and
     related functionality."""
 
-    def add_social_media_icon(self, url):
+    def add_social_media_icon(self, url: str) -> Image.Image:
         """Adds an appropriate social media icon to the QR code based on the
         provided URL.
 
@@ -18,7 +20,7 @@ class SocialMediaQRCode(QRCodeBase):
             url (str): The social media URL.
 
         Returns:
-            Image: The QR code image with the social media icon.
+            Image.Image: The QR code image with the social media icon.
 
         Raises:
             ValueError: If the URL does not match any known social media platforms.
@@ -53,21 +55,21 @@ class SocialMediaQRCode(QRCodeBase):
 
     def create_social_media_url(
         self,
-        url,
-        save=False,
-        frame=None,
-        color="#000000",
-        color2="#FFFFFF",
-        color3="#000000",
-        size=10,
-    ):
+        url: str,
+        save: bool = False,
+        frame: Optional[str] = None,
+        color: str = "#000000",
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+        size: int = 10,
+    ) -> None:
         """Generates a QR code for a social media URL and adds an appropriate
         icon.
 
         Args:
             url (str): The social media URL.
             save (bool, optional): Whether to save the QR code image. Default is False.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
@@ -91,23 +93,23 @@ class SocialMediaQRCode(QRCodeBase):
 
     def create_url(
         self,
-        playlist_url,
-        save,
-        custom=None,
-        frame=None,
-        color="#000000",
-        size=10,
-        color2="#FFFFFF",
-        color3="#000000",
-    ):
+        playlist_url: str,
+        save: bool,
+        custom: Optional[str] = None,
+        frame: Optional[str] = None,
+        color: str = "#000000",
+        size: int = 10,
+        color2: str = "#FFFFFF",
+        color3: str = "#000000",
+    ) -> None:
         """Generates a QR code for a URL and adds optional customizations like
         frame and text.
 
         Args:
             playlist_url (str): The URL to encode in the QR code.
             save (bool): Whether to save the QR code image.
-            custom (str, optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (str, optional): Path to a frame image to add around the QR code. Default is None.
+            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
+            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
