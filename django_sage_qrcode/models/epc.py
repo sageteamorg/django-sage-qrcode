@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 
 from django_sage_qrcode.models.qrcode import QRCode
@@ -49,12 +48,6 @@ class EPCQRCode(QRCode):
 
     def __repr__(self):
         return f"<EPCQRCode(id={self.pk}, name={self.name})>"
-
-    def clean(self):
-        if not self.name or not self.iban or not self.amount:
-            raise ValidationError(
-                _("Name, IBAN, and amount are required for EPC QR Code.")
-            )
 
     class Meta:
         indexes = [

@@ -1,9 +1,16 @@
 import os
 import uuid
-from PIL import Image
 import segno
 import logging
 from typing import Optional
+from pathlib import Path
+
+try:
+    from PIL import Image
+except ImportError:
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
+
+from django_sage_qrcode.helpers.type import HexCode
 
 logger = logging.getLogger(__name__)
 
@@ -23,21 +30,21 @@ class QRCodeBase:
 
     def generate_qr_code(
         self,
-        data: str,
+        data: dict,
         scale: int = 10,
         error: str = "h",
-        custom: Optional[str] = None,
-        color: str = "#000000",
-        color2: str = "#FFFFFF",
-        color3: str = "#000000",
+        custom: Path = None,
+        color: HexCode = "#000000",
+        color2: HexCode = "#FFFFFF",
+        color3: HexCode = "#000000",
     ) -> bool:
         """Generates a QR code image based on the provided data and parameters.
 
         Args:
-            data (str): The data to encode in the QR code.
+            data (dict): The data to encode in the QR code.
             scale (int, optional): Scale factor for the QR code size. Default is 10.
             error (str, optional): Error correction level ('h', 'q', 'm', 'l'). Default is 'h'.
-            custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
+            custom (str): Path to a custom image to overlay on the QR code. Default is None.
             color (str, optional): Color of the QR code. Default is '#000000'.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.

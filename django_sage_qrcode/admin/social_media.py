@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from polymorphic.admin import PolymorphicChildModelAdmin
 
@@ -30,7 +29,7 @@ class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     fieldsets = (
         (None, {"fields": ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -43,11 +42,6 @@ class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(TikTokQRCode)
@@ -62,7 +56,7 @@ class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     fieldsets = (
         (None, {"fields": ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -75,11 +69,6 @@ class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(SnapchatQRCode)
@@ -91,9 +80,9 @@ class SnapchatQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (None, {_("fields"): ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -106,11 +95,6 @@ class SnapchatQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(XQRCode)
@@ -124,7 +108,7 @@ class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     fieldsets = (
         (None, {"fields": ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -137,11 +121,6 @@ class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(LinkedInQRCode)
@@ -155,7 +134,7 @@ class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     fieldsets = (
         (None, {"fields": ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -168,11 +147,6 @@ class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(FacebookQRCode)
@@ -183,9 +157,9 @@ class FacebookQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (None, {_("fields"): ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -198,11 +172,6 @@ class FacebookQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(TelegramQRCode)
@@ -214,9 +183,9 @@ class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (None, {_("fields"): ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -229,11 +198,6 @@ class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(InstagramQRCode)
@@ -245,9 +209,9 @@ class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (None, {_("fields"): ("url",)}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -260,11 +224,6 @@ class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.url:
-            raise ValidationError(_("URL cannot be empty."))
 
 
 @admin.register(MediaUrl)
@@ -277,9 +236,9 @@ class MediaUrlAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url", "custom_gif")}),
+        (None, {_("fields"): ("url", "custom_gif")}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": ("size", "color", "second_color", "third_color"),

@@ -1,11 +1,16 @@
 import barcode
 from barcode.writer import ImageWriter
-from PIL import Image
 import uuid
 from io import BytesIO
 import pyshorteners
 import logging
 from typing import Optional
+from django_sage_qrcode.helpers.type import ColorName
+
+try:
+    from PIL import Image
+except ImportError:
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
 
 logger = logging.getLogger(__name__)
 
@@ -41,16 +46,16 @@ class BarcodeProxy:
 
     def generate_barcode(
         self,
-        data: str,
+        data: dict,
         barcode_type: str = "code128",
         scale: int = 1,
-        bar_color: str = "black",
-        bg_color: str = "white",
+        bar_color: ColorName = "black",
+        bg_color: ColorName = "white",
     ) -> Image.Image:
         """Generates a barcode image with the specified parameters.
 
         Args:
-            data (str): The data to encode in the barcode.
+            data (dict): The data to encode in the barcode.
             barcode_type (str, optional): The type of barcode to generate. Default is "code128".
             scale (int, optional): The scale of the barcode image. Default is 1.
             bar_color (str, optional): The color of the bars in the barcode. Default is "black".
@@ -125,8 +130,8 @@ class BarcodeProxy:
         self,
         url: str,
         save: bool = False,
-        bar_color: str = "black",
-        bg_color: str = "white",
+        bar_color: ColorName = "black",
+        bg_color: ColorName = "white",
     ) -> None:
         """Generates and displays a barcode for a given URL.
 

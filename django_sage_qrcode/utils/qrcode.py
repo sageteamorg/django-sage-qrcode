@@ -9,7 +9,7 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
-def add_text_to_image(image, text):
+def add_text_to_image(image: Image, text: str):
     """Adds centered text to the provided image.
 
     Args:
@@ -39,7 +39,7 @@ def add_text_to_image(image, text):
     return image
 
 
-def add_icon_to_image(image, icon_path):
+def add_icon_to_image(image: Image, icon_path: str):
     """Adds an icon to the center of the provided image.
 
     Args:
@@ -64,7 +64,7 @@ def add_icon_to_image(image, icon_path):
     return image
 
 
-def add_frame_to_image(image, frame_type="simple"):
+def add_frame_to_image(image: Image, frame_type: str = "simple"):
     """Adds a frame to the provided image. Supports simple and rounded frames.
 
     Args:

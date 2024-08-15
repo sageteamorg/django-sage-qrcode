@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from django_sage_qrcode.models.qrcode import QRCode
@@ -51,6 +52,10 @@ class BitcoinQRCode(QRCode):
 
     def __repr__(self):
         return f"<BitcoinQRCode(id={self.pk}, bitcoin_address={self.bitcoin_address})>"
+
+    def clean(self):
+        if not self.bitcoin_address or not self.amount:
+            raise ValidationError(_("Bitcoin address and amount are required."))
 
     class Meta:
         indexes = [models.Index(fields=["bitcoin_address"], name="bitcoin_address_idx")]

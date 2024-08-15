@@ -3,7 +3,11 @@ from django_sage_qrcode.service import QRCodeBase
 from django_sage_qrcode.service import ContactQRCode
 from django_sage_qrcode.service import PaymentQRCode
 from django_sage_qrcode.service import SocialMediaQRCode
-from PIL import Image
+
+try:
+    from PIL import Image
+except ImportError:
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
 
 
 class TestQRCodeBase(TestCase):

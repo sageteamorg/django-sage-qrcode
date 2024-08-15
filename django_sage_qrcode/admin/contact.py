@@ -1,5 +1,6 @@
 from polymorphic.admin import PolymorphicChildModelAdmin
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from django_sage_qrcode.models import VCardQRCode, WifiQRCode
 from django_sage_qrcode.forms import VCardQRCodeForm, WiFiQRCodeForm
@@ -19,7 +20,7 @@ class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
         (
             None,
             {
-                "fields": (
+                _("fields"): (
                     "display_name",
                     "full_name",
                     "email",
@@ -30,7 +31,7 @@ class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": ("org", "size", "color", "second_color", "third_color"),
@@ -49,9 +50,9 @@ class WiFiQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("ssid", "security")
 
     fieldsets = (
-        (None, {"fields": ("ssid", "password", "security", "custom_gif")}),
+        (None, {_("fields"): ("ssid", "password", "security", "custom_gif")}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": ("size", "color", "second_color", "third_color"),

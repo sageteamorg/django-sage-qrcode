@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.http import HttpResponse
 from polymorphic.admin import PolymorphicParentModelAdmin
 
 from django_sage_qrcode.models import (
@@ -44,13 +43,7 @@ class QRCodeParentAdmin(PolymorphicParentModelAdmin):
         TelegramQRCode,
         InstagramQRCode,
     )
-    actions = ["download_qr_code"]
-
-    def download_qr_code(self, request, queryset):
-        response = download_qr_code(request, queryset)
-        if isinstance(response, HttpResponse):
-            self.message_user(request, "Please select exactly one QR code to download.")
-        return response
+    actions = [download_qr_code]
 
     list_display = ("id", "created", "modified")
     list_filter = ("created", "modified", QRCodeTypeFilter)

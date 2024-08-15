@@ -1,8 +1,11 @@
-from segno import helpers
-from .base import QRCodeBase
-from ..utils import add_text_to_image, add_frame_to_image
 import logging
+from segno import helpers
 from typing import Optional
+from pathlib import Path
+
+from django_sage_qrcode.service.base import QRCodeBase
+from django_sage_qrcode.utils import add_text_to_image, add_frame_to_image
+from django_sage_qrcode.helpers.type import HexCode
 
 logger = logging.getLogger(__name__)
 
@@ -15,24 +18,24 @@ class ContactQRCode(QRCodeBase):
         self,
         ssid: str,
         password: str,
-        security: str = "WPA",
+        security_type: str = "WPA",
         save: bool = False,
-        custom: Optional[str] = None,
-        frame: Optional[str] = None,
-        color: str = "#000000",
+        custom: Path = None,
+        frame_type: Optional[str] = None,
+        color: HexCode = "#000000",
         size: int = 10,
-        color2: str = "#FFFFFF",
-        color3: str = "#000000",
+        color2: HexCode = "#FFFFFF",
+        color3: HexCode = "#000000",
     ) -> None:
         """Generates a QR code for connecting to a WiFi network.
 
         Args:
             ssid (str): The SSID of the WiFi network.
             password (str): The password of the WiFi network.
-            security (str, optional): The security type (WPA, WEP). Default is "WPA".
+            security_type (str, optional): The security type (WPA, WEP). Default is "WPA".
             save (bool, optional): Whether to save the QR code image. Default is False.
             custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
+            frame_type (Optional[str], optional): Kind of the frame
             color (str, optional): Color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
@@ -41,14 +44,14 @@ class ContactQRCode(QRCodeBase):
         """
         logging.debug(f"Generating WiFi QR code for SSID: {ssid}")
         wifi_data = helpers.make_wifi_data(
-            ssid=ssid, password=password, security=security
+            ssid=ssid, password=password, security=security_type
         )
         result = self.generate_qr_code(
             data=wifi_data, custom=custom, color=color, scale=size
         )
-        if frame:
-            logging.info("Adding frame to QR code.")
-            self.qr_image = add_frame_to_image(self.qr_image, frame)
+        if frame_type:
+            logging.info("Adding frame_type to QR code.")
+            self.qr_image = add_frame_to_image(self.qr_image, frame_type)
         if not result:
             logging.info("Adding text to QR code image.")
             self.qr_image = add_text_to_image(self.qr_image, "Scan to open WiFi")
@@ -61,12 +64,12 @@ class ContactQRCode(QRCodeBase):
         phone: Optional[str] = None,
         url: Optional[str] = None,
         save: bool = False,
-        custom: Optional[str] = None,
-        frame: Optional[str] = None,
+        custom: Path = None,
+        frame_type: Optional[str] = None,
         size: int = 10,
         color: str = "#000000",
-        color2: str = "#FFFFFF",
-        color3: str = "#000000",
+        color2: HexCode = "#FFFFFF",
+        color3: HexCode = "#000000",
     ) -> None:
         """Generates a QR code for a MeCard contact.
 
@@ -77,7 +80,7 @@ class ContactQRCode(QRCodeBase):
             url (Optional[str], optional): The URL associated with the contact. Default is None.
             save (bool, optional): Whether to save the QR code image. Default is False.
             custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
+            frame_type (Optional[str], optional): Kind of the frame
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color (str, optional): Color of the QR code. Default is '#000000'.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
@@ -89,9 +92,9 @@ class ContactQRCode(QRCodeBase):
         result = self.generate_qr_code(
             data=mecard_data, custom=custom, color=color, scale=size
         )
-        if frame:
-            logging.info("Adding frame to QR code.")
-            self.qr_image = add_frame_to_image(self.qr_image, frame)
+        if frame_type:
+            logging.info("Adding frame_type to QR code.")
+            self.qr_image = add_frame_to_image(self.qr_image, frame_type)
         if not result:
             logging.info("Adding text to QR code image.")
             self.qr_image = add_text_to_image(self.qr_image, "Scan to view MeCard")
@@ -109,10 +112,10 @@ class ContactQRCode(QRCodeBase):
         address: Optional[str] = None,
         save: bool = False,
         size: int = 10,
-        custom: Optional[str] = None,
-        frame: Optional[str] = None,
-        color2: str = "#FFFFFF",
-        color3: str = "#000000",
+        custom: Path = None,
+        frame_type: Optional[str] = None,
+        color2: HexCode = "#FFFFFF",
+        color3: HexCode = "#000000",
     ) -> None:
         """Generates a QR code for a VCard contact.
 
@@ -128,7 +131,7 @@ class ContactQRCode(QRCodeBase):
             save (bool, optional): Whether to save the QR code image. Default is False.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
+            frame_type (Optional[str], optional): Kind of the frame
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
 
@@ -146,9 +149,9 @@ class ContactQRCode(QRCodeBase):
             scale=size,
             custom=custom,
         )
-        if frame:
-            logging.info("Adding frame to QR code.")
-            self.qr_image = add_frame_to_image(self.qr_image, frame)
+        if frame_type:
+            logging.info("Adding frame_type to QR code.")
+            self.qr_image = add_frame_to_image(self.qr_image, frame_type)
         if not result:
             logging.info("Adding text to QR code image.")
             self.qr_image = add_text_to_image(self.qr_image, "Scan to view VCard")

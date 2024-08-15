@@ -1,9 +1,21 @@
-from .base import QRCodeBase
-from ..utils import add_text_to_image, add_icon_to_image, add_frame_to_image
 import os
 import logging
 from typing import Optional
-from PIL import Image
+from django_sage_qrcode.helpers.type import HexCode
+from pathlib import Path
+
+try:
+    from PIL import Image
+except ImportError:
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
+
+from django_sage_qrcode.service.base import QRCodeBase
+from django_sage_qrcode.utils import (
+    add_text_to_image,
+    add_icon_to_image,
+    add_frame_to_image,
+)
+
 
 logger = logging.getLogger(__name__)
 
@@ -57,10 +69,10 @@ class SocialMediaQRCode(QRCodeBase):
         self,
         url: str,
         save: bool = False,
-        frame: Optional[str] = None,
-        color: str = "#000000",
-        color2: str = "#FFFFFF",
-        color3: str = "#000000",
+        frame_type: Optional[str] = None,
+        color: HexCode = "#000000",
+        color2: HexCode = "#FFFFFF",
+        color3: HexCode = "#000000",
         size: int = 10,
     ) -> None:
         """Generates a QR code for a social media URL and adds an appropriate
@@ -69,7 +81,7 @@ class SocialMediaQRCode(QRCodeBase):
         Args:
             url (str): The social media URL.
             save (bool, optional): Whether to save the QR code image. Default is False.
-            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
+            frame_type (Optional[str], optional): Kind of frame you want.
             color (str, optional): Color of the QR code. Default is '#000000'.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
@@ -83,9 +95,9 @@ class SocialMediaQRCode(QRCodeBase):
         if not result:
             logging.info("QR code generated. Adding social media icon.")
             self.qr_image = self.add_social_media_icon(url)
-            if frame:
-                logging.info("Adding frame to QR code.")
-                self.qr_image = add_frame_to_image(self.qr_image, frame)
+            if frame_type:
+                logging.info("Adding frame_type to QR code.")
+                self.qr_image = add_frame_to_image(self.qr_image, frame_type)
             self.qr_image = add_text_to_image(
                 self.qr_image, "Scan to view social media profile"
             )
@@ -95,21 +107,21 @@ class SocialMediaQRCode(QRCodeBase):
         self,
         playlist_url: str,
         save: bool,
-        custom: Optional[str] = None,
-        frame: Optional[str] = None,
-        color: str = "#000000",
+        custom: Path = None,
+        frame_type: Optional[str] = None,
+        color: HexCode = "#000000",
         size: int = 10,
-        color2: str = "#FFFFFF",
-        color3: str = "#000000",
+        color2: HexCode = "#FFFFFF",
+        color3: HexCode = "#000000",
     ) -> None:
         """Generates a QR code for a URL and adds optional customizations like
-        frame and text.
+        frame_type and text.
 
         Args:
             playlist_url (str): The URL to encode in the QR code.
             save (bool): Whether to save the QR code image.
             custom (Optional[str], optional): Path to a custom image to overlay on the QR code. Default is None.
-            frame (Optional[str], optional): Path to a frame image to add around the QR code. Default is None.
+            frame_type (Optional[str], optional): Kind of frame you want
             color (str, optional): Color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
@@ -125,9 +137,9 @@ class SocialMediaQRCode(QRCodeBase):
             color2=color2,
             color3=color3,
         )
-        if frame:
-            logging.info("Adding frame to QR code.")
-            self.qr_image = add_frame_to_image(self.qr_image, frame)
+        if frame_type:
+            logging.info("Adding frame_type to QR code.")
+            self.qr_image = add_frame_to_image(self.qr_image, frame_type)
         if not self.generate_qr_code:
             logging.info("Adding text to QR code image.")
             self.qr_image = add_text_to_image(

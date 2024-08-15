@@ -1,8 +1,6 @@
 from polymorphic.admin import PolymorphicChildModelAdmin
-
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
-from django.core.exceptions import ValidationError
 
 from django_sage_qrcode.models import BitcoinQRCode, EPCQRCode
 from django_sage_qrcode.forms import BitForm, EPCQRCodeForm
@@ -21,7 +19,7 @@ class EPCQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     fieldsets = (
         (None, {"fields": ("name", "iban", "text", "amount", "custom_gif")}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": ("size", "color", "second_color", "third_color"),
@@ -41,7 +39,7 @@ class BitcoinQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     fieldsets = (
         (None, {"fields": ("bitcoin_address", "amount", "label", "message")}),
         (
-            "Advanced options",
+            _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
@@ -54,8 +52,3 @@ class BitcoinQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             },
         ),
     )
-
-    def clean(self):
-        super().clean()
-        if not self.bitcoin_address or not self.amount:
-            raise ValidationError(_("Bitcoin address and amount are required."))

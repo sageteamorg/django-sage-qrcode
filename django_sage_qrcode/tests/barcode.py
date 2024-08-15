@@ -2,7 +2,7 @@ from django.test import TestCase
 from PIL import Image
 from django_sage_qrcode.service import (
     BarcodeProxy,
-)  # Adjust the import path accordingly
+)
 
 
 class TestBarcodeProxy(TestCase):

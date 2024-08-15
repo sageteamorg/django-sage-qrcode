@@ -8,7 +8,6 @@ from django_sage_qrcode.service import (
     QRCodeBase,
     BarcodeProxy,
 )
-
 from django_sage_qrcode.models import (
     VCardQRCode,
     WifiQRCode,
@@ -28,7 +27,16 @@ from django_sage_qrcode.models import (
 )
 
 
-def generate_qr_code(obj):
+def generate_qr_code(obj: QRCodeBase) -> bytes:
+    """Generates a QR code image based on the type of object passed.
+
+    Args:
+        obj (QRCodeBase): An instance of a subclass of QRCodeBase containing data to generate a QR code.
+
+    Returns:
+        bytes: The generated QR code image in bytes.
+
+    """
     proxy = QRCodeBase()
     custom_gif_path = obj.custom_gif_path if obj.custom_gif else None
     obj.size = obj.size or 10
@@ -70,7 +78,7 @@ def generate_qr_code(obj):
         contact_proxy.generate_wifi_qr_code(
             ssid=obj.ssid,
             password=obj.password,
-            security=obj.security,
+            security_type=obj.security,
             custom=custom_gif_path,
             color=obj.color,
             color2=obj.second_color,
@@ -127,7 +135,14 @@ def generate_qr_code(obj):
     return proxy.show_qr_code(save=False)
 
 
-def save_qr_code_image(obj, qr_image):
+def save_qr_code_image(obj: QRCodeBase, qr_image: bytes) -> None:
+    """Saves the generated QR code image to the database.
+
+    Args:
+        obj (QRCodeBase): An instance of a subclass of QRCodeBase.
+        qr_image (bytes): The generated QR code image in bytes.
+
+    """
     buffer = io.BytesIO()
     qr_image.save(buffer, format="PNG")
     obj.qr_code_image.save(
@@ -135,7 +150,17 @@ def save_qr_code_image(obj, qr_image):
     )
 
 
-def download_qr_code(request, queryset):
+def download_qr_code(request: HttpResponse, queryset) -> HttpResponse:
+    """Handles the HTTP request to download a QR code.
+
+    Args:
+        request (HttpResponse): The HTTP request object.
+        queryset: A queryset containing the objects to be downloaded.
+
+    Returns:
+        HttpResponse: The HTTP response containing the QR code image.
+
+    """
     if queryset.count() != 1:
         return HttpResponse("Please select exactly one QR code to download.")
     obj = queryset.first()
@@ -146,7 +171,16 @@ def download_qr_code(request, queryset):
     return response
 
 
-def generate_barcode_image(obj):
+def generate_barcode_image(obj: BarcodeProxy) -> bytes:
+    """Generates a barcode image based on the type of object passed.
+
+    Args:
+        obj (BarcodeProxy): An instance of a subclass of BarcodeProxy containing data to generate a barcode.
+
+    Returns:
+        bytes: The generated barcode image in bytes.
+
+    """
     proxy = BarcodeProxy()
     if not obj.color:
         obj.color = "black"
@@ -161,7 +195,14 @@ def generate_barcode_image(obj):
     return proxy.show_barcode(save=False)
 
 
-def save_barcode_image(obj, barcode_image):
+def save_barcode_image(obj: BarcodeProxy, barcode_image: bytes) -> None:
+    """Saves the generated barcode image to the database.
+
+    Args:
+        obj (BarcodeProxy): An instance of a subclass of BarcodeProxy.
+        barcode_image (bytes): The generated barcode image in bytes.
+
+    """
     buffer = io.BytesIO()
     barcode_image.save(buffer, format="PNG")
     obj.bar_code_image.save(
@@ -169,7 +210,17 @@ def save_barcode_image(obj, barcode_image):
     )
 
 
-def download_barcode(request, queryset):
+def download_barcode(request: HttpResponse, queryset) -> HttpResponse:
+    """Handles the HTTP request to download a barcode.
+
+    Args:
+        request (HttpResponse): The HTTP request object.
+        queryset: A queryset containing the objects to be downloaded.
+
+    Returns:
+        HttpResponse: The HTTP response containing the barcode image.
+
+    """
     if queryset.count() != 1:
         return HttpResponse("Please select exactly one barcode to download.")
     obj = queryset.first()

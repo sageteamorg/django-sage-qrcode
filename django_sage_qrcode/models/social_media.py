@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.exceptions import ValidationError
 from django_sage_qrcode.models.qrcode import QRCode
 
 from django_sage_qrcode.helpers.validators import (
@@ -99,10 +98,6 @@ class TikTokQRCode(QRCode):
     def __repr__(self):
         return f"<TikTokQRCode(id={self.pk}, url={self.url})>"
 
-    def clean(self):
-        if "tiktok.com" not in self.url:
-            raise ValidationError(_("Invalid TikTok link."))
-
     class Meta:
         indexes = [models.Index(fields=["url"], name="tiktok_url_idx")]
         ordering = ["url"]
@@ -132,10 +127,6 @@ class SnapchatQRCode(QRCode):
 
     def __repr__(self):
         return f"<SnapchatQRCode(id={self.pk}, url={self.url})>"
-
-    def clean(self):
-        if "snapchat.com" not in self.url:
-            raise ValidationError(_("Invalid Snapchat link."))
 
     class Meta:
         indexes = [models.Index(fields=["url"], name="snapchat_url_idx")]
@@ -167,10 +158,6 @@ class InstagramQRCode(QRCode):
     def __repr__(self):
         return f"<InstagramQRCode(id={self.pk}, url={self.url})>"
 
-    def clean(self):
-        if "instagram.com" not in self.url:
-            raise ValidationError(_("Invalid Instagram link."))
-
     class Meta:
         indexes = [models.Index(fields=["url"], name="instagram_url_idx")]
         ordering = ["url"]
@@ -201,10 +188,6 @@ class FacebookQRCode(QRCode):
     def __repr__(self):
         return f"<FacebookQRCode(id={self.pk}, url={self.url})>"
 
-    def clean(self):
-        if "facebook.com" not in self.url:
-            raise ValidationError(_("Invalid Facebook link."))
-
     class Meta:
         indexes = [models.Index(fields=["url"], name="facebook_url_idx")]
         ordering = ["url"]
@@ -232,10 +215,6 @@ class TelegramQRCode(QRCode):
 
     def __repr__(self):
         return f"<TelegramQRCode(id={self.pk}, url={self.url})>"
-
-    def clean(self):
-        if "t.me" not in self.url:
-            raise ValidationError(_("Invalid Telegram link."))
 
     class Meta:
         indexes = [models.Index(fields=["url"], name="telegram_url_idx")]
@@ -267,10 +246,6 @@ class LinkedInQRCode(QRCode):
     def __repr__(self):
         return f"<LinkedInQRCode(id={self.pk}, url={self.url})>"
 
-    def clean(self):
-        if "linkedin.com" not in self.url:
-            raise ValidationError(_("Invalid LinkedIn link."))
-
     class Meta:
         indexes = [models.Index(fields=["url"], name="linkedin_url_idx")]
         ordering = ["url"]
@@ -298,10 +273,6 @@ class XQRCode(QRCode):
 
     def __repr__(self):
         return f"<TwitterQRCode(id={self.pk}, url={self.url})>"
-
-    def clean(self):
-        if "twitter.com" not in self.url:
-            raise ValidationError(_("Invalid Twitter link."))
 
     class Meta:
         indexes = [models.Index(fields=["url"], name="twitter_url_idx")]
