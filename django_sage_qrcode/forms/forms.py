@@ -6,6 +6,7 @@ from django_sage_qrcode.models import (
     EPCQRCode,
     TikTokQRCode,
     BitcoinQRCode,
+    XQRCode,
 )
 
 import uuid
@@ -87,6 +88,11 @@ class WiFiQRCodeForm(forms.ModelForm):
 class TikTokForm(forms.ModelForm):
     class Meta:
         model = TikTokQRCode
+        fields = ["url", "custom_gif", "color", "second_color", "third_color"]
+
+class XForm(forms.ModelForm):
+    class Meta:
+        model = XQRCode
         fields = ["url", "custom_gif", "color", "second_color", "third_color"]
 
 

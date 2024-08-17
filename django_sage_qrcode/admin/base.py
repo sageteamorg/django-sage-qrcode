@@ -1,5 +1,4 @@
 from django.contrib import admin
-from polymorphic.admin import PolymorphicParentModelAdmin
 
 from django_sage_qrcode.models import (
     MediaUrl,
@@ -25,24 +24,9 @@ from django_sage_qrcode.utils.admin import (
 )
 
 
-@admin.register(QRCode)
-class QRCodeParentAdmin(PolymorphicParentModelAdmin):
+# @admin.register(QRCode)
+class QRCodeParentAdmin(admin.ModelAdmin):
     base_model = QRCode
-    child_models = (
-        SkypeQRCode,
-        TikTokQRCode,
-        BitcoinQRCode,
-        SnapchatQRCode,
-        FacebookQRCode,
-        LinkedInQRCode,
-        XQRCode,
-        MediaUrl,
-        VCardQRCode,
-        WifiQRCode,
-        EPCQRCode,
-        TelegramQRCode,
-        InstagramQRCode,
-    )
     actions = [download_qr_code]
 
     list_display = ("id", "created", "modified")

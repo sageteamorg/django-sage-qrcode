@@ -26,8 +26,8 @@ class BitcoinQRCode(QRCode):
     amount = models.DecimalField(
         max_digits=10,
         decimal_places=8,
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         validators=[MinValueValidator(0.00000001)],
         help_text=_("Amount of Bitcoin to send. Example: '0.01'"),
         db_comment="The amount of Bitcoin to send.",
@@ -52,10 +52,6 @@ class BitcoinQRCode(QRCode):
 
     def __repr__(self):
         return f"<BitcoinQRCode(id={self.pk}, bitcoin_address={self.bitcoin_address})>"
-
-    def clean(self):
-        if not self.bitcoin_address or not self.amount:
-            raise ValidationError(_("Bitcoin address and amount are required."))
 
     class Meta:
         indexes = [models.Index(fields=["bitcoin_address"], name="bitcoin_address_idx")]

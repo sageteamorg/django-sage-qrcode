@@ -94,7 +94,7 @@ class QRCodeBase:
             logging.info("Saving QR code image.")
             self.save_qr_code()
 
-        self.qr_image.show()
+        # self.qr_image.show()
         logging.info("QR code displayed successfully.")
         return self.qr_image
 

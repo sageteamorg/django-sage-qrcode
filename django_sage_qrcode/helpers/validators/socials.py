@@ -401,7 +401,7 @@ class XValidator:
 
     message = _("Enter a valid X profile URL.")
     code = "invalid"
-    regex = re.compile(r"^https?://(?:www\.)?x\.com/[A-Za-z0-9_]+/?$", re.IGNORECASE)
+    regex = re.compile(r"^https?://(?:www\.)?twitter\.com/[A-Za-z0-9_]+/?$", re.IGNORECASE)
 
     def __init__(self, message=None, code=None):
         """Initializes the XValidator with optional custom message and code.

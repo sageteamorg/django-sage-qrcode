@@ -15,7 +15,7 @@ from .social_media import (
 from .payment import EPCQRCodeAdmin, BitcoinQRCodeAdmin
 
 __all__ = [
-    "QRCodeParentAdmin",
+    "QRCodeParentAdmin"
     "VCardQRCodeAdmin",
     "WiFiQRCodeAdmin",
     "MediaUrlAdmin",

@@ -8,10 +8,9 @@ from django_sage_qrcode.admin.base import QRCodeParentAdmin
 
 
 @admin.register(VCardQRCode)
-class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class VCardQRCodeAdmin(QRCodeParentAdmin):
     base_model = VCardQRCode
     form = VCardQRCodeForm
-    show_in_index = True
     list_display = ("full_name", "display_name", "email", "phone", "url", "custom_gif")
     list_filter = ("full_name", "display_name", "email")
     search_fields = ("full_name", "display_name", "email")
@@ -20,7 +19,7 @@ class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
         (
             None,
             {
-                _("fields"): (
+                "fields": (
                     "display_name",
                     "full_name",
                     "email",
@@ -41,10 +40,9 @@ class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(WifiQRCode)
-class WiFiQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class WiFiQRCodeAdmin(QRCodeParentAdmin):
     base_model = WifiQRCode
     form = WiFiQRCodeForm
-    show_in_index = True
     list_display = ("ssid", "password", "security", "custom_gif")
     list_filter = ("ssid", "security")
     search_fields = ("ssid", "security")

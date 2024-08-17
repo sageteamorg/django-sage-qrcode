@@ -16,6 +16,7 @@ from django_sage_qrcode.models import (
     InstagramQRCode,
     SnapchatQRCode,
     SkypeQRCode,
+    XQRCode,
     WhatsAppQRCode,
     FacebookQRCode,
     EPCQRCode,
@@ -54,6 +55,7 @@ def generate_qr_code(obj: QRCodeBase) -> bytes:
         WhatsAppQRCode,
         FacebookQRCode,
         LinkedInQRCode,
+        XQRCode
     )
 
     if isinstance(obj, VCardQRCode):
@@ -150,7 +152,7 @@ def save_qr_code_image(obj: QRCodeBase, qr_image: bytes) -> None:
     )
 
 
-def download_qr_code(request: HttpResponse, queryset) -> HttpResponse:
+def handle_qr_code(request: HttpResponse, queryset) -> HttpResponse:
     """Handles the HTTP request to download a QR code.
 
     Args:
@@ -170,7 +172,11 @@ def download_qr_code(request: HttpResponse, queryset) -> HttpResponse:
     response.write(obj.qr_code_image.read())
     return response
 
-
+def download_qr_code(self, request, queryset):
+        response = handle_qr_code(request, queryset)
+        if isinstance(response, HttpResponse):
+            self.message_user(request, "Please select exactly one QR code to download.")
+        return response
 def generate_barcode_image(obj: BarcodeProxy) -> bytes:
     """Generates a barcode image based on the type of object passed.
 

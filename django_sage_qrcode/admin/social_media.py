@@ -13,12 +13,12 @@ from django_sage_qrcode.models import (
     XQRCode,
     TelegramQRCode,
 )
-from django_sage_qrcode.forms import TikTokForm, MediaUrlForm
+from django_sage_qrcode.forms import TikTokForm, MediaUrlForm,XForm
 from django_sage_qrcode.admin.base import QRCodeParentAdmin
 
 
 @admin.register(SkypeQRCode)
-class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class SkypeQRCodeAdmin(QRCodeParentAdmin):
     base_model = SkypeQRCode
     form = TikTokForm
     show_in_index = True
@@ -33,7 +33,6 @@ class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
                     "size",
                     "color",
                     "second_color",
@@ -45,7 +44,7 @@ class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(TikTokQRCode)
-class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class TikTokQRCodeAdmin(QRCodeParentAdmin):
     base_model = TikTokQRCode
     form = TikTokForm
     show_in_index = True
@@ -60,7 +59,6 @@ class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
                     "size",
                     "color",
                     "second_color",
@@ -72,34 +70,8 @@ class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(SnapchatQRCode)
-class SnapchatQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class SnapchatQRCodeAdmin(QRCodeParentAdmin):
     base_model = SnapchatQRCode
-    form = TikTokForm
-    list_display = ("url",)
-    list_filter = ("url",)
-    search_fields = ("url",)
-
-    fieldsets = (
-        (None, {_("fields"): ("url",)}),
-        (
-            _("Advanced options"),
-            {
-                "classes": ("collapse",),
-                "fields": (
-                    "custom_gif",
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
-                ),
-            },
-        ),
-    )
-
-
-@admin.register(XQRCode)
-class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
-    base_model = XQRCode
     form = TikTokForm
     list_display = ("url",)
     list_filter = ("url",)
@@ -112,7 +84,31 @@ class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
+                    "size",
+                    "color",
+                    "second_color",
+                    "third_color",
+                ),
+            },
+        ),
+    )
+
+
+@admin.register(XQRCode)
+class XQRCodeAdmin(QRCodeParentAdmin):
+    base_model = XQRCode
+    form = XForm
+    list_display = ("url",)
+    list_filter = ("url",)
+    search_fields = ("url",)
+
+    fieldsets = (
+        (None, {"fields": ("url",)}),
+        (
+            _("Advanced options"),
+            {
+                "classes": ("collapse",),
+                "fields": (
                     "size",
                     "color",
                     "second_color",
@@ -124,7 +120,7 @@ class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(LinkedInQRCode)
-class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class LinkedInQRCodeAdmin(QRCodeParentAdmin):
     base_model = LinkedInQRCode
     show_in_index = True
     list_display = ("url",)
@@ -138,7 +134,6 @@ class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
                     "size",
                     "color",
                     "second_color",
@@ -150,20 +145,19 @@ class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(FacebookQRCode)
-class FacebookQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class FacebookQRCodeAdmin(QRCodeParentAdmin):
     base_model = FacebookQRCode
     list_display = ("url",)
     list_filter = ("url",)
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {_("fields"): ("url",)}),
+        (None, {"fields": ("url",)}),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
                     "size",
                     "color",
                     "second_color",
@@ -175,7 +169,7 @@ class FacebookQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(TelegramQRCode)
-class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class TelegramQRCodeAdmin(QRCodeParentAdmin):
     base_model = TelegramQRCode
     form = TikTokForm
     list_display = ("url",)
@@ -183,13 +177,12 @@ class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {_("fields"): ("url",)}),
+        (None, {"fields": ("url",)}),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
                     "size",
                     "color",
                     "second_color",
@@ -201,7 +194,7 @@ class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(InstagramQRCode)
-class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class InstagramQRCodeAdmin(QRCodeParentAdmin):
     base_model = InstagramQRCode
     form = TikTokForm
     list_display = ("url",)
@@ -209,13 +202,12 @@ class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {_("fields"): ("url",)}),
+        (None, {"fields": ("url",)}),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": (
-                    "custom_gif",
                     "size",
                     "color",
                     "second_color",
@@ -227,7 +219,7 @@ class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
 
 
 @admin.register(MediaUrl)
-class MediaUrlAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
+class MediaUrlAdmin(QRCodeParentAdmin):
     base_model = MediaUrl
     form = MediaUrlForm
     show_in_index = True
@@ -236,7 +228,7 @@ class MediaUrlAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {_("fields"): ("url", "custom_gif")}),
+        (None, {"fields": ("url",)}),
         (
             _("Advanced options"),
             {
