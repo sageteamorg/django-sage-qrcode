@@ -43,7 +43,7 @@ docs = ["sphinx", "sphinx-autobuild", "sphinx-rtd-theme"]
 
 [tool.pytest.ini_options]
 addopts = "--cov=. --cov-report=term-missing --cov-report=html"
-DJANGO_SETTINGS_MODULE = "qrcode.settings"
+DJANGO_SETTINGS_MODULE = "kernel.settings"
 python_files = ["tests.py", "test_*.py"]
 testpaths = ["tests"]
 norecursedirs = [
@@ -55,27 +55,27 @@ norecursedirs = [
     "venv",
     ".venv",
     "dist",
-    "build"
+    "build",
+    "kernel"
 ]
 
 [tool.coverage.run]
 omit = [
     "*/migrations/*",
-    "qrcode/*",
+    "kernel/*",
     "*/apps.py",
     "manage.py",
+    "*/admin/*",
 ]
 
 [tool.coverage.report]
 exclude_lines = [
     "pragma: no cover",
-    "def __repr__",
     "if self\\.debug",
     "raise AssertionError",
     "if 0:",
     "if __name__ == .__main__.:"
 ]
-
 [tool.ruff]
 line-length = 88
 exclude = [
@@ -166,7 +166,8 @@ load-plugins = [
     "pylint_django",
     "pylint.extensions.docparams",
 ]
-django-settings-module = "qrcode.settings"
+
+django-settings-module = "kernel.settings"
 good-names = [
     "qs",
     "pk",
