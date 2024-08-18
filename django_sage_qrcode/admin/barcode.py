@@ -53,6 +53,9 @@ class BarcodeUrlAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
     def get_fields(self, request, obj=None):
         return ["url", "color", "second_color"]
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(BarcodeText)
 class BarcodeTextAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
@@ -82,3 +85,6 @@ class BarcodeTextAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
 
     def get_fields(self, request, obj=None):
         return ["body", "color", "second_color"]
+
+    def has_module_permission(self, request):
+        return False

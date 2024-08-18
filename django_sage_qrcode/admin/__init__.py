@@ -1,4 +1,4 @@
-from .barcode import BarcodeTextAdmin, BarcodeUrlAdmin
+from .barcode import BarcodeParentAdmin
 from .base import QRCodeParentAdmin
 from .contact import VCardQRCodeAdmin, WiFiQRCodeAdmin
 from .social_media import (
@@ -15,7 +15,8 @@ from .social_media import (
 from .payment import EPCQRCodeAdmin, BitcoinQRCodeAdmin
 
 __all__ = [
-    "QRCodeParentAdmin"
+    "BarcodeParentAdmin",
+    "QRCodeParentAdmin",
     "VCardQRCodeAdmin",
     "WiFiQRCodeAdmin",
     "MediaUrlAdmin",

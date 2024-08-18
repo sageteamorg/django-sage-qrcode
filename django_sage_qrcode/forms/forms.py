@@ -90,6 +90,7 @@ class TikTokForm(forms.ModelForm):
         model = TikTokQRCode
         fields = ["url", "custom_gif", "color", "second_color", "third_color"]
 
+
 class XForm(forms.ModelForm):
     class Meta:
         model = XQRCode

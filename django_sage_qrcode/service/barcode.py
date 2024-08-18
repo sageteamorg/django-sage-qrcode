@@ -111,7 +111,7 @@ class BarcodeProxy:
         if save:
             logging.info("Saving barcode image.")
             self.save_barcode()
-        self.barcode_image.show()
+        # self.barcode_image.show()
         logging.info("Barcode displayed successfully.")
         return self.barcode_image
 

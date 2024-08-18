@@ -262,7 +262,9 @@ class XQRCode(QRCode):
     """
 
     url = models.URLField(
-        help_text=_("URL of the X profile. Example: 'https://www.twitter.com/username'"),
+        help_text=_(
+            "URL of the X profile. Example: 'https://www.twitter.com/username'"
+        ),
         validators=[validate_x],
         db_comment="The URL of the Twitter profile.",
         verbose_name=_("Twitter URL"),

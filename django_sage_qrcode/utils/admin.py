@@ -1,6 +1,10 @@
 import io
+import time
+import zipfile
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
+from django.contrib import messages
+
 from django_sage_qrcode.service import (
     ContactQRCode,
     SocialMediaQRCode,
@@ -8,6 +12,7 @@ from django_sage_qrcode.service import (
     QRCodeBase,
     BarcodeProxy,
 )
+
 from django_sage_qrcode.models import (
     VCardQRCode,
     WifiQRCode,
@@ -55,7 +60,7 @@ def generate_qr_code(obj: QRCodeBase) -> bytes:
         WhatsAppQRCode,
         FacebookQRCode,
         LinkedInQRCode,
-        XQRCode
+        XQRCode,
     )
 
     if isinstance(obj, VCardQRCode):
@@ -153,30 +158,56 @@ def save_qr_code_image(obj: QRCodeBase, qr_image: bytes) -> None:
 
 
 def handle_qr_code(request: HttpResponse, queryset) -> HttpResponse:
-    """Handles the HTTP request to download a QR code.
+    """Handles the HTTP request to download QR codes.
 
     Args:
         request (HttpResponse): The HTTP request object.
         queryset: A queryset containing the objects to be downloaded.
 
     Returns:
-        HttpResponse: The HTTP response containing the QR code image.
+        HttpResponse: The HTTP response containing the QR code image(s).
 
     """
-    if queryset.count() != 1:
-        return HttpResponse("Please select exactly one QR code to download.")
-    obj = queryset.first()
-    response = HttpResponse(content_type="image/png")
-    response["Content-Disposition"] = f"attachment; filename={obj.pk}_qr.png"
-    obj.qr_code_image.open("rb")
-    response.write(obj.qr_code_image.read())
-    return response
+    start_time = time.time()
+
+    if queryset.count() == 0:
+        return HttpResponse("Please select at least one QR code to download.")
+    elif queryset.count() == 1:
+        obj = queryset.first()
+        response = HttpResponse(content_type="image/png")
+        response["Content-Disposition"] = f"attachment; filename={obj.pk}_qr.png"
+        with obj.qr_code_image.open("rb") as img_file:
+            response.write(img_file.read())
+        return response
+    else:
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, "w") as zip_file:
+            for obj in queryset:
+                with obj.qr_code_image.open("rb") as img_file:
+                    zip_file.writestr(f"{obj.pk}_qr.png", img_file.read())
+
+        zip_buffer.seek(0)
+        response = HttpResponse(zip_buffer, content_type="application/zip")
+        response["Content-Disposition"] = 'attachment; filename="Qrcodes.zip"'
+
+        end_time = time.time()
+        runtime = end_time - start_time
+        messages.success(
+            request,
+            "Successfully prepared download for {} QR codes in {:.2f} seconds.".format(
+                queryset.count(), runtime
+            ),
+        )
+        return response
+
 
 def download_qr_code(self, request, queryset):
-        response = handle_qr_code(request, queryset)
-        if isinstance(response, HttpResponse):
-            self.message_user(request, "Please select exactly one QR code to download.")
-        return response
+    response = handle_qr_code(request, queryset)
+    if isinstance(response, HttpResponse):
+        self.message_user(request, "Please select exactly one QR code to download.")
+    return response
+
+
 def generate_barcode_image(obj: BarcodeProxy) -> bytes:
     """Generates a barcode image based on the type of object passed.
 
@@ -217,21 +248,38 @@ def save_barcode_image(obj: BarcodeProxy, barcode_image: bytes) -> None:
 
 
 def download_barcode(request: HttpResponse, queryset) -> HttpResponse:
-    """Handles the HTTP request to download a barcode.
+    """Handles the HTTP request to download barcodes.
 
     Args:
         request (HttpResponse): The HTTP request object.
         queryset: A queryset containing the objects to be downloaded.
 
     Returns:
-        HttpResponse: The HTTP response containing the barcode image.
+        HttpResponse: The HTTP response containing the barcode image(s).
 
     """
-    if queryset.count() != 1:
-        return HttpResponse("Please select exactly one barcode to download.")
-    obj = queryset.first()
-    response = HttpResponse(content_type="image/png")
-    response["Content-Disposition"] = f"attachment; filename={obj.pk}_barcode.png"
-    obj.bar_code_image.open("rb")
-    response.write(obj.bar_code_image.read())
-    return response
+    if queryset.count() == 0:
+        return HttpResponse("Please select at least one barcode to download.")
+    elif queryset.count() == 1:
+        obj = queryset.first()
+        response = HttpResponse(content_type="image/png")
+        response["Content-Disposition"] = f"attachment; filename={obj.pk}_barcode.png"
+        with obj.bar_code_image.open("rb") as img_file:
+            response.write(img_file.read())
+        return response
+    else:
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, "w") as zip_file:
+            for obj in queryset:
+                with obj.bar_code_image.open("rb") as img_file:
+                    zip_file.writestr(f"{obj.pk}_barcode.png", img_file.read())
+
+        zip_buffer.seek(0)
+        response = HttpResponse(zip_buffer, content_type="application/zip")
+        response["Content-Disposition"] = 'attachment; filename="Barcodes.zip"'
+
+        messages.success(
+            request,
+            "Successfully prepared download for {} barcodes.".format(queryset.count()),
+        )
+        return response

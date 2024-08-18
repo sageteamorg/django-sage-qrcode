@@ -1,8 +1,6 @@
 from polymorphic.admin import PolymorphicChildModelAdmin
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
-from django.shortcuts import redirect
-from django.urls import reverse 
 
 from django_sage_qrcode.models import BitcoinQRCode, EPCQRCode
 from django_sage_qrcode.forms import BitForm, EPCQRCodeForm
@@ -10,7 +8,7 @@ from django_sage_qrcode.admin.base import QRCodeParentAdmin
 
 
 @admin.register(EPCQRCode)
-class EPCQRCodeAdmin(QRCodeParentAdmin):
+class EPCQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = EPCQRCode
     form = EPCQRCodeForm
     # show_in_index = False
@@ -29,8 +27,12 @@ class EPCQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
+
 @admin.register(BitcoinQRCode)
-class BitcoinQRCodeAdmin(QRCodeParentAdmin):
+class BitcoinQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = BitcoinQRCode
     form = BitForm
     list_display = ("bitcoin_address", "amount", "label", "message")
@@ -52,3 +54,6 @@ class BitcoinQRCodeAdmin(QRCodeParentAdmin):
             },
         ),
     )
+
+    def has_module_permission(self, request):
+        return False

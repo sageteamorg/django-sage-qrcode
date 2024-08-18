@@ -5,7 +5,7 @@ from .forms import (
     MediaUrlForm,
     EPCQRCodeForm,
     BitForm,
-    XForm
+    XForm,
 )
 
 __all__ = [
@@ -15,4 +15,5 @@ __all__ = [
     "MediaUrlForm",
     "EPCQRCodeForm",
     "BitForm",
+    "XForm",
 ]

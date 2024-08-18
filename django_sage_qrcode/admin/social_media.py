@@ -13,12 +13,12 @@ from django_sage_qrcode.models import (
     XQRCode,
     TelegramQRCode,
 )
-from django_sage_qrcode.forms import TikTokForm, MediaUrlForm,XForm
+from django_sage_qrcode.forms import TikTokForm, MediaUrlForm, XForm
 from django_sage_qrcode.admin.base import QRCodeParentAdmin
 
 
 @admin.register(SkypeQRCode)
-class SkypeQRCodeAdmin(QRCodeParentAdmin):
+class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = SkypeQRCode
     form = TikTokForm
     show_in_index = True
@@ -42,9 +42,12 @@ class SkypeQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(TikTokQRCode)
-class TikTokQRCodeAdmin(QRCodeParentAdmin):
+class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = TikTokQRCode
     form = TikTokForm
     show_in_index = True
@@ -68,9 +71,12 @@ class TikTokQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(SnapchatQRCode)
-class SnapchatQRCodeAdmin(QRCodeParentAdmin):
+class SnapchatQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = SnapchatQRCode
     form = TikTokForm
     list_display = ("url",)
@@ -93,9 +99,12 @@ class SnapchatQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(XQRCode)
-class XQRCodeAdmin(QRCodeParentAdmin):
+class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = XQRCode
     form = XForm
     list_display = ("url",)
@@ -118,9 +127,12 @@ class XQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(LinkedInQRCode)
-class LinkedInQRCodeAdmin(QRCodeParentAdmin):
+class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = LinkedInQRCode
     show_in_index = True
     list_display = ("url",)
@@ -143,9 +155,12 @@ class LinkedInQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(FacebookQRCode)
-class FacebookQRCodeAdmin(QRCodeParentAdmin):
+class FacebookQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = FacebookQRCode
     list_display = ("url",)
     list_filter = ("url",)
@@ -167,9 +182,12 @@ class FacebookQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(TelegramQRCode)
-class TelegramQRCodeAdmin(QRCodeParentAdmin):
+class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = TelegramQRCode
     form = TikTokForm
     list_display = ("url",)
@@ -192,9 +210,12 @@ class TelegramQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(InstagramQRCode)
-class InstagramQRCodeAdmin(QRCodeParentAdmin):
+class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = InstagramQRCode
     form = TikTokForm
     list_display = ("url",)
@@ -217,9 +238,12 @@ class InstagramQRCodeAdmin(QRCodeParentAdmin):
         ),
     )
 
+    def has_module_permission(self, request):
+        return False
+
 
 @admin.register(MediaUrl)
-class MediaUrlAdmin(QRCodeParentAdmin):
+class MediaUrlAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     base_model = MediaUrl
     form = MediaUrlForm
     show_in_index = True
@@ -237,3 +261,6 @@ class MediaUrlAdmin(QRCodeParentAdmin):
             },
         ),
     )
+
+    def has_module_permission(self, request):
+        return False

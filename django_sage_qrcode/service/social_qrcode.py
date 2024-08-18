@@ -106,7 +106,7 @@ class SocialMediaQRCode(QRCodeBase):
     def create_url(
         self,
         playlist_url: str,
-        save: bool=False,
+        save: bool = False,
         custom: Path = None,
         frame_type: Optional[str] = None,
         color: HexCode = "#000000",
