@@ -5,10 +5,12 @@ The admin layer customizes the Django admin interface to manage QR codes. This s
 
 Managing QR Codes
 -----------------
+
 In the Django admin interface, you can manage various types of QR codes, including creating, editing, and deleting them.
 
 Viewing QR Codes
 ----------------
+
 To view the list of QR codes:
 
 1. Navigate to the Django admin interface.
@@ -20,6 +22,7 @@ This will display a list of all QR codes, where you can select and manage them.
 
 Adding a New QR Code
 --------------------
+
 To add a new QR code:
 
 1. Click on the `Add QR Code` button on the top right.
@@ -29,17 +32,18 @@ To add a new QR code:
 
 3. Fill in the details required for the specific QR code type.
 
-.. image:: ../../_static/4.jpg
+.. image:: ../../_static/3.jpg
 
 You can Also Write Advanced options like color and size
 
-.. image:: ../../_static/5.jpg
+.. image:: ../../_static/4.jpg
 
 
 4. Click `SAVE` to create the QR code.
 
 Editing a QR Code
 -----------------
+
 To edit an existing QR code:
 
 1. Select a QR code from the list to view its details.
@@ -52,9 +56,10 @@ To edit an existing QR code:
 
 Actions
 --------------
+
 The Django admin interface also provides a `Actions` section where you can see the latest activities performed on QR codes.
 
-.. image:: ../../_static/6.jpg
+.. image:: ../../_static/5.jpg
 
 .. image:: ../../_static/7.jpg
 

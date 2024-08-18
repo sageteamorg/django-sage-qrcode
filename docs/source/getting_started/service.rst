@@ -5,10 +5,12 @@ The service layer contains the core logic for generating and handling QR codes a
 
 QRCodeBase Class
 ----------------
+
 The `QRCodeBase` class is the foundational class used to generate and handle QR codes. It provides methods to create QR codes, save them, and manipulate their appearance.
 
 Methods
 ^^^^^^^
+
 - `generate_qr_code(data: str, error_correction: Optional[str] = 'M', scale: int = 10, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> bool`  
   Generates a QR code based on the provided data.
 
@@ -28,6 +30,7 @@ Methods
 
 ContactQRCode Class
 -------------------
+
 The `ContactQRCode` class extends `QRCodeBase` and is used to generate contact-specific QR codes, like WiFi and VCard QR codes.
 
 Methods
@@ -49,8 +52,12 @@ Methods
   - `phone_number`: Phone number of the contact.
   - `website`: Website of the contact.
 
+.. note::
+    If you want your QR code to be saved, ensure the `save` parameter is set to `True`. Otherwise, the QR code will only be displayed.
+
 Example Usage
 ^^^^^^^^^^^^^
+
 .. code-block:: python
 
     from django_sage_qrcode.service.contact_qrcode import ContactQRCode
@@ -59,11 +66,12 @@ Example Usage
     contact_qr = ContactQRCode()
 
     # Generate a WiFi QR code
-    contact_qr.generate_wifi_qr_code(ssid='MyWiFi', password='mypassword', security_type='WPA')
+    contact_qr.generate_wifi_qr_code(ssid='MyWiFi', password='mypassword', security_type='WPA',save=True)
 
 
 PaymentQRCode Class
 -------------------
+
 The `PaymentQRCode` class is designed to generate QR codes for payment transactions, such as EPC and Bitcoin payments.
 
 Methods
@@ -101,6 +109,7 @@ Methods
 
 Example Usage
 ^^^^^^^^^^^^^
+
 .. code-block:: python
 
     from django_sage_qrcode.service.payment_qrcode import PaymentQRCode
@@ -129,6 +138,7 @@ Example Usage
 
 BarcodeProxy Class
 ------------------
+
 The `BarcodeProxy` class is used to generate barcodes instead of QR codes. It supports different barcode formats and integrates with image processing tools.
 
 Methods
@@ -152,6 +162,7 @@ Methods
 
 Example Usage
 ^^^^^^^^^^^^^
+
 .. code-block:: python
 
     from django_sage_qrcode.service.barcode import BarcodeProxy
@@ -168,6 +179,7 @@ Example Usage
 
 SocialMediaQRCode Class
 -----------------------
+
 The `SocialMediaQRCode` class extends `QRCodeBase` and is used to generate QR codes for social media URLs with additional icons.
 
 Methods
@@ -198,6 +210,7 @@ Methods
 
 Example Usage
 ^^^^^^^^^^^^^
+
 .. code-block:: python
 
     from django_sage_qrcode.service.social_qrcode import SocialMediaQRCode
@@ -211,5 +224,3 @@ Example Usage
         save=True
     )
 
-.. note::
-    If you want your QR code to be saved, ensure the `save` parameter is set to `True`. Otherwise, the QR code will only be displayed.
