@@ -1,14 +1,15 @@
+import logging
 import os
 import uuid
-import segno
-import logging
 from typing import Optional
 from pathlib import Path
 
+import segno
+
 try:
     from PIL import Image
-except ImportError:
-    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
+except ImportError as exc:
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.") from exc
 
 from sage_qrcode.helpers.type import HexCode
 
@@ -20,12 +21,11 @@ class QRCodeBase:
 
     Attributes:
         qr_image (Optional[Image.Image]): Stores the generated QR code image.
-
     """
 
     def __init__(self) -> None:
         """Initializes a new instance of QRCodeBase with no QR code image."""
-        logging.info("Initializing QRCodeBase instance.")
+        logger.info("Initializing QRCodeBase instance.")
         self.qr_image: Optional[Image.Image] = None
 
     def generate_qr_code(
@@ -51,28 +51,27 @@ class QRCodeBase:
 
         Returns:
             bool: True if a custom QR code is generated, False otherwise.
-
         """
-        logging.debug(f"Generating QR code with data: {data}")
-        qr = segno.make(data, error=error)
+        logger.debug("Generating QR code with data: %s", data)
+        qr_code = segno.make(data, error=error)
 
         if custom:
-            logging.info("Applying custom image to QR code.")
-            self.qr_image = self.customize_qr_code(qr, custom)
+            logger.info("Applying custom image to QR code.")
+            self.qr_image = self.customize_qr_code(qr_code, custom)
             return True
 
         try:
-            self.qr_image = qr.to_pil(
+            self.qr_image = qr_code.to_pil(
                 scale=scale, dark=color, light=color2, finder_dark=color3
             )
-        except ValueError as e:
-            logging.error(f"Error applying color: {e}")
-            self.qr_image = qr.to_pil(scale=scale)
+        except ValueError as error:
+            logger.error("Error applying color: %s", error)
+            self.qr_image = qr_code.to_pil(scale=scale)
 
         if self.qr_image.mode != "RGBA":
             self.qr_image = self.qr_image.convert("RGBA")
 
-        logging.info("QR code generated successfully.")
+        logger.info("QR code generated successfully.")
         return False
 
     def show_qr_code(self, save: bool = False) -> Image.Image:
@@ -83,51 +82,49 @@ class QRCodeBase:
 
         Returns:
             Image.Image: The generated QR code image.
-
         """
-        logging.debug("Attempting to display QR code.")
+        logger.debug("Attempting to display QR code.")
         if self.qr_image is None:
-            logging.error("No QR code image to display.")
+            logger.error("No QR code image to display.")
             raise ValueError("QR code image is not generated.")
 
         if save:
-            logging.info("Saving QR code image.")
+            logger.info("Saving QR code image.")
             self.save_qr_code()
 
         # self.qr_image.show()
-        logging.info("QR code displayed successfully.")
+        logger.info("QR code displayed successfully.")
         return self.qr_image
 
     def save_qr_code(self) -> None:
         """Saves the generated QR code image to a file."""
-        logging.debug("Attempting to save QR code image.")
+        logger.debug("Attempting to save QR code image.")
         if self.qr_image is None:
-            logging.error("No QR code image to save.")
+            logger.error("No QR code image to save.")
             raise ValueError("QR code image is not generated.")
 
-        unique_filename = str(uuid.uuid4()) + ".png"
+        unique_filename = f"{uuid.uuid4()}.png"
         self.qr_image.save(unique_filename)
-        logging.info(f"QR code image saved as {unique_filename}")
+        logger.info("QR code image saved as %s", unique_filename)
 
     def customize_qr_code(
-        self, obj: segno.QRCode, path: str, scale: int = 10
+        self, qr_code: segno.QRCode, path: str, scale: int = 10
     ) -> Image.Image:
         """Applies custom styling to the QR code by overlaying it with another
         image.
 
         Args:
-            obj (segno.QRCode): The QR code object to customize.
+            qr_code (segno.QRCode): The QR code object to customize.
             path (str): Path to the custom image file.
             scale (int, optional): Scale factor for the custom image. Default is 10.
 
         Returns:
             Image.Image: The customized QR code image.
-
         """
-        logging.debug(f"Customizing QR code with image from path: {path}")
+        logger.debug("Customizing QR code with image from path: %s", path)
         target_extension = os.path.splitext(path)[1]
-        unique_filename = str(uuid.uuid4()) + target_extension
-        obj.to_artistic(background=path, target=unique_filename, scale=8)
+        unique_filename = f"{uuid.uuid4()}{target_extension}"
+        qr_code.to_artistic(background=path, target=unique_filename, scale=8)
         customized_qr = Image.open(unique_filename)
-        logging.info("Customized QR code generated successfully.")
+        logger.info("Customized QR code generated successfully.")
         return customized_qr

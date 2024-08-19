@@ -1,24 +1,18 @@
 import os
 import logging
-from typing import Optional
-from sage_qrcode.helpers.type import HexCode
 from pathlib import Path
+from typing import Optional
+
+from sage_qrcode.service.base import QRCodeBase
+from sage_qrcode.utils import add_text_to_image, add_icon_to_image, add_frame_to_image
+from sage_qrcode.helpers.type import HexCode
 
 try:
     from PIL import Image
-except ImportError:
-    raise ImportError("Install `pillow` package. Run `pip install pillow`.")
-
-from sage_qrcode.service.base import QRCodeBase
-from sage_qrcode.utils import (
-    add_text_to_image,
-    add_icon_to_image,
-    add_frame_to_image,
-)
-
+except ImportError as exc:
+    raise ImportError("Install `pillow` package. Run `pip install pillow`.") from exc
 
 logger = logging.getLogger(__name__)
-
 
 class SocialMediaQRCode(QRCodeBase):
     """A class for generating QR codes that include social media icons and
@@ -27,18 +21,14 @@ class SocialMediaQRCode(QRCodeBase):
     def add_social_media_icon(self, url: str) -> Image.Image:
         """Adds an appropriate social media icon to the QR code based on the
         provided URL.
-
         Args:
             url (str): The social media URL.
-
         Returns:
             Image.Image: The QR code image with the social media icon.
-
         Raises:
             ValueError: If the URL does not match any known social media platforms.
-
         """
-        logging.debug(f"Attempting to add a social media icon for URL: {url}")
+        logger.debug("Attempting to add a social media icon for URL: %s", url)
         script_dir = os.path.dirname(os.path.abspath(__file__))
         os.chdir(script_dir)
         icon_paths = {
@@ -55,14 +45,14 @@ class SocialMediaQRCode(QRCodeBase):
 
         for key, path in icon_paths.items():
             if key in url.lower():
-                logging.info(f"Matching icon found for {key}, using icon at {path}.")
+                logger.info("Matching icon found for %s, using icon at %s.", key, path)
                 image = add_icon_to_image(self.qr_image, path)
                 break
         else:
-            logging.error(f"No matching icon found for URL: {url}")
+            logger.error("No matching icon found for URL: %s", url)
             raise ValueError("Invalid social media link")
 
-        logging.info("Social media icon added successfully.")
+        logger.info("Social media icon added successfully.")
         return image
 
     def create_social_media_url(
@@ -77,7 +67,6 @@ class SocialMediaQRCode(QRCodeBase):
     ) -> None:
         """Generates a QR code for a social media URL and adds an appropriate
         icon.
-
         Args:
             url (str): The social media URL.
             save (bool, optional): Whether to save the QR code image. Default is False.
@@ -86,17 +75,16 @@ class SocialMediaQRCode(QRCodeBase):
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
             size (int, optional): Scale factor for the QR code size. Default is 10.
-
         """
-        logging.debug(f"Creating QR code for social media URL: {url}")
+        logger.debug("Creating QR code for social media URL: %s", url)
         result = self.generate_qr_code(
             data=url, custom=None, color=color, scale=size, color2=color2, color3=color3
         )
         if not result:
-            logging.info("QR code generated. Adding social media icon.")
+            logger.info("QR code generated. Adding social media icon.")
             self.qr_image = self.add_social_media_icon(url)
             if frame_type:
-                logging.info("Adding frame_type to QR code.")
+                logger.info("Adding frame_type to QR code.")
                 self.qr_image = add_frame_to_image(self.qr_image, frame_type)
             self.qr_image = add_text_to_image(
                 self.qr_image, "Scan to view social media profile"
@@ -116,7 +104,6 @@ class SocialMediaQRCode(QRCodeBase):
     ) -> None:
         """Generates a QR code for a URL and adds optional customizations like
         frame_type and text.
-
         Args:
             playlist_url (str): The URL to encode in the QR code.
             save (bool): Whether to save the QR code image.
@@ -126,9 +113,8 @@ class SocialMediaQRCode(QRCodeBase):
             size (int, optional): Scale factor for the QR code size. Default is 10.
             color2 (str, optional): Background color of the QR code. Default is '#FFFFFF'.
             color3 (str, optional): Finder pattern color of the QR code. Default is '#000000'.
-
         """
-        logging.debug(f"Creating QR code for URL: {playlist_url}")
+        logger.debug("Creating QR code for URL: %s", playlist_url)
         self.generate_qr_code(
             data=playlist_url,
             custom=custom,
@@ -138,14 +124,14 @@ class SocialMediaQRCode(QRCodeBase):
             color3=color3,
         )
         if frame_type:
-            logging.info("Adding frame_type to QR code.")
+            logger.info("Adding frame_type to QR code.")
             self.qr_image = add_frame_to_image(self.qr_image, frame_type)
         if not self.generate_qr_code:
-            logging.info("Adding text to QR code image.")
+            logger.info("Adding text to QR code image.")
             self.qr_image = add_text_to_image(
                 self.qr_image, "Scan to view social media profile"
             )
             self.show_qr_code(save)
         else:
-            logging.info("Displaying QR code without saving.")
+            logger.info("Displaying QR code without saving.")
             self.show_qr_code(False)

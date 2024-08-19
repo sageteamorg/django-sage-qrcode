@@ -20,22 +20,12 @@ class VCardQRCodeForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a VCard QR Code.
-
-        Args:
-            commit (bool): Whether to commit the save operation to the database. Defaults to True.
-
-        Returns:
-            VCardQRCode: The saved instance of the VCardQRCode model.
-
-        """
+        associated with a VCard QR Code."""
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
             unique_id = uuid.uuid4().hex
-            file_name = (
-                f"{unique_id}_{custom_gif.name}"  # Append unique id to file name
-            )
+            file_name = f"{unique_id}_{custom_gif.name}"
             upload_path = os.path.join("uploads", unique_id)
             os.makedirs(upload_path, exist_ok=True)
             file_path = os.path.join(upload_path, file_name)
@@ -56,23 +46,13 @@ class WiFiQRCodeForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a WiFi QR Code.
-
-        Args:
-            commit (bool): Whether to commit the save operation to the database. Defaults to True.
-
-        Returns:
-            WifiQRCode: The saved instance of the WifiQRCode model.
-
-        """
+        associated with a WiFi QR Code."""
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
 
         if custom_gif:
             unique_id = uuid.uuid4().hex
-            file_name = (
-                f"{unique_id}_{custom_gif.name}"  # Append unique id to file name
-            )
+            file_name = f"{unique_id}_{custom_gif.name}"
             upload_path = os.path.join("uploads", unique_id)
             os.makedirs(upload_path, exist_ok=True)
             file_path = os.path.join(upload_path, file_name)
@@ -86,12 +66,16 @@ class WiFiQRCodeForm(forms.ModelForm):
 
 
 class TikTokForm(forms.ModelForm):
+    """A form for creating TikTok QR Codes."""
+
     class Meta:
         model = TikTokQRCode
         fields = ["url", "custom_gif", "color", "second_color", "third_color"]
 
 
 class XForm(forms.ModelForm):
+    """A form for creating X QR Codes."""
+
     class Meta:
         model = XQRCode
         fields = ["url", "custom_gif", "color", "second_color", "third_color"]
@@ -104,22 +88,12 @@ class MediaUrlForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a Media URL QR Code.
-
-        Args:
-            commit (bool): Whether to commit the save operation to the database. Defaults to True.
-
-        Returns:
-            MediaUrl: The saved instance of the MediaUrl model.
-
-        """
+        associated with a Media URL QR Code."""
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
             unique_id = uuid.uuid4().hex
-            file_name = (
-                f"{unique_id}_{custom_gif.name}"  # Append unique id to file name
-            )
+            file_name = f"{unique_id}_{custom_gif.name}"
             upload_path = os.path.join("uploads", unique_id)
             os.makedirs(upload_path, exist_ok=True)
             file_path = os.path.join(upload_path, file_name)
@@ -139,22 +113,12 @@ class EPCQRCodeForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with an EPC QR Code.
-
-        Args:
-            commit (bool): Whether to commit the save operation to the database. Defaults to True.
-
-        Returns:
-            EPCQRCode: The saved instance of the EPCQRCode model.
-
-        """
+        associated with an EPC QR Code."""
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
             unique_id = uuid.uuid4().hex
-            file_name = (
-                f"{unique_id}_{custom_gif.name}"  # Append unique id to file name
-            )
+            file_name = f"{unique_id}_{custom_gif.name}"
             upload_path = os.path.join("uploads", unique_id)
             os.makedirs(upload_path, exist_ok=True)
             file_path = os.path.join(upload_path, file_name)
@@ -182,22 +146,12 @@ class BitForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a Bitcoin QR Code.
-
-        Args:
-            commit (bool): Whether to commit the save operation to the database. Defaults to True.
-
-        Returns:
-            BitcoinQRCode: The saved instance of the BitcoinQRCode model.
-
-        """
+        associated with a Bitcoin QR Code."""
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
             unique_id = uuid.uuid4().hex
-            file_name = (
-                f"{unique_id}_{custom_gif.name}"  # Append unique id to file name
-            )
+            file_name = f"{unique_id}_{custom_gif.name}"
             upload_path = os.path.join("uploads", unique_id)
             os.makedirs(upload_path, exist_ok=True)
             file_path = os.path.join(upload_path, file_name)

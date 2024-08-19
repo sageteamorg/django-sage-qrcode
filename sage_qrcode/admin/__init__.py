@@ -1,4 +1,4 @@
-from .barcode import BarcodeParentAdmin
+from .barcode import BarcodeParentAdmin,BarcodeUrlAdmin,BarcodeTextAdmin
 from .base import QRCodeParentAdmin
 from .contact import VCardQRCodeAdmin, WiFiQRCodeAdmin
 from .social_media import (
