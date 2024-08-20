@@ -7,7 +7,7 @@ class TestIBANValidator:
     def test_valid_iban(self):
         validator = IBANValidator()
         valid_iban = "DE89370400440532013000"
-        validator(valid_iban)
+        assert validator(valid_iban) is None
 
     def test_invalid_iban(self):
         validator = IBANValidator()

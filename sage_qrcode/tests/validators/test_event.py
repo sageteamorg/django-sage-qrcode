@@ -9,7 +9,7 @@ class TestEventTimeRangeValidator:
         validator = EventTimeRangeValidator()
         start_time = datetime.now()
         end_time = start_time + timedelta(hours=1)
-        validator(start_time, end_time)
+        assert validator(start_time, end_time) is None
 
     def test_invalid_event_time_range(self):
         validator = EventTimeRangeValidator()

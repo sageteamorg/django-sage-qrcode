@@ -87,7 +87,7 @@ class TestTikTokValidator:
     def test_valid_tiktok_url(self):
         validator = TikTokValidator()
         valid_url = "https://tiktok.com/@validuser"
-        validator(valid_url)  # Should not raise an exception
+        validator(valid_url)
 
     def test_invalid_tiktok_url(self):
         validator = TikTokValidator()
@@ -101,7 +101,7 @@ class TestSkypeValidator:
     def test_valid_skype_url(self):
         validator = SkypeValidator()
         valid_url = "https://skype.com/validuser"
-        validator(valid_url)  # Should not raise an exception
+        validator(valid_url)
 
     def test_invalid_skype_url(self):
         validator = SkypeValidator()
@@ -115,7 +115,7 @@ class TestXValidator:
     def test_valid_x_url(self):
         validator = XValidator()
         valid_url = "https://twitter.com/validuser"
-        validator(valid_url)  # Should not raise an exception
+        validator(valid_url)
 
     def test_invalid_x_url(self):
         validator = XValidator()

@@ -26,7 +26,7 @@ class TestImageFileValidator:
         image.save(image_file, format='PNG')
         image_file = SimpleUploadedFile("test.png", image_file.getvalue())
 
-        validator(image_file)
+        assert validator(image_file) is None
 
     def test_invalid_image_file(self):
         validator = ImageFileValidator()

@@ -7,7 +7,7 @@ class TestBitcoinAddressValidator:
     def test_valid_bitcoin_address(self):
         validator = BitcoinAddressValidator()
         valid_address = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
-        validator(valid_address)
+        assert validator(valid_address) is None
 
     def test_invalid_bitcoin_address(self):
         validator = BitcoinAddressValidator()

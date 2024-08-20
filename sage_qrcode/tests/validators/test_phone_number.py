@@ -7,7 +7,7 @@ class TestValidatorE164:
     def test_valid_e164_phone_number(self):
         validator = ValidatorE164()
         valid_phone_number = "+123456789012"
-        validator(valid_phone_number)
+        assert validator(valid_phone_number) is None
 
     def test_invalid_e164_phone_number(self):
         validator = ValidatorE164()
