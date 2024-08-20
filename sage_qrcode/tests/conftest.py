@@ -1,5 +1,8 @@
 import pytest
 from pathlib import Path
+from PIL import Image
+from django.conf import settings
+
 from sage_qrcode.service import (
     QRCodeBase,
     ContactQRCode,
@@ -79,3 +82,20 @@ def sample_url():
 @pytest.fixture
 def sample_text():
     return "Sample Text for Barcode"
+
+@pytest.fixture
+def temp_image(self, tmpdir):
+    img = Image.new('RGB', (100, 100), color='red')
+    path = Path(tmpdir) / 'temp_image.png'
+    img.save(path)
+    return path
+
+
+@pytest.fixture(autouse=True)
+def setup_django_settings():
+    if not settings.configured:
+        settings.configure(
+            USE_I18N=True,
+            USE_L10N=True,
+            USE_TZ=True,
+        )
