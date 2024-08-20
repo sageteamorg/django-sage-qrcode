@@ -11,7 +11,7 @@ from sage_qrcode.admin.actions import download_barcode_action
 class BarcodeParentAdmin(PolymorphicParentModelAdmin):
     base_model = Barcode
     child_models = (BarcodeUrl, BarcodeText)
-    list_display = ("id", "title", "color", "second_color", "created", "modified")
+    list_display = ("title","get_barcode_type", "color", "second_color", "created", "modified")
     list_filter = ("created", "modified", "color", "second_color")
     search_fields = ("title",)
     actions = [download_barcode_action]
@@ -25,6 +25,10 @@ class BarcodeParentAdmin(PolymorphicParentModelAdmin):
             },
         ),
     )
+
+    @admin.display(description=_("Bar Code Type"))
+    def get_barcode_type(self, obj):
+        return obj.get_real_instance_class()._meta.verbose_name
 
     def save_model(self, request, obj, form, change):
         barcode_image = generate_barcode_image(obj)

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from polymorphic.admin import PolymorphicParentModelAdmin
+from django.utils.translation import gettext_lazy as _
 
 from sage_qrcode.models import (
     MediaUrl,
@@ -44,14 +45,13 @@ class QRCodeParentAdmin(PolymorphicParentModelAdmin):
     )
     actions = [download_qr_code]
 
-    list_display = ("id", "created", "modified", "get_qr_code_type")
+    list_display = ("id","get_qr_code_type" ,"created", "modified")
     list_filter = ("created", "modified", QRCodeTypeFilter)
     search_fields = ("id", "created", "modified")
 
+    @admin.display(description=_("QR Code Type"))
     def get_qr_code_type(self, obj):
         return obj.get_real_instance_class()._meta.verbose_name
-
-    get_qr_code_type.short_description = "QR Code Type"
 
     def save_model(self, request, obj, form, change):
         qr_image = generate_qr_code(obj)
