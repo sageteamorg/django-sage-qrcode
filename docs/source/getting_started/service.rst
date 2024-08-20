@@ -11,7 +11,7 @@ The `QRCodeBase` class is the foundational class used to generate and handle QR 
 Methods
 ^^^^^^^
 
-- `generate_qr_code(data: str, error_correction: Optional[str] = 'M', scale: int = 10, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> bool`  
+- `generate_qr_code(data: str, error_correction: Optional[str] = 'M', scale: int = 10, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> bool`
   Generates a QR code based on the provided data.
 
   **Arguments:**
@@ -22,7 +22,7 @@ Methods
   - `color2`: Background color of the QR code (default is '#FFFFFF').
   - `color3`: Finder pattern color of the QR code (default is '#000000').
 
-- `save_image(filename: str) -> None`  
+- `save_image(filename: str) -> None`
   Saves the generated QR code to a file.
 
   **Arguments:**
@@ -35,7 +35,7 @@ The `ContactQRCode` class extends `QRCodeBase` and is used to generate contact-s
 
 Methods
 ^^^^^^^
-- `generate_wifi_qr_code(ssid: str, password: str, security_type: str = 'WPA') -> None`  
+- `generate_wifi_qr_code(ssid: str, password: str, security_type: str = 'WPA') -> None`
   Generates a QR code for a WiFi network.
 
   **Arguments:**
@@ -43,7 +43,7 @@ Methods
   - `password`: The password for the WiFi network.
   - `security_type`: The security type (e.g., 'WPA', 'WEP').
 
-- `generate_vcard_qr_code(full_name: str, email: str, phone_number: str, website: str) -> None`  
+- `generate_vcard_qr_code(full_name: str, email: str, phone_number: str, website: str) -> None`
   Generates a QR code for a VCard.
 
   **Arguments:**
@@ -60,7 +60,7 @@ Example Usage
 
 .. code-block:: python
 
-    from django_sage_qrcode.service.contact_qrcode import ContactQRCode
+    from sage_qrcode.service.contact_qrcode import ContactQRCode
 
     # Create an instance of ContactQRCode
     contact_qr = ContactQRCode()
@@ -76,7 +76,7 @@ The `PaymentQRCode` class is designed to generate QR codes for payment transacti
 
 Methods
 ^^^^^^^
-- `generate_epc_qr_code(name: str, iban: IBAN, amount: float, text: str = '', save: bool = False, custom: Path = None, frame_type: Optional[str] = None, color: HexCode = '#000000', size: int = 10, color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> None`  
+- `generate_epc_qr_code(name: str, iban: IBAN, amount: float, text: str = '', save: bool = False, custom: Path = None, frame_type: Optional[str] = None, color: HexCode = '#000000', size: int = 10, color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> None`
   Generates a QR code for EPC (European Payments Council) payments.
 
   **Arguments:**
@@ -92,7 +92,7 @@ Methods
   - `color2`: Background color of the QR code (default is '#FFFFFF').
   - `color3`: Finder pattern color of the QR code (default is '#000000').
 
-- `generate_bitcoin_qr_code(address: str, amount: Optional[float] = None, label: Optional[str] = None, save: bool = False, message: Optional[str] = None, scale: int = 10, color: HexCode = '#000000', frame_type: Optional[str] = None, color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> None`  
+- `generate_bitcoin_qr_code(address: str, amount: Optional[float] = None, label: Optional[str] = None, save: bool = False, message: Optional[str] = None, scale: int = 10, color: HexCode = '#000000', frame_type: Optional[str] = None, color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> None`
   Generates a QR code for Bitcoin payments.
 
   **Arguments:**
@@ -112,7 +112,7 @@ Example Usage
 
 .. code-block:: python
 
-    from django_sage_qrcode.service.payment_qrcode import PaymentQRCode
+    from sage_qrcode.service.payment_qrcode import PaymentQRCode
 
     # Create an instance of PaymentQRCode
     payment_qr = PaymentQRCode()
@@ -143,7 +143,7 @@ The `BarcodeProxy` class is used to generate barcodes instead of QR codes. It su
 
 Methods
 ^^^^^^^
-- `generate_barcode(data: str, barcode_format: str = 'EAN13', scale: int = 10, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> bool`  
+- `generate_barcode(data: str, barcode_format: str = 'EAN13', scale: int = 10, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000') -> bool`
   Generates a barcode based on the provided data.
 
   **Arguments:**
@@ -154,7 +154,7 @@ Methods
   - `color2`: Background color of the barcode (default is '#FFFFFF').
   - `color3`: Finder pattern color of the barcode (default is '#000000').
 
-- `save_barcode(filename: str) -> None`  
+- `save_barcode(filename: str) -> None`
   Saves the generated barcode to a file.
 
   **Arguments:**
@@ -165,7 +165,7 @@ Example Usage
 
 .. code-block:: python
 
-    from django_sage_qrcode.service.barcode import BarcodeProxy
+    from sage_qrcode.service.barcode import BarcodeProxy
 
     # Create an instance of BarcodeProxy
     barcode = BarcodeProxy()
@@ -184,7 +184,7 @@ The `SocialMediaQRCode` class extends `QRCodeBase` and is used to generate QR co
 
 Methods
 ^^^^^^^
-- `add_social_media_icon(url: str) -> Image.Image`  
+- `add_social_media_icon(url: str) -> Image.Image`
   Adds an appropriate social media icon to the QR code based on the provided URL.
 
   **Arguments:**
@@ -196,7 +196,7 @@ Methods
   **Raises:**
   - `ValueError`: If the URL does not match any known social media platforms.
 
-- `create_social_media_url(url: str, save: bool = False, frame_type: Optional[str] = None, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000', size: int = 10) -> None`  
+- `create_social_media_url(url: str, save: bool = False, frame_type: Optional[str] = None, color: HexCode = '#000000', color2: HexCode = '#FFFFFF', color3: HexCode = '#000000', size: int = 10) -> None`
   Generates a QR code for a social media URL and adds an appropriate icon.
 
   **Arguments:**
@@ -213,7 +213,7 @@ Example Usage
 
 .. code-block:: python
 
-    from django_sage_qrcode.service.social_qrcode import SocialMediaQRCode
+    from sage_qrcode.service.social_qrcode import SocialMediaQRCode
 
     # Create an instance of SocialMediaQRCode
     social_qr = SocialMediaQRCode()
@@ -223,4 +223,3 @@ Example Usage
         url='https://instagram.com/example',
         save=True
     )
-

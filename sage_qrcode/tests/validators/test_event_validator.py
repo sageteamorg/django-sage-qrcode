@@ -10,7 +10,7 @@ class TestEventTimeValidator:
         self.validator = EventTimeRangeValidator()
 
     @pytest.mark.parametrize("start_time, end_time", [
-        ("10:00", "11:00"),  # Valid time range
+        ("10:00", "11:00"),
     ])
     def test_valid_event_times(self, start_time, end_time):
         try:

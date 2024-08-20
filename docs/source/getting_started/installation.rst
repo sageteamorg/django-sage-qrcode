@@ -13,7 +13,7 @@ Using `pip` with `virtualenv`
       python -m venv .venv
 
 2. **Activate the Virtual Environment**:
-   
+
    - On Windows:
 
      .. code-block:: bash
@@ -47,6 +47,15 @@ Using `poetry`
 
       poetry add django-sage-qrcode
 
+3. **Apply Migrations**:
+
+   After installation, make sure to run the following commands to create necessary database tables:
+
+   .. code-block:: bash
+
+      poetry run python manage.py makemigrations
+      poetry run python manage.py migrate
+
 Django Settings Configuration
 -----------------------------
 
@@ -58,7 +67,6 @@ To use `django-sage-qrcode`, add it to your `INSTALLED_APPS` in the Django setti
 .. code-block:: python
 
     INSTALLED_APPS = [
-        "django.contrib.sites",
         ...
         "sage_qrcode",
         "colorfield",

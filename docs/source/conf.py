@@ -7,14 +7,13 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import sys
-import sphinx_rtd_theme
 import django
 
-sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath("../../"))
 
-project = 'django-sage-mailbox'
-author = ' Radin Ghaheremani radin@sageteam.org Sepehr Akbarzadeh sepehr@sageteam.org'
-release = '0.1.0'
+project = "django-sage-mailbox"
+author = " Radin Ghaheremani radin@sageteam.org Sepehr Akbarzadeh sepehr@sageteam.org"
+release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -35,5 +34,5 @@ exclude_patterns = []
 html_theme = "sphinx_rtd_theme"
 html_static_path = ["_static"]
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'kernel.settings'
+os.environ["DJANGO_SETTINGS_MODULE"] = "kernel.settings"
 django.setup()

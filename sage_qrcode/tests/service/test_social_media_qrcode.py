@@ -1,19 +1,11 @@
 import pytest
 from pathlib import Path
 from sage_qrcode.service.social_qrcode import SocialMediaQRCode
-from PIL import Image
 
 class TestSocialMediaQRCodeGeneration:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.social_qrcode = SocialMediaQRCode()
-
-    @pytest.fixture
-    def temp_image(self, tmpdir):
-        img = Image.new('RGBA', (100, 100), color=(255, 0, 0, 0))  # RGBA to ensure transparency
-        path = Path(tmpdir) / 'temp_image.png'
-        img.save(path)
-        return path
 
     @pytest.mark.parametrize("social_url, icon_name", [
         ("https://www.instagram.com/username", "icons/instagram.png"),

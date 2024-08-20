@@ -1,16 +1,7 @@
 import pytest
 from django.core.exceptions import ValidationError
 from sage_qrcode.helpers.validators.phone_number import ValidatorE164
-from django.conf import settings
 
-@pytest.fixture(autouse=True)
-def setup_django_settings():
-    if not settings.configured:
-        settings.configure(
-            USE_I18N=True,
-            USE_L10N=True,
-            USE_TZ=True,
-        )
 
 class TestPhoneNumberValidator:
     @pytest.fixture(autouse=True)

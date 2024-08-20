@@ -1,6 +1,5 @@
 import pytest
 from django.core.exceptions import ValidationError
-from django.conf import settings
 from sage_qrcode.helpers.validators import (
     TikTokValidator,
     SnapchatValidator,
@@ -11,14 +10,6 @@ from sage_qrcode.helpers.validators import (
     SkypeValidator,
 )
 
-@pytest.fixture(autouse=True)
-def setup_django_settings():
-    if not settings.configured:
-        settings.configure(
-            USE_I18N=True,
-            USE_L10N=True,
-            USE_TZ=True,
-        )
 
 class TestSocialMediaValidators:
     @pytest.fixture(autouse=True)

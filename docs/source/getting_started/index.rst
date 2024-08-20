@@ -8,8 +8,8 @@ Welcome to Django Sage QRCode's documentation!
 
    installation
    modules
-   
-   
+
+
 Indices and tables
 ==================
 * :ref:`genindex`

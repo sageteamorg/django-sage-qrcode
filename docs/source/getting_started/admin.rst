@@ -64,5 +64,5 @@ The Django admin interface also provides a `Actions` section where you can see t
 .. image:: ../../_static/7.jpg
 
 .. note::
-    Some the Qrcode models support the option name custom gif the models that 
+    Some the Qrcode models support the option name custom gif the models that
     support this feature you can see it in advance options

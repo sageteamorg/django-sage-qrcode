@@ -9,14 +9,6 @@ from sage_qrcode.helpers.validators import (
     LongitudeValidator,
 )
 
-@pytest.fixture(autouse=True)
-def setup_django_settings():
-    if not settings.configured:
-        settings.configure(
-            USE_I18N=True,
-            USE_L10N=True,
-            USE_TZ=True,
-        )
 
 class TestMiscValidators:
     @pytest.fixture(autouse=True)
