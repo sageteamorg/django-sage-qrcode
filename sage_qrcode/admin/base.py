@@ -24,7 +24,6 @@ from sage_qrcode.utils.admin import (
     download_qr_code,
 )
 
-
 @admin.register(QRCode)
 class QRCodeParentAdmin(PolymorphicParentModelAdmin):
     base_model = QRCode
@@ -45,9 +44,14 @@ class QRCodeParentAdmin(PolymorphicParentModelAdmin):
     )
     actions = [download_qr_code]
 
-    list_display = ("id", "created", "modified")
+    list_display = ("id", "created", "modified", "get_qr_code_type")
     list_filter = ("created", "modified", QRCodeTypeFilter)
     search_fields = ("id", "created", "modified")
+
+    def get_qr_code_type(self, obj):
+        return obj.get_real_instance_class()._meta.verbose_name
+
+    get_qr_code_type.short_description = "QR Code Type"
 
     def save_model(self, request, obj, form, change):
         qr_image = generate_qr_code(obj)
