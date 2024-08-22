@@ -3,16 +3,29 @@ repos:
     rev: v4.4.0
     hooks:
       - id: trailing-whitespace
+        exclude: (migrations/|tests/|docs/|static/|media/).*
       - id: end-of-file-fixer
-      - id: check-merge-conflict
-      - id: check-yaml
+        exclude: (migrations/|tests/|docs/|static/|media/).*
       - id: check-added-large-files
-      - id: detect-private-key
+        exclude: (migrations/|tests/|docs/|static/|media/).*
+      - id: check-case-conflict
+        exclude: (migrations/|tests/|docs/|static/|media/).*
+      - id: check-merge-conflict
+        exclude: (migrations/|tests/|docs/|static/|media/).*
+      - id: check-docstring-first
+        exclude: (migrations/|tests/|docs/|static/|media/).*
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort
+        exclude: (migrations/|tests/|docs/|static/|media/).*
 
   - repo: https://github.com/psf/black
     rev: 23.3.0
     hooks:
       - id: black
+        exclude: (migrations/|tests/|docs/|static/|media/).*
         language_version: python3.11
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
