@@ -63,7 +63,7 @@ norecursedirs = [
 ]
 
 [tool.bandit]
-targets = ["./sage_newsletter"]
+targets = ["./sage_qrcode"]
 exclude_dirs = [
     "tests",
     "migrations",
