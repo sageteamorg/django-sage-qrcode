@@ -1,9 +1,9 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.core.validators import MinValueValidator
 
-from sage_qrcode.models.qrcode import QRCode
 from sage_qrcode.helpers.validators import validate_iban
+from sage_qrcode.models.qrcode import QRCode
 
 
 class EPCQRCode(QRCode):
@@ -12,7 +12,6 @@ class EPCQRCode(QRCode):
     An EPC QR code stores payment details such as the beneficiary's
     name, IBAN, and the amount. It allows for easy scanning and
     processing of payments.
-
     """
 
     name = models.CharField(
@@ -57,3 +56,4 @@ class EPCQRCode(QRCode):
         ordering = ["name"]
         verbose_name = _("EPC QR Code")
         verbose_name_plural = _("EPC QR Codes")
+        db_table = "sage_qrcode_epc_qr"

@@ -1,5 +1,22 @@
-from .phone_number import ValidatorE164
+from .bitcoin import BitcoinAddressValidator, validate_bitcoin_address
+from .event import EventTimeRangeValidator, validate_event_time_range
+from .geo_location import (
+    LatitudeValidator,
+    LongitudeValidator,
+    validate_latitude,
+    validate_longitude,
+)
+from .iban import IBANValidator, validate_iban
+from .image import ImageFileValidator, SizeValidator, validate_image_file, validate_size
+from .phone_number import ValidatorE164, validate_phone_number
 from .socials import (
+    FacebookValidator,
+    InstagramValidator,
+    LinkedInValidator,
+    SkypeValidator,
+    SnapchatValidator,
+    TelegramValidator,
+    TikTokValidator,
     validate_facebook,
     validate_instagram,
     validate_linkedin,
@@ -8,25 +25,7 @@ from .socials import (
     validate_telegram,
     validate_tiktok,
     validate_x,
-    SkypeValidator,
-    TikTokValidator,
-    FacebookValidator,
-    LinkedInValidator,
-    SnapchatValidator,
-    TelegramValidator,
-    InstagramValidator,
 )
-from .geo_location import (
-    LatitudeValidator,
-    LongitudeValidator,
-    validate_latitude,
-    validate_longitude,
-)
-from .image import ImageFileValidator, SizeValidator, validate_image_file, validate_size
-from .iban import IBANValidator, validate_iban
-from .event import EventTimeRangeValidator, validate_event_time_range
-from .bitcoin import BitcoinAddressValidator, validate_bitcoin_address
-from .phone_number import validate_phone_number
 
 __all__ = [
     "ValidatorE164",

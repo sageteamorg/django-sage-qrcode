@@ -1,16 +1,17 @@
+import os
+import uuid
+
 from django import forms
+
 from sage_qrcode.models import (
+    BitcoinQRCode,
+    EPCQRCode,
+    MediaUrl,
+    TikTokQRCode,
     VCardQRCode,
     WifiQRCode,
-    MediaUrl,
-    EPCQRCode,
-    TikTokQRCode,
-    BitcoinQRCode,
     XQRCode,
 )
-
-import uuid
-import os
 
 
 class VCardQRCodeForm(forms.ModelForm):
@@ -20,7 +21,8 @@ class VCardQRCodeForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a VCard QR Code."""
+        associated with a VCard QR Code.
+        """
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
@@ -46,7 +48,8 @@ class WiFiQRCodeForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a WiFi QR Code."""
+        associated with a WiFi QR Code.
+        """
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
 
@@ -88,7 +91,8 @@ class MediaUrlForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a Media URL QR Code."""
+        associated with a Media URL QR Code.
+        """
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
@@ -113,7 +117,8 @@ class EPCQRCodeForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with an EPC QR Code."""
+        associated with an EPC QR Code.
+        """
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:
@@ -146,7 +151,8 @@ class BitForm(forms.ModelForm):
 
     def save(self, commit=True):
         """Custom save method to handle the storage of a custom GIF file
-        associated with a Bitcoin QR Code."""
+        associated with a Bitcoin QR Code.
+        """
         instance = super().save(commit=False)
         custom_gif = self.cleaned_data.get("custom_gif", None)
         if custom_gif:

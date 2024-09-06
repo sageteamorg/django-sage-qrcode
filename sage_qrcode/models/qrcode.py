@@ -1,14 +1,13 @@
+from colorfield.fields import ColorField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-from colorfield.fields import ColorField
 from polymorphic.models import PolymorphicModel
+from sage_tools.mixins.models import TimeStampMixin
 
-from sage_qrcode.mixins import TimestampMixin
 from sage_qrcode.helpers.validators import validate_image_file, validate_size
 
 
-class QRCode(PolymorphicModel, TimestampMixin):
+class QRCode(PolymorphicModel, TimeStampMixin):
     """Abstract base class for all QR code types."""
 
     qr_code_image = models.ImageField(
@@ -67,6 +66,7 @@ class QRCode(PolymorphicModel, TimestampMixin):
     class Meta:
         verbose_name = _("QR Code")
         verbose_name_plural = _("QR Codes")
+        db_table = "sage_qrcode_qr_code"
 
     def __str__(self):
         return f"{self.__class__.__name__} {self.pk} - {self.title or 'No Title'}"

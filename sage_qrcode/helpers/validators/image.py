@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
+from django.core.files.images import get_image_dimensions
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
-from django.core.files.images import get_image_dimensions
 
 
 @deconstructible
@@ -15,7 +15,6 @@ class ImageFileValidator:
         message (str): The error message to be returned if validation fails.
         code (str): The error code to be used if validation fails.
         max_size (int, optional): The maximum file size allowed in bytes.
-
     """
 
     message = _("Upload a valid image file.")
@@ -30,7 +29,6 @@ class ImageFileValidator:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
             max_size (int, optional): Maximum allowed file size in bytes.
-
         """
         if message is not None:
             self.message = message
@@ -48,7 +46,6 @@ class ImageFileValidator:
 
         Raises:
             ValidationError: If the file is not a valid image or exceeds the maximum allowed size.
-
         """
         # Check if the file is an image
         try:
@@ -72,7 +69,6 @@ class ImageFileValidator:
 
         Returns:
             bool: True if both instances have the same message, code, and max_size, False otherwise.
-
         """
         return (
             isinstance(other, ImageFileValidator)
@@ -93,7 +89,6 @@ class SizeValidator:
         code (str): The error code to be used if validation fails.
         min_value (int): The minimum allowed value for the size.
         max_value (int): The maximum allowed value for the size.
-
     """
 
     message = _("Size must be between 1 and 1000.")
@@ -110,7 +105,6 @@ class SizeValidator:
             code (str, optional): Custom error code.
             min_value (int, optional): Minimum allowed value.
             max_value (int, optional): Maximum allowed value.
-
         """
         if message is not None:
             self.message = message
@@ -129,7 +123,6 @@ class SizeValidator:
 
         Raises:
             ValidationError: If the value is outside the specified range.
-
         """
         if value is not None and (value < self.min_value or value > self.max_value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -142,7 +135,6 @@ class SizeValidator:
 
         Returns:
             bool: True if both instances have the same message, code, min_value, and max_value, False otherwise.
-
         """
         return (
             isinstance(other, SizeValidator)

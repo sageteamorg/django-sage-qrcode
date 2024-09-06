@@ -1,9 +1,9 @@
-from django.db import models
 from django.core.validators import MinValueValidator
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from sage_qrcode.models.qrcode import QRCode
 from sage_qrcode.helpers.validators import validate_bitcoin_address
+from sage_qrcode.models.qrcode import QRCode
 
 
 class BitcoinQRCode(QRCode):
@@ -12,7 +12,6 @@ class BitcoinQRCode(QRCode):
     A Bitcoin Payment QR code stores Bitcoin payment information. When
     scanned, it opens the Bitcoin wallet app with the encoded payment
     information.
-
     """
 
     bitcoin_address = models.CharField(
@@ -57,3 +56,4 @@ class BitcoinQRCode(QRCode):
         ordering = ["bitcoin_address"]
         verbose_name = _("Bitcoin QR Code")
         verbose_name_plural = _("Bitcoin QR Codes")
+        db_table = "sage_qrcode_bitcoin_qr"

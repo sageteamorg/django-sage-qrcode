@@ -169,3 +169,6 @@ manage.py
 # Ignore all migrations files except __init__.py
 **/migrations/*
 !**/migrations/__init__.py
+
+bar_codes/
+qr_codes/

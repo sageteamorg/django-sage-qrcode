@@ -1,18 +1,18 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from sage_qrcode.models.qrcode import QRCode
 
 from sage_qrcode.helpers.validators import (
-    validate_tiktok,
-    validate_snapchat,
-    validate_instagram,
     validate_facebook,
-    validate_telegram,
+    validate_instagram,
     validate_linkedin,
-    validate_x,
-    validate_skype,
     validate_phone_number,
+    validate_skype,
+    validate_snapchat,
+    validate_telegram,
+    validate_tiktok,
+    validate_x,
 )
+from sage_qrcode.models.qrcode import QRCode
 
 
 class WhatsAppQRCode(QRCode):
@@ -20,7 +20,6 @@ class WhatsAppQRCode(QRCode):
 
     A WhatsApp QR code stores a phone number with an optional message.
     When scanned, it opens WhatsApp with the encoded information.
-
     """
 
     phone_number = models.CharField(
@@ -50,6 +49,7 @@ class WhatsAppQRCode(QRCode):
         ordering = ["phone_number"]
         verbose_name = _("WhatsApp QR Code")
         verbose_name_plural = _("WhatsApp QR Codes")
+        db_table = "sage_qrcode_whatsapp_qr"
 
 
 class SkypeQRCode(QRCode):
@@ -73,6 +73,7 @@ class SkypeQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("Skype QR Code")
         verbose_name_plural = _("Skype QR Codes")
+        db_table = "sage_qrcode_skype_qr"
 
 
 class TikTokQRCode(QRCode):
@@ -80,7 +81,6 @@ class TikTokQRCode(QRCode):
 
     A TikTok QR code stores the URL of a TikTok profile. When scanned,
     it directs the user to the TikTok profile page.
-
     """
 
     url = models.URLField(
@@ -103,6 +103,7 @@ class TikTokQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("TikTok QR Code")
         verbose_name_plural = _("TikTok QR Codes")
+        db_table = "sage_qrcode_tiktok_qr"
 
 
 class SnapchatQRCode(QRCode):
@@ -110,7 +111,6 @@ class SnapchatQRCode(QRCode):
 
     A Snapchat QR code stores the URL of a Snapchat profile. When
     scanned, it directs the user to the Snapchat profile page.
-
     """
 
     url = models.URLField(
@@ -133,6 +133,7 @@ class SnapchatQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("Snapchat QR Code")
         verbose_name_plural = _("Snapchat QR Codes")
+        db_table = "sage_qrcode_snapchat_qr"
 
 
 class InstagramQRCode(QRCode):
@@ -140,7 +141,6 @@ class InstagramQRCode(QRCode):
 
     An Instagram QR code stores the URL of an Instagram profile. When
     scanned, it directs the user to the Instagram profile page.
-
     """
 
     url = models.URLField(
@@ -163,6 +163,7 @@ class InstagramQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("Instagram QR Code")
         verbose_name_plural = _("Instagram QR Codes")
+        db_table = "sage_qrcode_instagram_qr"
 
 
 class FacebookQRCode(QRCode):
@@ -170,7 +171,6 @@ class FacebookQRCode(QRCode):
 
     A Facebook QR code stores the URL of a Facebook profile. When
     scanned, it directs the user to the Facebook profile page.
-
     """
 
     url = models.URLField(
@@ -193,6 +193,7 @@ class FacebookQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("Facebook QR Code")
         verbose_name_plural = _("Facebook QR Codes")
+        db_table = "sage_qrcode_facebook_qr"
 
 
 class TelegramQRCode(QRCode):
@@ -200,7 +201,6 @@ class TelegramQRCode(QRCode):
 
     A Telegram QR code stores the URL of a Telegram profile. When
     scanned, it directs the user to the Telegram profile page.
-
     """
 
     url = models.URLField(
@@ -221,6 +221,7 @@ class TelegramQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("Telegram QR Code")
         verbose_name_plural = _("Telegram QR Codes")
+        db_table = "sage_qrcode_telegram_qr"
 
 
 class LinkedInQRCode(QRCode):
@@ -228,7 +229,6 @@ class LinkedInQRCode(QRCode):
 
     A LinkedIn QR code stores the URL of a LinkedIn profile. When
     scanned, it directs the user to the LinkedIn profile page.
-
     """
 
     url = models.URLField(
@@ -251,6 +251,7 @@ class LinkedInQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("LinkedIn QR Code")
         verbose_name_plural = _("LinkedIn QR Codes")
+        db_table = "sage_qrcode_linkedin_qr"
 
 
 class XQRCode(QRCode):
@@ -258,7 +259,6 @@ class XQRCode(QRCode):
 
     A X (old Twitter) QR code stores the URL of a Twitter profile. When
     scanned, it directs the user to the Twitter profile page.
-
     """
 
     url = models.URLField(
@@ -281,6 +281,7 @@ class XQRCode(QRCode):
         ordering = ["url"]
         verbose_name = _("Twitter QR Code")
         verbose_name_plural = _("Twitter QR Codes")
+        db_table = "sage_qrcode_twitter_qr"
 
 
 class MediaUrl(QRCode):
@@ -288,7 +289,6 @@ class MediaUrl(QRCode):
 
     A media URL QR code stores the URL of media content such as videos
     or audio. When scanned, it directs the user to the media content.
-
     """
 
     url = models.URLField(
@@ -308,3 +308,4 @@ class MediaUrl(QRCode):
         ordering = ["url"]
         verbose_name = _("Media URL QR Code")
         verbose_name_plural = _("Media URL QR Codes")
+        db_table = "sage_qrcode_media_url_qr"

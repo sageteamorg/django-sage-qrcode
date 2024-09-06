@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
 from sage_qrcode.models.qrcode import QRCode
 
 
@@ -8,7 +9,6 @@ class WifiQRCode(QRCode):
 
     A WiFi QR code stores the credentials for a WiFi network. When
     scanned, it allows the user to quickly connect to the WiFi network.
-
     """
 
     ssid = models.CharField(
@@ -42,3 +42,4 @@ class WifiQRCode(QRCode):
         ordering = ["ssid"]
         verbose_name = _("WiFi QR Code")
         verbose_name_plural = _("WiFi QR Codes")
+        db_table = "sage_qrcode_wifi_qr"

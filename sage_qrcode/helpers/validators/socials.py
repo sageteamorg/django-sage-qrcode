@@ -1,4 +1,5 @@
 import re
+
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
@@ -14,7 +15,6 @@ class TikTokValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for TikTok URL validation.
-
     """
 
     message = _("Enter a valid TikTok profile URL.")
@@ -30,7 +30,6 @@ class TikTokValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -46,7 +45,6 @@ class TikTokValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -59,7 +57,6 @@ class TikTokValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, TikTokValidator)
@@ -78,7 +75,6 @@ class SnapchatValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for Snapchat URL validation.
-
     """
 
     message = _("Enter a valid Snapchat profile URL.")
@@ -94,7 +90,6 @@ class SnapchatValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -110,7 +105,6 @@ class SnapchatValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -123,7 +117,6 @@ class SnapchatValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, SnapchatValidator)
@@ -142,7 +135,6 @@ class InstagramValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for Instagram URL validation.
-
     """
 
     message = _("Enter a valid Instagram profile URL.")
@@ -158,7 +150,6 @@ class InstagramValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -174,7 +165,6 @@ class InstagramValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -187,7 +177,6 @@ class InstagramValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, InstagramValidator)
@@ -206,7 +195,6 @@ class FacebookValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for Facebook URL validation.
-
     """
 
     message = _("Enter a valid Facebook profile URL.")
@@ -222,7 +210,6 @@ class FacebookValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -238,7 +225,6 @@ class FacebookValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -251,7 +237,6 @@ class FacebookValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, FacebookValidator)
@@ -270,7 +255,6 @@ class TelegramValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for Telegram URL validation.
-
     """
 
     message = _("Enter a valid Telegram profile URL.")
@@ -284,7 +268,6 @@ class TelegramValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -300,7 +283,6 @@ class TelegramValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -313,7 +295,6 @@ class TelegramValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, TelegramValidator)
@@ -332,7 +313,6 @@ class LinkedInValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for LinkedIn URL validation.
-
     """
 
     message = _("Enter a valid LinkedIn profile URL.")
@@ -348,7 +328,6 @@ class LinkedInValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -364,7 +343,6 @@ class LinkedInValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -377,7 +355,6 @@ class LinkedInValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, LinkedInValidator)
@@ -396,7 +373,6 @@ class XValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for X URL validation.
-
     """
 
     message = _("Enter a valid X profile URL.")
@@ -411,7 +387,6 @@ class XValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -426,7 +401,6 @@ class XValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -439,7 +413,6 @@ class XValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, XValidator)
@@ -458,7 +431,6 @@ class SkypeValidator:
         message (str): Error message returned if the validation fails.
         code (str): Error code returned if the validation fails.
         regex (Pattern): Compiled regular expression pattern for Skype URL validation.
-
     """
 
     message = _("Enter a valid Skype profile URL.")
@@ -474,7 +446,6 @@ class SkypeValidator:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -490,7 +461,6 @@ class SkypeValidator:
 
         Raises:
             ValidationError: If the value does not match the regex pattern.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -503,7 +473,6 @@ class SkypeValidator:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, SkypeValidator)

@@ -1,10 +1,12 @@
+import logging
 import uuid
 from io import BytesIO
-import logging
 from typing import Optional
+
+import pyshorteners
 from barcode import get_barcode_class
 from barcode.writer import ImageWriter
-import pyshorteners
+
 from sage_qrcode.helpers.type import ColorName
 
 try:
@@ -13,6 +15,7 @@ except ImportError as exc:
     raise ImportError("Install `pillow` package. Run `pip install pillow`.") from exc
 
 logger = logging.getLogger(__name__)
+
 
 class BarcodeProxy:
     """A proxy class for generating and handling barcodes.
@@ -109,7 +112,9 @@ class BarcodeProxy:
         return self.barcode_image
 
     def save_barcode(self) -> None:
-        """Saves the generated barcode image to a file with a unique filename."""
+        """Saves the generated barcode image to a file with a unique
+        filename.
+        """
         logger.debug("Attempting to save barcode image.")
         if self.barcode_image is None:
             logger.error("No barcode image to save.")

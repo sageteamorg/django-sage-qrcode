@@ -9,21 +9,29 @@ class TestEventTimeValidator:
     def setup(self):
         self.validator = EventTimeRangeValidator()
 
-    @pytest.mark.parametrize("start_time, end_time", [
-        ("10:00", "11:00"),
-    ])
+    @pytest.mark.parametrize(
+        "start_time, end_time",
+        [
+            ("10:00", "11:00"),
+        ],
+    )
     def test_valid_event_times(self, start_time, end_time):
         try:
             self.validator(start_time, end_time)
             assert True
         except ValidationError as e:
-            pytest.fail(f"Valid event time range '{start_time} - {end_time}' raised a ValidationError: {str(e)}")
+            pytest.fail(
+                f"Valid event time range '{start_time} - {end_time}' raised a ValidationError: {str(e)}"
+            )
 
-    @pytest.mark.parametrize("start_time, end_time", [
-        ("11:00", "10:00"),
-        ("10:00", "10:00"),
-        ("invalid", "11:00"),
-    ])
+    @pytest.mark.parametrize(
+        "start_time, end_time",
+        [
+            ("11:00", "10:00"),
+            ("10:00", "10:00"),
+            ("invalid", "11:00"),
+        ],
+    )
     def test_invalid_event_times(self, start_time, end_time):
         with pytest.raises(ValidationError):
             self.validator(start_time, end_time)

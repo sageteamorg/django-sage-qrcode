@@ -10,7 +10,6 @@ class EventTimeRangeValidator:
 
     This validator checks that the end time of an event is after the
     start time, ensuring that events have a valid time range.
-
     """
 
     message = _("End time must be after start time.")
@@ -31,7 +30,6 @@ class EventTimeRangeValidator:
 
         Raises:
             ValidationError: If the end time is not after the start time.
-
         """
         if end_time <= start_time:
             raise ValidationError(

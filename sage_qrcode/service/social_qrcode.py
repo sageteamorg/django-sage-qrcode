@@ -1,11 +1,11 @@
-import os
 import logging
+import os
 from pathlib import Path
 from typing import Optional
 
-from sage_qrcode.service.base import QRCodeBase
-from sage_qrcode.utils import add_text_to_image, add_icon_to_image, add_frame_to_image
 from sage_qrcode.helpers.type import HexCode
+from sage_qrcode.service.base import QRCodeBase
+from sage_qrcode.utils import add_frame_to_image, add_icon_to_image, add_text_to_image
 
 try:
     from PIL import Image
@@ -14,13 +14,16 @@ except ImportError as exc:
 
 logger = logging.getLogger(__name__)
 
+
 class SocialMediaQRCode(QRCodeBase):
     """A class for generating QR codes that include social media icons and
-    related functionality."""
+    related functionality.
+    """
 
     def add_social_media_icon(self, url: str) -> Image.Image:
         """Adds an appropriate social media icon to the QR code based on the
         provided URL.
+
         Args:
             url (str): The social media URL.
         Returns:
@@ -67,6 +70,7 @@ class SocialMediaQRCode(QRCodeBase):
     ) -> None:
         """Generates a QR code for a social media URL and adds an appropriate
         icon.
+
         Args:
             url (str): The social media URL.
             save (bool, optional): Whether to save the QR code image. Default is False.
@@ -104,6 +108,7 @@ class SocialMediaQRCode(QRCodeBase):
     ) -> None:
         """Generates a QR code for a URL and adds optional customizations like
         frame_type and text.
+
         Args:
             playlist_url (str): The URL to encode in the QR code.
             save (bool): Whether to save the QR code image.

@@ -1,9 +1,9 @@
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from sage_qrcode.models.qrcode import QRCode
 from sage_qrcode.helpers.validators import validate_phone_number
+from sage_qrcode.models.qrcode import QRCode
 
 
 class VCardQRCode(QRCode):
@@ -12,7 +12,6 @@ class VCardQRCode(QRCode):
     A VCard QR code stores information about an individual, such as
     their name, email, phone number, and more. When scanned, it allows
     the user to easily add the contact details to their address book.
-
     """
 
     full_name = models.CharField(
@@ -101,3 +100,4 @@ class VCardQRCode(QRCode):
         ordering = ["full_name"]
         verbose_name = _("VCard QR Code")
         verbose_name_plural = _("VCard QR Codes")
+        db_table = "sage_qrcode_vcard_qr"
