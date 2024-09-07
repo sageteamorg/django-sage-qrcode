@@ -1,14 +1,17 @@
+from importlib.util import find_spec
+
 from django.conf import settings
 from django.core.checks import Error, register
-from importlib.util import find_spec
+
 
 @register()
 def check_installed_apps(app_configs, **kwargs):
     errors = []
     required_apps = [
-        'polymorphic',
-        'sage_qrcode',
-        'colorfield',
+        "polymorphic",
+        "sage_qrcode",
+        "sage_tools",
+        "colorfield",
     ]
 
     for app in required_apps:
@@ -24,13 +27,15 @@ def check_installed_apps(app_configs, **kwargs):
 
     return errors
 
+
 @register()
 def check_required_libraries(app_configs, **kwargs):
     errors = []
     required_libraries = [
-        'polymorphic',
-        'sage_qrcode',
-        'colorfield',
+        "polymorphic",
+        "sage_qrcode",
+        "sage_tools",
+        "colorfield",
     ]
 
     for library in required_libraries:

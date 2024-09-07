@@ -1,9 +1,9 @@
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from sage_qrcode.models.qrcode import QRCode
 from sage_qrcode.helpers.validators import validate_phone_number
+from sage_qrcode.models.qrcode import QRCode
 
 
 class VCardQRCode(QRCode):
@@ -12,60 +12,59 @@ class VCardQRCode(QRCode):
     A VCard QR code stores information about an individual, such as
     their name, email, phone number, and more. When scanned, it allows
     the user to easily add the contact details to their address book.
-
     """
 
     full_name = models.CharField(
+        verbose_name=_("Full Name"),
         max_length=255,
         help_text=_("Full name of the individual."),
         db_comment="The name of the individual represented in the VCard QR code.",
-        verbose_name=_("Full Name"),
     )
     display_name = models.CharField(
+        verbose_name=_("Display Name"),
         max_length=255,
         null=True,
         blank=True,
         help_text=_("Display name of the individual."),
         db_comment="An optional display name for the individual.",
-        verbose_name=_("Display Name"),
     )
     email = models.EmailField(
+        verbose_name=_("Email"),
         null=True,
         blank=True,
         help_text=_("Email address of the individual."),
         db_comment="The email address of the individual.",
-        verbose_name=_("Email"),
     )
     phone = models.CharField(
+        verbose_name=_("Phone Number"),
         max_length=20,
         null=True,
         blank=True,
         validators=[validate_phone_number],
         help_text=_("Phone number of the individual."),
         db_comment="The phone number of the individual.",
-        verbose_name=_("Phone Number"),
     )
     url = models.URLField(
+        verbose_name=_("Website URL"),
         null=True,
         blank=True,
         help_text=_("URL of the individual's website or profile."),
         db_comment="The URL to the individual's website or profile.",
-        verbose_name=_("Website URL"),
     )
     org = models.CharField(
+        verbose_name=_("Organization"),
         max_length=255,
         null=True,
         blank=True,
         help_text=_("Name of the organization."),
         db_comment="The organization name associated with the individual.",
-        verbose_name=_("Organization"),
     )
     address = models.TextField(
+        verbose_name=_("Address"),
         null=True,
         blank=True,
         help_text=_("Physical address of the individual."),
         db_comment="The physical address of the individual.",
-        verbose_name=_("Address"),
     )
     phone_number = models.CharField(
         _("Phone Number"),
@@ -101,3 +100,4 @@ class VCardQRCode(QRCode):
         ordering = ["full_name"]
         verbose_name = _("VCard QR Code")
         verbose_name_plural = _("VCard QR Codes")
+        db_table = "sage_qrcode_vcard_qr"

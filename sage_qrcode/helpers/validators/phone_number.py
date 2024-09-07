@@ -1,4 +1,5 @@
 import re
+
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
@@ -15,7 +16,6 @@ class ValidatorE164:
         message (str): Error message to be used if validation fails.
         code (str): Error code to be used if validation fails.
         regex (Pattern): Compiled regular expression pattern for E.164 validation.
-
     """
 
     message = _("Invalid phone number format. Must be in E.164 format.")
@@ -28,7 +28,6 @@ class ValidatorE164:
         Args:
             message (str, optional): Custom error message.
             code (str, optional): Custom error code.
-
         """
         if message is not None:
             self.message = message
@@ -44,7 +43,6 @@ class ValidatorE164:
 
         Raises:
             ValidationError: If the value does not match the E.164 format.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})
@@ -57,7 +55,6 @@ class ValidatorE164:
 
         Returns:
             bool: True if both instances have the same message and code, False otherwise.
-
         """
         return (
             isinstance(other, ValidatorE164)

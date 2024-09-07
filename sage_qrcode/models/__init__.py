@@ -1,21 +1,21 @@
+from .barcode import Barcode, BarcodeText, BarcodeUrl
+from .bitcoin import BitcoinQRCode
 from .card import VCardQRCode
+from .epc import EPCQRCode
 from .qrcode import QRCode
 from .social_media import (
-    WhatsAppQRCode,
-    SkypeQRCode,
-    SnapchatQRCode,
-    TelegramQRCode,
     FacebookQRCode,
-    XQRCode,
     InstagramQRCode,
     LinkedInQRCode,
     MediaUrl,
+    SkypeQRCode,
+    SnapchatQRCode,
+    TelegramQRCode,
     TikTokQRCode,
+    WhatsAppQRCode,
+    XQRCode,
 )
 from .wifi import WifiQRCode
-from .epc import EPCQRCode
-from .bitcoin import BitcoinQRCode
-from .barcode import Barcode, BarcodeUrl, BarcodeText
 
 __all__ = [
     "VCardQRCode",
