@@ -23,17 +23,17 @@ class WhatsAppQRCode(QRCode):
     """
 
     phone_number = models.CharField(
+        verbose_name=_("WhatsApp Phone Number"),
         max_length=20,
         validators=[validate_phone_number],
         help_text=_("WhatsApp phone number. Example: +1234567890"),
         db_comment="The WhatsApp phone number.",
-        verbose_name=_("WhatsApp Phone Number"),
     )
     message = models.TextField(
+        verbose_name=_("Message"),
         blank=True,
         help_text=_("Message to be sent. Example: 'Hello, this is a test message.'"),
         db_comment="The message to be sent via WhatsApp.",
-        verbose_name=_("Message"),
     )
 
     def __str__(self):
@@ -54,12 +54,12 @@ class WhatsAppQRCode(QRCode):
 
 class SkypeQRCode(QRCode):
     url = models.URLField(
+        verbose_name=_("Skype URL"),
+        validators=[validate_skype],
         help_text=_(
             "URL of the Skype profile. Example: 'https://www.skype.com/username'"
         ),
-        validators=[validate_skype],
         db_comment="The URL of the Skype profile.",
-        verbose_name=_("Skype URL"),
     )
 
     def __str__(self):
@@ -84,12 +84,12 @@ class TikTokQRCode(QRCode):
     """
 
     url = models.URLField(
+        verbose_name=_("TikTok URL"),
+        validators=[validate_tiktok],
         help_text=_(
             "URL of the TikTok profile. Example: 'https://www.tiktok.com/@username'"
         ),
-        validators=[validate_tiktok],
         db_comment="The URL of the TikTok profile.",
-        verbose_name=_("TikTok URL"),
     )
 
     def __str__(self):
@@ -114,12 +114,12 @@ class SnapchatQRCode(QRCode):
     """
 
     url = models.URLField(
+        verbose_name=_("Snapchat URL"),
+        validators=[validate_snapchat],
         help_text=_(
             "URL of the Snapchat profile. Example: 'https://www.snapchat.com/add/username'"
         ),
-        validators=[validate_snapchat],
         db_comment="The URL of the Snapchat profile.",
-        verbose_name=_("Snapchat URL"),
     )
 
     def __str__(self):
@@ -144,12 +144,12 @@ class InstagramQRCode(QRCode):
     """
 
     url = models.URLField(
+        verbose_name=_("Instagram URL"),
+        validators=[validate_instagram],
         help_text=_(
             "URL of the Instagram profile. Example: 'https://www.instagram.com/username'"
         ),
-        validators=[validate_instagram],
         db_comment="The URL of the Instagram profile.",
-        verbose_name=_("Instagram URL"),
     )
 
     def __str__(self):
@@ -174,12 +174,12 @@ class FacebookQRCode(QRCode):
     """
 
     url = models.URLField(
+        verbose_name=_("Facebook URL"),
+        validators=[validate_facebook],
         help_text=_(
             "URL of the Facebook profile. Example: 'https://www.facebook.com/username'"
         ),
-        validators=[validate_facebook],
         db_comment="The URL of the Facebook profile.",
-        verbose_name=_("Facebook URL"),
     )
 
     def __str__(self):
@@ -204,10 +204,10 @@ class TelegramQRCode(QRCode):
     """
 
     url = models.URLField(
-        help_text=_("URL of the Telegram profile. Example: 'https://t.me/username'"),
-        validators=[validate_telegram],
-        db_comment="The URL of the Telegram profile.",
         verbose_name=_("Telegram URL"),
+        validators=[validate_telegram],
+        help_text=_("URL of the Telegram profile. Example: 'https://t.me/username'"),
+        db_comment="The URL of the Telegram profile.",
     )
 
     def __str__(self):
@@ -232,12 +232,12 @@ class LinkedInQRCode(QRCode):
     """
 
     url = models.URLField(
+        verbose_name=_("LinkedIn URL"),
+        validators=[validate_linkedin],
         help_text=_(
             "URL of the LinkedIn profile. Example: 'https://www.linkedin.com/in/username'"
         ),
-        validators=[validate_linkedin],
         db_comment="The URL of the LinkedIn profile.",
-        verbose_name=_("LinkedIn URL"),
     )
 
     def __str__(self):
@@ -261,13 +261,13 @@ class XQRCode(QRCode):
     scanned, it directs the user to the Twitter profile page.
     """
 
+    verbose_name=_("Twitter URL"),
     url = models.URLField(
+        validators=[validate_x],
         help_text=_(
             "URL of the X profile. Example: 'https://www.twitter.com/username'"
         ),
-        validators=[validate_x],
         db_comment="The URL of the Twitter profile.",
-        verbose_name=_("Twitter URL"),
     )
 
     def __str__(self):
@@ -292,9 +292,9 @@ class MediaUrl(QRCode):
     """
 
     url = models.URLField(
+        verbose_name=_("Media URL"),
         help_text=_("URL of the media content."),
         db_comment="The URL of the media content.",
-        verbose_name=_("Media URL"),
     )
 
     def __str__(self):

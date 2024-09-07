@@ -12,23 +12,23 @@ class WifiQRCode(QRCode):
     """
 
     ssid = models.CharField(
+        verbose_name=_("SSID"),
         max_length=255,
         help_text=_("SSID of the WiFi network."),
         db_comment="The SSID of the WiFi network.",
-        verbose_name=_("SSID"),
     )
     password = models.CharField(
+        verbose_name=_("WiFi Password"),
         max_length=255,
         help_text=_("Password of the WiFi network."),
         db_comment="The password for the WiFi network.",
-        verbose_name=_("WiFi Password"),
     )
     security = models.CharField(
+        verbose_name=_("Security Type"),
         max_length=50,
         default="WPA",
         help_text=_("Security type of the WiFi network."),
         db_comment="The security type for the WiFi network (e.g., WPA, WPA2).",
-        verbose_name=_("Security Type"),
     )
 
     def __str__(self):

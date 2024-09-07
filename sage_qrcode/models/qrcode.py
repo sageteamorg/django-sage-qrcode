@@ -11,6 +11,7 @@ class QRCode(PolymorphicModel, TimeStampMixin):
     """Abstract base class for all QR code types."""
 
     qr_code_image = models.ImageField(
+        verbose_name=_("QR Code Image"),
         upload_to="qr_codes/",
         blank=True,
         null=True,
@@ -19,6 +20,7 @@ class QRCode(PolymorphicModel, TimeStampMixin):
         db_comment="The image file of the generated QR code.",
     )
     custom_gif = models.ImageField(
+        verbose_name=_("Custom GIF"),
         upload_to="custom_gifs/",
         blank=True,
         null=True,
@@ -27,6 +29,7 @@ class QRCode(PolymorphicModel, TimeStampMixin):
         db_comment="An optional custom GIF that can be embedded in the QR code.",
     )
     title = models.CharField(
+        verbose_name=_("Title"),
         max_length=255,
         null=True,
         blank=True,
@@ -34,32 +37,36 @@ class QRCode(PolymorphicModel, TimeStampMixin):
         db_comment="A descriptive title for the QR code.",
     )
     size = models.PositiveSmallIntegerField(
+        verbose_name=_("Size"),
         validators=[validate_size],
-        help_text=_("Size of the QR code image."),
         null=True,
         blank=True,
+        help_text=_("Size of the QR code image."),
         db_comment="The size (dimensions) of the QR code image.",
     )
     color = ColorField(
+        verbose_name=_("Color"),
         format="hex",
-        help_text=_("Color of the QR code."),
         null=True,
         blank=True,
+        help_text=_("Color of the QR code."),
         db_comment="The color of the QR code in hexadecimal format.",
     )
     second_color = ColorField(
+        verbose_name=_("Second Color"),
         format="hex",
-        help_text=_("Second color of the QR code."),
         null=True,
         blank=True,
+        help_text=_("Second color of the QR code."),
         db_comment="The second color of the QR code in hexadecimal format.",
     )
 
     third_color = ColorField(
+        verbose_name=_("Third Color"),
         format="hex",
-        help_text=_("Third color of the QR code."),
         null=True,
         blank=True,
+        help_text=_("Third color of the QR code."),
         db_comment="The third color of the BAR code in hexadecimal format.",
     )
 

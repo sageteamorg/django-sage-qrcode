@@ -11,6 +11,7 @@ class Barcode(PolymorphicModel, TimeStampMixin):
     """Abstract base class for all QR code types."""
 
     bar_code_image = models.ImageField(
+        verbose_name=_("Bar Code Image"),
         upload_to="bar_codes/",
         blank=True,
         null=True,
@@ -20,6 +21,7 @@ class Barcode(PolymorphicModel, TimeStampMixin):
     )
 
     title = models.CharField(
+        verbose_name=_("Title"),
         max_length=255,
         null=True,
         blank=True,
@@ -28,17 +30,21 @@ class Barcode(PolymorphicModel, TimeStampMixin):
     )
 
     color = ColorField(
+        verbose_name=_("Color"),
         format="hex",
-        help_text=_("Color of the BAR code."),
+        default="#000000",
         null=True,
         blank=True,
+        help_text=_("Color of the BAR code."),
         db_comment="The color of the BAR code in hexadecimal format.",
     )
     second_color = ColorField(
+        verbose_name=_("Second Color"),
         format="hex",
-        help_text=_("Second color of the QR code."),
+        default="##FFFFFF",
         null=True,
         blank=True,
+        help_text=_("Second color of the QR code."),
         db_comment="The second color of the BAR code in hexadecimal format.",
     )
 
@@ -63,9 +69,9 @@ class BarcodeUrl(Barcode):
     """
 
     url = models.URLField(
+        verbose_name=_("barcode URL"),
         help_text=_("URL of the barcode content."),
         db_comment="The URL of the barcode content.",
-        verbose_name=_("barcode URL"),
     )
 
     def __str__(self):
@@ -90,10 +96,10 @@ class BarcodeText(Barcode):
     """
 
     body = models.TextField(
+        verbose_name=_("body"),
         blank=True,
         help_text=_("Body of the barcode."),
         db_comment="The body of the barcode.",
-        verbose_name=_("body"),
     )
 
     def __str__(self):
