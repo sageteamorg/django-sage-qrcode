@@ -4,7 +4,7 @@ requires = [ "poetry-core" ]
 
 [tool.poetry]
 name = "django_sage_qrcode"
-version = "0.1.0"
+version = "0.1.1"
 description = "A project for QR code generation and NFC integration"
 authors = [ "Radin Ghahremani <radin@sageteam.org>", "Sepehr Akbarzadeh <sepehr@sageteam.org>" ]
 readme = "README.md"
@@ -27,8 +27,11 @@ classifiers = [
 "Issues" = "https://github.com/sageteamorg/django-sage-qrcode/issues"
 
 [tool.poetry.dependencies]
-python = "^3.8"
-django = "^4.2"
+python = ">=3.10,<4.0"
+django = [
+  { version = ">=4.2,<5.0", python = "3.10" },
+  { version = ">=4.2,<5.3", python = ">=3.10" },
+]
 sengo = "^0.0.2"
 qrcode-artistic = "^3.0.2"
 django-polymorphic = "^3.1.0"
@@ -38,7 +41,7 @@ ndeflib = "^0.3.3"
 ndef = "^0.2"
 python-barcode = "^0.15.1"
 pyshorteners = "^1.0.1"
-django-sage-tools = "^0.2.2"
+django-sage-tools = "^0.3.5"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
