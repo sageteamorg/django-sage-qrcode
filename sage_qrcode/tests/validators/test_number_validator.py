@@ -8,22 +8,30 @@ class TestPhoneNumberValidator:
     def setup(self):
         self.validator = ValidatorE164()
 
-    @pytest.mark.parametrize("phone_number", [
-        "+14155552671",
-        "+447911123456",
-    ])
+    @pytest.mark.parametrize(
+        "phone_number",
+        [
+            "+14155552671",
+            "+447911123456",
+        ],
+    )
     def test_valid_phone_numbers(self, phone_number):
         try:
             self.validator(phone_number)
             assert True
         except ValidationError as e:
-            pytest.fail(f"Valid phone number '{phone_number}' raised a ValidationError: {str(e)}")
+            pytest.fail(
+                f"Valid phone number '{phone_number}' raised a ValidationError: {str(e)}"
+            )
 
-    @pytest.mark.parametrize("phone_number", [
-        "14155552671",
-        "invalidnumber",
-        "",
-    ])
+    @pytest.mark.parametrize(
+        "phone_number",
+        [
+            "14155552671",
+            "invalidnumber",
+            "",
+        ],
+    )
     def test_invalid_phone_numbers(self, phone_number):
         with pytest.raises(ValidationError):
             self.validator(phone_number)

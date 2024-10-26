@@ -1,35 +1,35 @@
 import io
 import time
 import zipfile
+
+from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.http import HttpResponse
-from django.contrib import messages
-
-from sage_qrcode.service import (
-    ContactQRCode,
-    SocialMediaQRCode,
-    PaymentQRCode,
-    QRCodeBase,
-    BarcodeProxy,
-)
 
 from sage_qrcode.models import (
-    VCardQRCode,
-    WifiQRCode,
-    TikTokQRCode,
-    TelegramQRCode,
-    InstagramQRCode,
-    SnapchatQRCode,
-    SkypeQRCode,
-    XQRCode,
-    WhatsAppQRCode,
-    FacebookQRCode,
-    EPCQRCode,
-    MediaUrl,
-    LinkedInQRCode,
-    BitcoinQRCode,
     BarcodeText,
     BarcodeUrl,
+    BitcoinQRCode,
+    EPCQRCode,
+    FacebookQRCode,
+    InstagramQRCode,
+    LinkedInQRCode,
+    MediaUrl,
+    SkypeQRCode,
+    SnapchatQRCode,
+    TelegramQRCode,
+    TikTokQRCode,
+    VCardQRCode,
+    WhatsAppQRCode,
+    WifiQRCode,
+    XQRCode,
+)
+from sage_qrcode.service import (
+    BarcodeProxy,
+    ContactQRCode,
+    PaymentQRCode,
+    QRCodeBase,
+    SocialMediaQRCode,
 )
 
 
@@ -41,7 +41,6 @@ def generate_qr_code(obj: QRCodeBase) -> bytes:
 
     Returns:
         bytes: The generated QR code image in bytes.
-
     """
     proxy = QRCodeBase()
     custom_gif_path = obj.custom_gif_path if obj.custom_gif else None
@@ -148,7 +147,6 @@ def save_qr_code_image(obj: QRCodeBase, qr_image: bytes) -> None:
     Args:
         obj (QRCodeBase): An instance of a subclass of QRCodeBase.
         qr_image (bytes): The generated QR code image in bytes.
-
     """
     buffer = io.BytesIO()
     qr_image.save(buffer, format="PNG")
@@ -166,7 +164,6 @@ def handle_qr_code(request: HttpResponse, queryset) -> HttpResponse:
 
     Returns:
         HttpResponse: The HTTP response containing the QR code image(s).
-
     """
     start_time = time.time()
 
@@ -175,7 +172,9 @@ def handle_qr_code(request: HttpResponse, queryset) -> HttpResponse:
     elif queryset.count() == 1:
         obj = queryset.first()
         response = HttpResponse(content_type="image/png")
-        response["Content-Disposition"] = f"attachment; filename={obj.pk}_qr.png"
+        response[
+            "Content-Disposition"
+        ] = f"attachment; filename={obj.get_real_instance_class()._meta.verbose_name}_{str(obj.pk)}_qr.png"
         with obj.qr_code_image.open("rb") as img_file:
             response.write(img_file.read())
         return response
@@ -184,7 +183,10 @@ def handle_qr_code(request: HttpResponse, queryset) -> HttpResponse:
         with zipfile.ZipFile(zip_buffer, "w") as zip_file:
             for obj in queryset:
                 with obj.qr_code_image.open("rb") as img_file:
-                    zip_file.writestr(f"{obj.pk}_qr.png", img_file.read())
+                    zip_file.writestr(
+                        f"{obj.get_real_instance_class()._meta.verbose_name}_{str(obj.pk)}_qr.png",
+                        img_file.read(),
+                    )
 
         zip_buffer.seek(0)
         response = HttpResponse(zip_buffer, content_type="application/zip")
@@ -216,7 +218,6 @@ def generate_barcode_image(obj: BarcodeProxy) -> bytes:
 
     Returns:
         bytes: The generated barcode image in bytes.
-
     """
     proxy = BarcodeProxy()
     if not obj.color:
@@ -238,7 +239,6 @@ def save_barcode_image(obj: BarcodeProxy, barcode_image: bytes) -> None:
     Args:
         obj (BarcodeProxy): An instance of a subclass of BarcodeProxy.
         barcode_image (bytes): The generated barcode image in bytes.
-
     """
     buffer = io.BytesIO()
     barcode_image.save(buffer, format="PNG")
@@ -256,7 +256,6 @@ def download_barcode(request: HttpResponse, queryset) -> HttpResponse:
 
     Returns:
         HttpResponse: The HTTP response containing the barcode image(s).
-
     """
     if queryset.count() == 0:
         return HttpResponse("Please select at least one barcode to download.")

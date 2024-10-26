@@ -70,27 +70,38 @@ To integrate these models into the Django admin interface, register them in the 
 .. code-block:: python
 
     from django.contrib import admin
-    from django_sage_qrcode.models import TelegramQRCode, TikTokQRCode, WhatsAppQRCode, XQRCode, WifiQRCode
+    from django_sage_qrcode.models import (
+        TelegramQRCode,
+        TikTokQRCode,
+        WhatsAppQRCode,
+        XQRCode,
+        WifiQRCode,
+    )
+
 
     @admin.register(TelegramQRCode)
     class TelegramQRCodeAdmin(admin.ModelAdmin):
-        list_display = ['profile_url']
+        list_display = ["profile_url"]
+
 
     @admin.register(TikTokQRCode)
     class TikTokQRCodeAdmin(admin.ModelAdmin):
-        list_display = ['profile_url']
+        list_display = ["profile_url"]
+
 
     @admin.register(WhatsAppQRCode)
     class WhatsAppQRCodeAdmin(admin.ModelAdmin):
-        list_display = ['phone_number', 'message']
+        list_display = ["phone_number", "message"]
+
 
     @admin.register(XQRCode)
     class XQRCodeAdmin(admin.ModelAdmin):
-        list_display = ['profile_url']
+        list_display = ["profile_url"]
+
 
     @admin.register(WifiQRCode)
     class WifiQRCodeAdmin(admin.ModelAdmin):
-        list_display = ['ssid', 'encryption']
+        list_display = ["ssid", "encryption"]
 
 
 This will allow you to manage the different QR code models directly from the Django admin interface.

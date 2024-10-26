@@ -67,9 +67,9 @@ To use `django-sage-qrcode`, add it to your `INSTALLED_APPS` in the Django setti
 .. code-block:: python
 
     INSTALLED_APPS = [
-        ...
+        # other packages
         "sage_qrcode",
+        "sage_tools",
         "colorfield",
         "polymorphic",
-        ...
     ]

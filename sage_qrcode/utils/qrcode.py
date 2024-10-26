@@ -7,6 +7,7 @@ except ImportError as exc:
 
 logger = logging.getLogger(__name__)
 
+
 def add_text_to_image(image: Image, text: str):
     """Adds centered text to the provided image.
 
@@ -16,7 +17,6 @@ def add_text_to_image(image: Image, text: str):
 
     Returns:
         Image: The image with the added text.
-
     """
     logger.debug("Adding text to image: %s", text)
     draw = ImageDraw.Draw(image)
@@ -26,9 +26,7 @@ def add_text_to_image(image: Image, text: str):
     text_bbox = draw.textbbox((0, 0), text, font=font)
     text_width = text_bbox[2] - text_bbox[0]
     text_height = text_bbox[3] - text_bbox[1]
-    logger.debug(
-        "Text dimensions: width=%s, height=%s", text_width, text_height
-    )
+    logger.debug("Text dimensions: width=%s, height=%s", text_width, text_height)
 
     draw.text(
         ((image.width - text_width) // 2, image.height - text_height - 10),
@@ -39,6 +37,7 @@ def add_text_to_image(image: Image, text: str):
     logger.info("Text added to image successfully.")
     return image
 
+
 def add_icon_to_image(image: Image, icon_path: str):
     """Adds an icon to the center of the provided image.
 
@@ -48,7 +47,6 @@ def add_icon_to_image(image: Image, icon_path: str):
 
     Returns:
         Image: The image with the added icon.
-
     """
     logger.debug("Adding icon to image from path: %s", icon_path)
     icon = Image.open(icon_path).convert("RGBA")
@@ -63,8 +61,11 @@ def add_icon_to_image(image: Image, icon_path: str):
     logger.info("Icon added to image successfully.")
     return image
 
+
 def add_frame_to_image(image: Image, frame_type: str = "simple"):
-    """Adds a frame to the provided image. Supports simple and rounded frames.
+    """Adds a frame to the provided image.
+
+    Supports simple and rounded frames.
 
     Args:
         image (Image): The image to which the frame will be added.
@@ -73,7 +74,6 @@ def add_frame_to_image(image: Image, frame_type: str = "simple"):
 
     Returns:
         Image: The image with the added frame.
-
     """
     logger.debug("Adding %s frame to image.", frame_type)
     if image.mode != "RGBA":

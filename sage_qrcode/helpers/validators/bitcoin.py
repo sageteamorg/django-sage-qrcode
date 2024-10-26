@@ -1,4 +1,5 @@
 import re
+
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext_lazy as _
@@ -16,7 +17,6 @@ class BitcoinAddressValidator:
         message (str): Error message returned when the validation fails.
         code (str): Error code returned when the validation fails.
         regex (Pattern): Compiled regular expression for validating Bitcoin addresses.
-
     """
 
     message = _("Enter a valid Bitcoin address.")
@@ -37,7 +37,6 @@ class BitcoinAddressValidator:
 
         Raises:
             ValidationError: If the Bitcoin address is not valid.
-
         """
         if not self.regex.match(value):
             raise ValidationError(self.message, code=self.code, params={"value": value})

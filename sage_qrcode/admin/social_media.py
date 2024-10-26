@@ -2,19 +2,19 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from polymorphic.admin import PolymorphicChildModelAdmin
 
+from sage_qrcode.admin.base import QRCodeParentAdmin
+from sage_qrcode.forms import MediaUrlForm, TikTokForm, XForm
 from sage_qrcode.models import (
-    MediaUrl,
-    TikTokQRCode,
     FacebookQRCode,
     InstagramQRCode,
     LinkedInQRCode,
+    MediaUrl,
     SkypeQRCode,
     SnapchatQRCode,
-    XQRCode,
     TelegramQRCode,
+    TikTokQRCode,
+    XQRCode,
 )
-from sage_qrcode.forms import TikTokForm, MediaUrlForm, XForm
-from sage_qrcode.admin.base import QRCodeParentAdmin
 
 
 @admin.register(SkypeQRCode)
@@ -27,16 +27,22 @@ class SkypeQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the Skype URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -56,16 +62,22 @@ class TikTokQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the TikTok profile URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -84,16 +96,22 @@ class SnapchatQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the Snapchat profile URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -112,16 +130,22 @@ class XQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the X profile URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -140,16 +164,22 @@ class LinkedInQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the LinkedIn profile URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -167,16 +197,22 @@ class FacebookQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the Facebook profile URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -195,16 +231,22 @@ class TelegramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the Telegram profile or group URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -223,16 +265,22 @@ class InstagramQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the Instagram profile URL to generate the corresponding QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
-                "fields": (
-                    "size",
-                    "color",
-                    "second_color",
-                    "third_color",
+                "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
                 ),
             },
         ),
@@ -252,12 +300,23 @@ class MediaUrlAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
     search_fields = ("url",)
 
     fieldsets = (
-        (None, {"fields": ("url",)}),
+        (
+            None,
+            {
+                "fields": ("url",),
+                "description": _(
+                    "Enter the media URL to generate the corresponding QR code. Optionally, add a custom GIF."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Customize the QR code by adjusting its size and colors."
+                ),
             },
         ),
     )

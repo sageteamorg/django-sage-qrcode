@@ -1,17 +1,17 @@
+from colorfield.fields import ColorField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
-from colorfield.fields import ColorField
 from polymorphic.models import PolymorphicModel
+from sage_tools.mixins.models import TimeStampMixin
 
-from sage_qrcode.mixins import TimestampMixin
 from sage_qrcode.helpers.validators import validate_image_file
 
 
-class Barcode(PolymorphicModel, TimestampMixin):
+class Barcode(PolymorphicModel, TimeStampMixin):
     """Abstract base class for all QR code types."""
 
     bar_code_image = models.ImageField(
+        verbose_name=_("Bar Code Image"),
         upload_to="bar_codes/",
         blank=True,
         null=True,
@@ -21,6 +21,7 @@ class Barcode(PolymorphicModel, TimestampMixin):
     )
 
     title = models.CharField(
+        verbose_name=_("Title"),
         max_length=255,
         null=True,
         blank=True,
@@ -29,23 +30,28 @@ class Barcode(PolymorphicModel, TimestampMixin):
     )
 
     color = ColorField(
+        verbose_name=_("Color"),
         format="hex",
-        help_text=_("Color of the BAR code."),
+        default="#000000",
         null=True,
         blank=True,
+        help_text=_("Color of the BAR code."),
         db_comment="The color of the BAR code in hexadecimal format.",
     )
     second_color = ColorField(
+        verbose_name=_("Second Color"),
         format="hex",
-        help_text=_("Second color of the QR code."),
+        default="##FFFFFF",
         null=True,
         blank=True,
+        help_text=_("Second color of the QR code."),
         db_comment="The second color of the BAR code in hexadecimal format.",
     )
 
     class Meta:
         verbose_name = _("Bar Code")
         verbose_name_plural = _("Bar Codes")
+        db_table = "sage_qrcode_barcode"
 
     def __str__(self):
         return f"{self.__class__.__name__} {self.pk} - {self.title or 'No Title'}"
@@ -60,13 +66,12 @@ class BarcodeUrl(Barcode):
     A Barcode URL QR code stores the URL of media content such as videos
     or audio. When scanned, it directs the user to the Barcode url
     content.
-
     """
 
     url = models.URLField(
+        verbose_name=_("barcode URL"),
         help_text=_("URL of the barcode content."),
         db_comment="The URL of the barcode content.",
-        verbose_name=_("barcode URL"),
     )
 
     def __str__(self):
@@ -80,6 +85,7 @@ class BarcodeUrl(Barcode):
         ordering = ["url"]
         verbose_name = _(" URL Barcode")
         verbose_name_plural = _("URL Barcode")
+        db_table = "sage_qrcode_barcode_url"
 
 
 class BarcodeText(Barcode):
@@ -87,14 +93,13 @@ class BarcodeText(Barcode):
 
     A Text bar stores the URL of media content such as videos or audio.
     When scanned, it directs the user to the media content.
-
     """
 
     body = models.TextField(
+        verbose_name=_("body"),
         blank=True,
         help_text=_("Body of the barcode."),
         db_comment="The body of the barcode.",
-        verbose_name=_("body"),
     )
 
     def __str__(self):
@@ -108,3 +113,4 @@ class BarcodeText(Barcode):
         ordering = ["body"]
         verbose_name = _("Barcode Text")
         verbose_name_plural = _("Barcode Texts")
+        db_table = "sage_qrcode_barcode_txt"

@@ -1,10 +1,10 @@
-from polymorphic.admin import PolymorphicChildModelAdmin
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from polymorphic.admin import PolymorphicChildModelAdmin
 
-from sage_qrcode.models import VCardQRCode, WifiQRCode
-from sage_qrcode.forms import VCardQRCodeForm, WiFiQRCodeForm
 from sage_qrcode.admin.base import QRCodeParentAdmin
+from sage_qrcode.forms import VCardQRCodeForm, WiFiQRCodeForm
+from sage_qrcode.models import VCardQRCode, WifiQRCode
 
 
 @admin.register(VCardQRCode)
@@ -26,7 +26,10 @@ class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
                     "phone",
                     "url",
                     "custom_gif",
-                )
+                ),
+                "description": _(
+                    "Provide the basic contact details and an optional custom GIF for the VCard QR code."
+                ),
             },
         ),
         (
@@ -34,6 +37,9 @@ class VCardQRCodeAdmin(PolymorphicChildModelAdmin, QRCodeParentAdmin):
             {
                 "classes": ("collapse",),
                 "fields": ("org", "size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Configure additional details like organization, size, and color options for the QR code."
+                ),
             },
         ),
     )
@@ -51,12 +57,23 @@ class WiFiQRCodeAdmin(QRCodeParentAdmin):
     search_fields = ("ssid", "security")
 
     fieldsets = (
-        (None, {_("fields"): ("ssid", "password", "security", "custom_gif")}),
+        (
+            None,
+            {
+                "fields": ("ssid", "password", "security", "custom_gif"),
+                "description": _(
+                    "Enter the Wi-Fi network details and optionally add a custom GIF for the QR code."
+                ),
+            },
+        ),
         (
             _("Advanced options"),
             {
                 "classes": ("collapse",),
                 "fields": ("size", "color", "second_color", "third_color"),
+                "description": _(
+                    "Adjust the QR code's size and color settings for customization."
+                ),
             },
         ),
     )

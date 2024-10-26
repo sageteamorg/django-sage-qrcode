@@ -66,7 +66,9 @@ Example Usage
     contact_qr = ContactQRCode()
 
     # Generate a WiFi QR code
-    contact_qr.generate_wifi_qr_code(ssid='MyWiFi', password='mypassword', security_type='WPA',save=True)
+    contact_qr.generate_wifi_qr_code(
+        ssid="MyWiFi", password="mypassword", security_type="WPA", save=True
+    )
 
 
 PaymentQRCode Class
@@ -119,20 +121,20 @@ Example Usage
 
     # Generate an EPC payment QR code
     payment_qr.generate_epc_qr_code(
-        name='John Doe',
-        iban='DE89370400440532013000',
+        name="John Doe",
+        iban="DE89370400440532013000",
         amount=100.50,
-        text='Payment for services',
-        save=True
+        text="Payment for services",
+        save=True,
     )
 
     # Generate a Bitcoin payment QR code
     payment_qr.generate_bitcoin_qr_code(
-        address='1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+        address="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
         amount=0.005,
-        label='Donation',
-        message='Thanks for your support!',
-        save=True
+        label="Donation",
+        message="Thanks for your support!",
+        save=True,
     )
 
 
@@ -171,7 +173,7 @@ Example Usage
     barcode = BarcodeProxy()
 
     # Generate a barcode for a given data string
-    barcode.generate_barcode(data='123456789012')
+    barcode.generate_barcode(data="123456789012")
 
     # Save the barcode
     barcode.save_barcode()
@@ -219,7 +221,4 @@ Example Usage
     social_qr = SocialMediaQRCode()
 
     # Generate a QR code for a social media URL with an icon
-    social_qr.create_social_media_url(
-        url='https://instagram.com/example',
-        save=True
-    )
+    social_qr.create_social_media_url(url="https://instagram.com/example", save=True)

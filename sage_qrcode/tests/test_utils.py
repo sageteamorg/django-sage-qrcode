@@ -1,6 +1,7 @@
 from PIL import Image
 from sage_qrcode.utils import add_text_to_image, add_icon_to_image, add_frame_to_image
 
+
 class TestAddTextToImage:
 
     def test_add_text_to_image(self):

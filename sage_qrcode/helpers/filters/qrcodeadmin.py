@@ -1,12 +1,7 @@
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import gettext_lazy as _
 
-from sage_qrcode.models import (
-    VCardQRCode,
-    WifiQRCode,
-    MediaUrl,
-    EPCQRCode,
-)
+from sage_qrcode.models import EPCQRCode, MediaUrl, VCardQRCode, WifiQRCode
 
 
 class QRCodeTypeFilter(SimpleListFilter):
@@ -14,7 +9,6 @@ class QRCodeTypeFilter(SimpleListFilter):
 
     This filter allows the admin interface to display QR codes based on
     their type, such as VCard, WiFi, Social Media, Media URL, or EPC.
-
     """
 
     title = _("QR Code Type")
@@ -31,7 +25,6 @@ class QRCodeTypeFilter(SimpleListFilter):
 
         Returns:
             list: A list of tuples containing filter options.
-
         """
         return (
             ("vcard", _("VCard QR Code")),
@@ -50,7 +43,6 @@ class QRCodeTypeFilter(SimpleListFilter):
 
         Returns:
             QuerySet: The filtered queryset based on the selected QR code type.
-
         """
         if self.value() == "vcard":
             return queryset.instance_of(VCardQRCode)

@@ -1,17 +1,20 @@
 import logging
-from typing import Optional
 from pathlib import Path
+from typing import Optional
+
 from segno import helpers
 
-from sage_qrcode.service.base import QRCodeBase
-from sage_qrcode.utils import add_text_to_image, add_frame_to_image
 from sage_qrcode.helpers.type import HexCode
+from sage_qrcode.service.base import QRCodeBase
+from sage_qrcode.utils import add_frame_to_image, add_text_to_image
 
 logger = logging.getLogger(__name__)
 
 
 class ContactQRCode(QRCodeBase):
-    """A class for generating specific types of QR codes like WiFi, MeCard, and VCard."""
+    """A class for generating specific types of QR codes like WiFi, MeCard, and
+    VCard.
+    """
 
     def generate_wifi_qr_code(
         self,
@@ -58,10 +61,7 @@ class ContactQRCode(QRCodeBase):
     ) -> None:
         """Generates a QR code for a MeCard contact."""
         logger.debug("Generating MeCard QR code for name: %s", name)
-        mecard_data = (
-            f"MECARD:N:{name};"
-            f"EMAIL:{email};TEL:{phone};URL:{url};;"
-        )
+        mecard_data = f"MECARD:N:{name};" f"EMAIL:{email};TEL:{phone};URL:{url};;"
         result = self.generate_qr_code(
             data=mecard_data, custom=custom, color=color, scale=size
         )

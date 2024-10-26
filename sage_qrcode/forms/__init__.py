@@ -1,10 +1,10 @@
 from .forms import (
-    WiFiQRCodeForm,
-    VCardQRCodeForm,
-    TikTokForm,
-    MediaUrlForm,
-    EPCQRCodeForm,
     BitForm,
+    EPCQRCodeForm,
+    MediaUrlForm,
+    TikTokForm,
+    VCardQRCodeForm,
+    WiFiQRCodeForm,
     XForm,
 )
 

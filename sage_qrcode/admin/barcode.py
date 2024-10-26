@@ -1,27 +1,45 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from polymorphic.admin import PolymorphicParentModelAdmin, PolymorphicChildModelAdmin
+from polymorphic.admin import PolymorphicChildModelAdmin, PolymorphicParentModelAdmin
 
-from sage_qrcode.models import Barcode, BarcodeUrl, BarcodeText
-from sage_qrcode.utils.admin import generate_barcode_image, save_barcode_image
 from sage_qrcode.admin.actions import download_barcode_action
+from sage_qrcode.models import Barcode, BarcodeText, BarcodeUrl
+from sage_qrcode.utils.admin import generate_barcode_image, save_barcode_image
 
 
 @admin.register(Barcode)
 class BarcodeParentAdmin(PolymorphicParentModelAdmin):
     base_model = Barcode
     child_models = (BarcodeUrl, BarcodeText)
-    list_display = ("title","get_barcode_type", "color", "second_color", "created", "modified")
-    list_filter = ("created", "modified", "color", "second_color")
+    list_display = (
+        "title",
+        "get_barcode_type",
+        "color",
+        "second_color",
+        "created_at",
+        "modified_at",
+    )
+    list_filter = ("created_at", "modified_at", "color", "second_color")
     search_fields = ("title",)
     actions = [download_barcode_action]
 
     fieldsets = (
-        (None, {"fields": ("title", "color", "second_color")}),
+        (
+            None,
+            {
+                "fields": ("title", "color", "second_color"),
+                "description": _(
+                    "Provide the title and choose the primary and secondary colors for the barcode."
+                ),
+            },
+        ),
         (
             _("Image"),
             {
                 "fields": ("bar_code_image",),
+                "description": _(
+                    "This field will display the generated barcode image after saving."
+                ),
             },
         ),
     )
@@ -41,15 +59,26 @@ class BarcodeUrlAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
     base_model = BarcodeUrl
     show_in_index = True
     list_display = ("title",)
-    list_filter = ("created", "modified", "url", "color", "second_color")
+    list_filter = ("created_at", "modified_at", "url", "color", "second_color")
     search_fields = ("title", "url")
 
     fieldsets = (
-        (None, {"fields": ("title", "url", "color", "second_color")}),
+        (
+            None,
+            {
+                "fields": ("title", "url", "color", "second_color"),
+                "description": _(
+                    "Enter the title, URL, and select the primary and secondary colors for the barcode."
+                ),
+            },
+        ),
         (
             _("Image"),
             {
                 "fields": ("bar_code_image",),
+                "description": _(
+                    "This field will display the generated barcode image after saving."
+                ),
             },
         ),
     )
@@ -71,18 +100,29 @@ class BarcodeTextAdmin(PolymorphicChildModelAdmin, BarcodeParentAdmin):
         "body",
         "color",
         "second_color",
-        "created",
-        "modified",
+        "created_at",
+        "modified_at",
     )
-    list_filter = ("created", "modified", "color", "second_color")
+    list_filter = ("created_at", "modified_at", "color", "second_color")
     search_fields = ("title", "body")
 
     fieldsets = (
-        (None, {"fields": ("title", "body", "color", "second_color")}),
+        (
+            None,
+            {
+                "fields": ("title", "body", "color", "second_color"),
+                "description": _(
+                    "Enter the title, text content, and select the primary and secondary colors for the barcode."
+                ),
+            },
+        ),
         (
             _("Image"),
             {
                 "fields": ("bar_code_image",),
+                "description": _(
+                    "This field will display the generated barcode image after saving."
+                ),
             },
         ),
     )

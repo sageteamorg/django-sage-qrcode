@@ -1,18 +1,18 @@
 import logging
+from pathlib import Path
 from typing import Optional
 from urllib.parse import urlencode
-from pathlib import Path
 
+from sage_qrcode.helpers.type import IBAN, HexCode
 from sage_qrcode.service.base import QRCodeBase
-from sage_qrcode.utils import add_text_to_image, add_frame_to_image
-from sage_qrcode.helpers.type import HexCode, IBAN
+from sage_qrcode.utils import add_frame_to_image, add_text_to_image
 
 logger = logging.getLogger(__name__)
 
+
 class PaymentQRCode(QRCodeBase):
-    """
-    A class for generating payment-related QR codes, 
-    such as EPC and Bitcoin payment QR codes.
+    """A class for generating payment-related QR codes, such as EPC and Bitcoin
+    payment QR codes.
     """
 
     def generate_epc_qr_code(
@@ -32,7 +32,9 @@ class PaymentQRCode(QRCodeBase):
         """Generates a QR code for EPC (European Payments Council) payments."""
         logger.debug(
             "Generating EPC QR code for recipient: %s, IBAN: %s, Amount: %.2f",
-            name, iban, amount
+            name,
+            iban,
+            amount,
         )
         epc_data = (
             f"BCD\n001\n1\nSCT\n{name}\n{iban}\n"
@@ -70,7 +72,9 @@ class PaymentQRCode(QRCodeBase):
         """Generates a QR code for Bitcoin payments."""
         logger.debug(
             "Generating Bitcoin QR code for address: %s, Amount: %s, Label: %s",
-            address, amount, label
+            address,
+            amount,
+            label,
         )
         params = {
             "amount": amount,
@@ -95,7 +99,5 @@ class PaymentQRCode(QRCodeBase):
             self.qr_image = add_frame_to_image(self.qr_image, frame_type)
         if not result:
             logger.info("Adding text to QR code image.")
-            self.qr_image = add_text_to_image(
-                self.qr_image, "Scan for bitcoin payment"
-            )
+            self.qr_image = add_text_to_image(self.qr_image, "Scan for bitcoin payment")
         self.show_qr_code(save)

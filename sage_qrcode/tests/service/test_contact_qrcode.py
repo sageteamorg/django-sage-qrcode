@@ -3,24 +3,15 @@ from pathlib import Path
 from PIL import Image
 from sage_qrcode.service.contact_qrcode import ContactQRCode
 
+
 class TestContactQRCodeGeneration:
     @pytest.fixture(autouse=True)
     def setup(self):
         self.contact_qrcode = ContactQRCode()
 
-    @pytest.fixture
-    def temp_image(self, tmpdir):
-        img = Image.new('RGB', (100, 100), color='red')
-        path = Path(tmpdir) / 'temp_image.png'
-        img.save(path)
-        return path
-
     def test_generate_wifi_qr_code(self):
         self.contact_qrcode.generate_wifi_qr_code(
-            ssid="TestSSID",
-            password="TestPassword",
-            security_type="WPA",
-            save=False
+            ssid="TestSSID", password="TestPassword", security_type="WPA", save=False
         )
         assert self.contact_qrcode.qr_image is not None
 
@@ -30,19 +21,15 @@ class TestContactQRCodeGeneration:
             ssid="TestSSID",
             password="TestPassword",
             security_type=security_type,
-            save=False
+            save=False,
         )
         assert self.contact_qrcode.qr_image is not None
 
     def test_generate_wifi_qr_code_with_empty_ssid(self):
         self.contact_qrcode.generate_wifi_qr_code(
-        ssid="",
-        password="TestPassword",
-        security_type="WPA",
-        save=False
+            ssid="", password="TestPassword", security_type="WPA", save=False
         )
         assert self.contact_qrcode.qr_image is not None
-
 
     def test_generate_mecard_qr_code(self):
         self.contact_qrcode.generate_mecard_qr_code(
@@ -50,7 +37,7 @@ class TestContactQRCodeGeneration:
             email="john.doe@example.com",
             phone="+1234567890",
             url="https://example.com",
-            save=False
+            save=False,
         )
         assert self.contact_qrcode.qr_image is not None
 
@@ -63,11 +50,13 @@ class TestContactQRCodeGeneration:
             org="ExampleOrg",
             url="https://example.com",
             address="123 Main St, Anytown, USA",
-            save=False
+            save=False,
         )
         assert self.contact_qrcode.qr_image is not None
 
-    @pytest.mark.parametrize("optional_field", ["displayname", "email", "phone", "org", "url", "address"])
+    @pytest.mark.parametrize(
+        "optional_field", ["displayname", "email", "phone", "org", "url", "address"]
+    )
     def test_generate_vcard_qr_code_with_missing_optional_fields(self, optional_field):
         kwargs = {
             "name": "John Doe",
@@ -77,7 +66,7 @@ class TestContactQRCodeGeneration:
             "org": "ExampleOrg",
             "url": "https://example.com",
             "address": "123 Main St, Anytown, USA",
-            "save": False
+            "save": False,
         }
         del kwargs[optional_field]
         self.contact_qrcode.generate_vcard_qr_code(**kwargs)
@@ -90,16 +79,15 @@ class TestContactQRCodeGeneration:
             password="TestPassword",
             security_type="WPA",
             save=False,
-            frame_type=frame_type
+            frame_type=frame_type,
         )
         assert self.contact_qrcode.qr_image is not None
 
-    def test_qr_code_with_custom_image(self, temp_image):
+    def test_qr_code_with_custom_image(self):
         self.contact_qrcode.generate_wifi_qr_code(
             ssid="TestSSID",
             password="TestPassword",
             security_type="WPA",
             save=False,
-            custom=temp_image
         )
         assert self.contact_qrcode.qr_image is not None

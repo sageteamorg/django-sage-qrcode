@@ -1,29 +1,30 @@
 from django.contrib import admin
-from polymorphic.admin import PolymorphicParentModelAdmin
 from django.utils.translation import gettext_lazy as _
+from polymorphic.admin import PolymorphicParentModelAdmin
 
+from sage_qrcode.helpers.filters import QRCodeTypeFilter
 from sage_qrcode.models import (
-    MediaUrl,
-    TikTokQRCode,
+    BitcoinQRCode,
+    EPCQRCode,
     FacebookQRCode,
-    WifiQRCode,
     InstagramQRCode,
     LinkedInQRCode,
-    VCardQRCode,
-    SkypeQRCode,
-    BitcoinQRCode,
-    TelegramQRCode,
-    SnapchatQRCode,
-    XQRCode,
+    MediaUrl,
     QRCode,
-    EPCQRCode,
+    SkypeQRCode,
+    SnapchatQRCode,
+    TelegramQRCode,
+    TikTokQRCode,
+    VCardQRCode,
+    WifiQRCode,
+    XQRCode,
 )
-from sage_qrcode.helpers.filters import QRCodeTypeFilter
 from sage_qrcode.utils.admin import (
+    download_qr_code,
     generate_qr_code,
     save_qr_code_image,
-    download_qr_code,
 )
+
 
 @admin.register(QRCode)
 class QRCodeParentAdmin(PolymorphicParentModelAdmin):
@@ -45,9 +46,9 @@ class QRCodeParentAdmin(PolymorphicParentModelAdmin):
     )
     actions = [download_qr_code]
 
-    list_display = ("id","get_qr_code_type" ,"created", "modified")
-    list_filter = ("created", "modified", QRCodeTypeFilter)
-    search_fields = ("id", "created", "modified")
+    list_display = ("id", "get_qr_code_type", "created_at", "modified_at")
+    list_filter = ("created_at", "modified_at", QRCodeTypeFilter)
+    search_fields = ("id", "created_at", "modified_at")
 
     @admin.display(description=_("QR Code Type"))
     def get_qr_code_type(self, obj):
